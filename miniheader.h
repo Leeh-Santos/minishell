@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/06/20 18:37:48 by learodri         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:00:08 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,16 @@ typedef struct s_token
 	char *token;
     struct t_token *next;
 }t_token;
+
+typedef struct s_shell
+{
+	char **env;
+	char *input;
+	char *path;
+	char *pwd;
+	char *en_shell;
+	int exit_s;
+	
+}t_shell;
 
 #endif
