@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/06/22 16:00:08 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/06/22 20:14:38 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@ typedef struct s_shell
 	char **env;
 	char *input;
 	char *path;
-	char *pwd;
-	char *en_shell;
 	int exit_s;
 	
 }t_shell;
+
+//libft
+
+size_t	ft_strlen(const char *s);
+char    *ft_strcpy(char *s1, char *s2);
+t_shell *shell(void);
 
 #endif

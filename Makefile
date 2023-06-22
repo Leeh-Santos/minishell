@@ -4,7 +4,7 @@ RM			= 	/bin/rm -f
 NAME		= 	minishell
 INCLUDES	= 	./headers -I /usr/include/readline
 
-SRCS		= 	main.c #$(shell find rest/ -name '*.c')
+SRCS		= 	main.c $(shell find rest/ -name '*.c')
 OBJS		= 	$(SRCS:.c=.o)
 
 .c.o:
