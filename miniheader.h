@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/06/22 20:14:38 by learodri         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:51:23 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
 
 typedef struct s_token
 {
@@ -35,10 +36,17 @@ typedef struct s_shell
 	
 }t_shell;
 
+//struct
+
+t_shell *shell(void);
+
 //libft
 
-size_t	ft_strlen(const char *s);
+int	ft_strlen(char *s);
 char    *ft_strcpy(char *s1, char *s2);
-t_shell *shell(void);
+char	*ft_strdup(char *s1);
+
+//signal
+void	handle_sigint(int sig);
 
 #endif

@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structscall.c                                      :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 12:19:32 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/06/26 16:00:46 by learodri@st      ###   ########.fr       */
+/*   Created: 2023/06/26 16:49:13 by learodri@st       #+#    #+#             */
+/*   Updated: 2023/06/26 16:51:01 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
 
-t_shell *shell(void)
+void	handle_sigint(int sig)
 {
-    static t_shell shell;
-
-    return (&shell);
+	if (sig == SIGINT)
+	{
+		write (1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
-
