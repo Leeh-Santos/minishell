@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/06/26 16:53:12 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/06/27 15:59:09 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void envparse(char **envp)
 		i++;
 	}
 	shell()->env[i] = NULL;
+	shell()->path = getenv("PATH");
 }
 
 int	main(int argc, char *argv[] ,char **envp)
@@ -48,10 +49,12 @@ int	main(int argc, char *argv[] ,char **envp)
 	(void)argc;
 	(void)argv;
 	envparse(envp);
+	printf("%s \n", shell()->path);
 	while (1)
 	{
 		//signal(SIGINT, handle_sigint);
 		input = readline("minishell$ ");
+		//inputcheck(input);
 		printf("\n%s ", input);
 		
 	}
