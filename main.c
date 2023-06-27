@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/06/27 15:59:09 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/06/27 19:15:57 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheader.h"
 
-void envparse(char **envp)
+void	envparse(char **envp)
 {
 	int i;
 	
@@ -23,19 +23,13 @@ void envparse(char **envp)
 		free(shell()->env);
 	shell()->env = malloc(sizeof(char *) * (i + 1));
 	if (!shell()->env)
-	{	
-		perror("env mtx deu ruim");
-		exit(EXIT_FAILURE);
-	}
+		display_error("env mtx deu ruim", 0);
 	i = 0;
 	while (envp[i])
 	{
 		shell()->env[i] = ft_strdup(envp[i]);
 		if (!shell()->env[i])
-		{	
-			perror("env mtx deu ruim");
-			exit(EXIT_FAILURE);
-		}
+			display_error("env mtx deu ruim", 0);
 		i++;
 	}
 	shell()->env[i] = NULL;
@@ -49,14 +43,11 @@ int	main(int argc, char *argv[] ,char **envp)
 	(void)argc;
 	(void)argv;
 	envparse(envp);
-	printf("%s \n", shell()->path);
 	while (1)
 	{
 		//signal(SIGINT, handle_sigint);
 		input = readline("minishell$ ");
-		//inputcheck(input);
-		printf("\n%s ", input);
-		
+		inputcheck(input);
 	}
 	return 0;
 }
