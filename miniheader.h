@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/06/27 19:07:39 by learodri         ###   ########.fr       */
+/*   Updated: 2023/06/29 20:39:18 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	display_error(char *str, int x);
 //input
 
 void	inputcheck(char *input);
-void	quotecheck(char *input, int i);
+void	quotecheck(char *input, int i, int flag);
 
 #endif
