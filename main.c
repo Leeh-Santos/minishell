@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/07/05 15:56:28 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/07/05 22:27:02 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+static int	is_special_character(char c)
+{
+	return (c == ';' || c == '\\' || c == '[' || c == ']' || c == '{'
+		|| c == '}' || c == '(' || c == ')');
+}  	
 
 # include "miniheader.h"
 
 //checkar redirects < para dps aplicar logica ---- | > | < só cria doc.
-//com espaco >  > nao aceita >>somente junto 
+//check >txt.txt for token 
 
 void	envparse(char **envp)
 {
@@ -53,7 +58,10 @@ int	main(int argc, char *argv[] ,char **envp)
 		input = readline("minishell$ ");
 		inputcheck(input);
 		if (input && *input)
+		{
 			add_history(input);
+			//token_it(input);
+		}
 		free(input);
 	}
 	return 0;

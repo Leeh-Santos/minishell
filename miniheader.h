@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/07/03 16:48:06 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/07/05 19:23:36 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_token
 	char *token;
     struct t_token *next;
 }t_token;
+
 
 typedef struct s_shell
 {
@@ -53,7 +54,7 @@ void	handle_sigint(int sig);
 //errors
 void	display_error(char *str, int x);
 
-//input
+//input & parse
 
 void	inputcheck(char *input);
 void	quotecheck(char *input, int i, int flag);
