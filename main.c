@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/06/29 21:06:58 by learodri         ###   ########.fr       */
+/*   Updated: 2023/07/05 15:56:28 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 # include "miniheader.h"
+
+//checkar redirects < para dps aplicar logica ---- | > | < só cria doc.
+//com espaco >  > nao aceita >>somente junto 
 
 void	envparse(char **envp)
 {

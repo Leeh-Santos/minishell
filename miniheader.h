@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/06/29 20:39:18 by learodri         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:48:06 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_shell
 	
 }t_shell;
 
-//struct
+//struct -- 
 
 t_shell *shell(void);
 
@@ -57,5 +57,7 @@ void	display_error(char *str, int x);
 
 void	inputcheck(char *input);
 void	quotecheck(char *input, int i, int flag);
+void		verify_c(char c, int i, char *in);
+void	redicheck(char *input, int i);
 
 #endif
