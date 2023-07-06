@@ -6,20 +6,12 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/07/05 22:27:02 by learodri         ###   ########.fr       */
+/*   Updated: 2023/07/06 22:21:04 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	is_special_character(char c)
-{
-	return (c == ';' || c == '\\' || c == '[' || c == ']' || c == '{'
-		|| c == '}' || c == '(' || c == ')');
-}  	
-
 # include "miniheader.h"
 
-//checkar redirects < para dps aplicar logica ---- | > | < só cria doc.
-//check >txt.txt for token 
 
 void	envparse(char **envp)
 {
@@ -60,7 +52,7 @@ int	main(int argc, char *argv[] ,char **envp)
 		if (input && *input)
 		{
 			add_history(input);
-			//token_it(input);
+			token_it(input, 0);
 		}
 		free(input);
 	}

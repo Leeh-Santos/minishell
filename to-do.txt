@@ -1,0 +1,8 @@
+
+
+*checkar redirects < para dps aplicar logica ---- | > | < só cria doc.
+*check >txt.txt for token 
+*chars especiais somente entre quotes (c == ';' || c == '\\' || c == '[' || c == ']' || c == '{'
+		//|| c == '}' || c == '(' || c == ')');
+
+* expand somente com aspas duplas

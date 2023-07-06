@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/07/05 19:23:36 by learodri         ###   ########.fr       */
+/*   Updated: 2023/07/06 22:20:59 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@
 # include <signal.h>
 # include <errno.h>
 
+
+
 typedef struct s_token
 {
 	char *token;
     struct t_token *next;
 }t_token;
 
+t_token *head = NULL;
 
 typedef struct s_shell
 {
