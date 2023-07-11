@@ -2,8 +2,6 @@
 
 *checkar redirects < para dps aplicar logica ---- | > | < só cria doc.
 *check >txt.txt for token 
-*chars especiais somente entre quotes (c == ';' || c == '\\' || c == '[' || c == ']' || c == '{'
-		//|| c == '}' || c == '(' || c == ')');
 
 * expand somente com aspas duplas
 
@@ -13,4 +11,14 @@
 
 ** se nao for arg ele ignora : cat Makefile ls main.c
 
+**sempre depois do pipe tem que ter um comando e sempre depois do redirect tem um nome do arquivo - usar indexes e verificar comando com access
+
 try : escanea a str, verifica pipes or redir, e segue o baile
+
+**escanar pelo delimitador 
+
+referencia sempre pelo ultimo comando ou built in 
+
+atencao com double quotes 
+
+

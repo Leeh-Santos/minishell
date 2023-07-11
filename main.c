@@ -6,12 +6,13 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/07/06 22:21:04 by learodri         ###   ########.fr       */
+/*   Updated: 2023/07/11 18:26:48 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "miniheader.h"
 
+t_token *head = NULL;
 
 void	envparse(char **envp)
 {
@@ -52,7 +53,7 @@ int	main(int argc, char *argv[] ,char **envp)
 		if (input && *input)
 		{
 			add_history(input);
-			token_it(input, 0);
+			//token_it(input, 0);
 		}
 		free(input);
 	}

@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/07/06 22:20:59 by learodri         ###   ########.fr       */
+/*   Updated: 2023/07/11 19:43:05 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_token
     struct t_token *next;
 }t_token;
 
-t_token *head = NULL;
+
 
 typedef struct s_shell
 {
@@ -40,6 +40,8 @@ typedef struct s_shell
 	int exit_s;
 	
 }t_shell;
+
+
 
 //struct -- 
 
@@ -61,6 +63,7 @@ void	display_error(char *str, int x);
 
 void	inputcheck(char *input);
 void	quotecheck(char *input, int i, int flag);
+void	forbidenchar(char *input);
 void		verify_c(char c, int i, char *in);
 void	redicheck(char *input, int i);
 

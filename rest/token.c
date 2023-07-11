@@ -6,13 +6,13 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/07/06 22:27:08 by learodri         ###   ########.fr       */
+/*   Updated: 2023/07/11 19:31:03 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
 
-char* create_it(char *in, int i)
+/*char *create_it(char *in, int i)
 {
 	while (in[i] && (in[i] =! ' ' || in[i] != '\t'))
 }
@@ -25,4 +25,4 @@ void	token_it(char *in, int i)
 			i++;
 		insert(create_it(in, i));
 	}
-}
+}*/

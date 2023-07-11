@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputcheck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/07/05 16:36:03 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/07/11 19:42:46 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,39 @@ void		verify_c(char c, int i, char *in)
 
 void	redicheck(char *input, int i)
 {
-
+	char c;
+	
 	while (input[i])
 	{
 		if (input[i] == '|' || input[i] == '>' || input[i] == '<')
 			verify_c(input[i], i + 1, input);
 		i++;
+	}
+
+}
+
+void	forbidenchar(char *input)
+{
+	int i;
+	char c;
+
+	i = 0;
+
+	while (input[i])
+	{
+		if (input[i] == 39 || input[i] == '"')
+		{
+			c = input[i];
+			if (input[i])
+				i++;
+			while (input[i] && input[i] != c)
+				i++;
+		}
+		if (input[i]== ';' || input[i] == '\\' || input[i] == '[' || input[i] == ']' || input[i] == '{'
+		|| input[i] == '}' || input[i] == '(' || input[i] == ')')
+			display_error("char que nao pode ai fera", 0);
+		if (input[i])
+			i++;
 	}
 }
 
@@ -78,4 +105,5 @@ void	inputcheck(char *input)
 {
 	quotecheck(input, 0, 0);
 	redicheck(input, 0);
+	forbidenchar(input);
 }
