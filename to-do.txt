@@ -6,3 +6,11 @@
 		//|| c == '}' || c == '(' || c == ')');
 
 * expand somente com aspas duplas
+
+** tudo que vem depois do comando é arg, ate encontrar pipe, red
+
+** echo "vai carai" ls -la vai tomar no cu -- aparentemento o echo vai indo atee
+
+** se nao for arg ele ignora : cat Makefile ls main.c
+
+try : escanea a str, verifica pipes or redir, e segue o baile
