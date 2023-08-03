@@ -7,7 +7,9 @@
 
 ** tudo que vem depois do comando é arg, ate encontrar pipe, red
 
-** echo "vai carai" ls -la vai tomar no cu -- aparentemento o echo vai indo atee
+** echo "vai carai" ls -la vai tomar no cu -- aparentemento o echo vai indo atee, e o output do echo é devolvido sem extra spaces/
+
+** cat < main.c vish.txt VAI SOMENTE PEGAR O VISH.TXT para input do cat
 
 ** se nao for arg ele ignora : cat Makefile ls main.c
 
@@ -21,4 +23,63 @@ referencia sempre pelo ultimo comando ou built in
 
 atencao com double quotes 
 
+redirect & expand antes de tratar do pipe
 
+primero arg sempre comando, tenta usar o access
+
+funcao executadora ideia : pipe ou comando no node, se pipe lanca os childs com os dois comandos, pipe - fork -exce
+linked list paraa segurar os tokens dps sair criando a tree
+
+>> OU > MESMO QUE NAO FUNCIONE ELE CRIA O ARQUIVO
+
+pipes = numero de foks
+
+struct Node {
+    char* command;
+    char** arguments;
+    int num_arguments;
+    int pipe;
+    int expander;
+    int red_in;
+    int red_out;
+    char* input_file; 
+    char* output_file;
+    int append_output;
+    struct Node* left;
+    struct Node* right;
+};
+
+
+echo "vai carai seu viado" | wc -l > aqui.txt
+
+
+
+built-in nao usa exevce, cmds
+atencao com o expander
+
+talvez criar dicionario ou hash para ver se é built in, se nao lanca no exceve
+
+array of structs como o filo - cada elemento struct existe para cada pipe, com isso pode ter tamanho da array para depois escanear e ver oque faz
+
+APPLY --------------------------------------------------------------------
+
+1 - criar linked list ou array e jogar numa linked
+    - comando precisa ser sepadado pelo espaco o resto é tudo arg, coloca numa funcioa de if que checa cada char, manda os flags caso tenha pipe ou redir ou expander
+    - ir ate o if (espaco, pipe ou redir) para coletar cmd sempre atencao nos espacos e tabs antes do primeiro cmd - funcao get_cmd(), talvez ja testar no ACCESS para ver se é um comando valido e explodir em caso de nao 
+    cuidado com o pipe ou redir que pode estar colado
+    - a scan function que vai ver o prompt, pegar o primeiro cdm e args, 
+
+    | > >> < - aceita mesmo colado ao comando ou args
+    - checkar argc[0] == . && argv[1] == / -- para os executaveis ver isso tambem
+
+tenta strtoken do chatgtp
+
+uiui 
+
+rules 
+ir ate bater num pipe, if pipe cria node ja con tudo escaneado
+se tem pipe tem que haver um cmd valido dpes (tenta com o access)senao so executa o primeiro node e presta atencao nos redir para tratar em case
+ate bater no pipe o resto tudo é arg, joga na mtx a nao ser redir e aspa,atencao
+
+tratar cada node como realmente um objeto que com ifs e regras que se comunicar, por exemplo, criar funcao que vai sair escaneado os nodes e tratando dos redir primeiro
+e depois outra funcao executadora

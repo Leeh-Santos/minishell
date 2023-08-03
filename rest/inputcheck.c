@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputcheck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/07/11 19:42:46 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/02 15:23:46 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,13 @@ void	redicheck(char *input, int i)
 	while (input[i])
 	{
 		if (input[i] == '|' || input[i] == '>' || input[i] == '<')
+		{
 			verify_c(input[i], i + 1, input);
+			if (input[i] == '|')
+				shell()->nb_pipe++;
+		}
 		i++;
 	}
-
 }
 
 void	forbidenchar(char *input)
