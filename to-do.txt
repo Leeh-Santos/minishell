@@ -30,34 +30,44 @@ primero arg sempre comando, tenta usar o access
 funcao executadora ideia : pipe ou comando no node, se pipe lanca os childs com os dois comandos, pipe - fork -exce
 linked list paraa segurar os tokens dps sair criando a tree
 
->> OU > MESMO QUE NAO FUNCIONE ELE CRIA O ARQUIVO
+>> OU > MESMO QUE NAO FUNCIONE ELE CRIA O ARQUIVOput
+
+dup2 ja forca doc ou cmd como input ou out
 
 pipes = numero de foks
 
-struct Node {
+< << >> > | delimitador;
+
+struct Node { ----------------- parsing pa isso aqui fela
+    NodeType;
     char* command;
     char** arguments;
     int num_arguments;
-    int pipe;
-    int expander;
-    int red_in;
-    int red_out;
-    char* input_file; 
-    char* output_file;
-    int append_output;
+    int pipe[2];
+    struct Node* up;    
     struct Node* left;
     struct Node* right;
 };
 
 
-echo "vai carai seu viado" | wc -l > aqui.txt
+echo "vai carai seu viado" | wc -l > aqui.txt 
+
+echo "vai carai" > vai.txt
+
+opcion1 
+
+matriz de tokens - funcao para tokens, atencao expadn e aspas
+manda em funcao para criar ast node - para cada token 
+vai creando com as regras e ja definindo o type y linkando a poha toda
 
 
 
-built-in nao usa exevce, cmds
+fuction cmd or built in  - se nao for built é comando fodase
 atencao com o expander
 
-talvez criar dicionario ou hash para ver se é built in, se nao lanca no exceve
+talvez criar dicionario ou hash para ver se é built in, se nao lanca no exceve******, se primeiro arg nao foi bunitinho,
+atencao que pipes e redir ainda funcionam,
+inportancia o is simple_command
 
 array of structs como o filo - cada elemento struct existe para cada pipe, com isso pode ter tamanho da array para depois escanear e ver oque faz
 

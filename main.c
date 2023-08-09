@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/07/11 18:26:48 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/09 16:11:27 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "miniheader.h"
 
-t_token *head = NULL;
 
 void	envparse(char **envp)
 {

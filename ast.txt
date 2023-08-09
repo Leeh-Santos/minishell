@@ -1,0 +1,179 @@
+AST TYPES OF NODES ********* CommandNode, ArgumentNode, OperatorNode, pipe node
+
+typedef enum {
+    COMMAND_NODE,
+    ARGUMENT_NODE,
+    OPERATOR_NODE,
+     PIPE_NODE,
+    REDIRECTION_NODE
+} NodeType;
+ 
+
+ pre-order traversal of the AST:
+
+ // Sample structure of AST nodes
+struct TreeNode {
+    NodeType type;
+    char* value;
+    struct TreeNode* left;
+    struct TreeNode* right;
+};
+
+echo "vai carai seu viado" | wc -l > aqui.txt
+
+                PIPE
+              /     \
+           ECHO     REDIRECTION
+           /  \         /      \
+   ARGUMENT   STRING   FILE     wc
+              "vai      aqui.txt
+              carai
+              seu
+              viado"
+
+// Pre-order traversal function
+
+void preOrderTraversal(struct TreeNode* node) {  AKA ENGINE SAMPLE
+    if (node == NULL) {
+        return;
+    }
+
+    // Visit the current node
+    if (node->type == ECHO_NODE) {
+        // Execute the echo command
+        // Output the result
+    } else if (node->type == PIPE_NODE) {
+        // Create a pipe
+    } else if (node->type == WC_NODE) {
+        // Execute the wc command
+        // Output the result
+    } else if (node->type == REDIRECTION_NODE) {
+        // Perform output redirection
+    }
+
+    // Traverse left subtree
+    preOrderTraversal(node->left);
+
+    // Traverse right subtree
+    preOrderTraversal(node->right);
+}
+\
+
+
+-------------------------------------------------------------------------------
+struct TreeNode* createCommandNode(char* command) {  //FAZENDO OS NODES
+    // Create a CommandNode with the provided command
+}
+
+struct TreeNode* createArgumentNode(char* argument) {
+    // Create an ArgumentNode with the provided argument
+}
+
+struct TreeNode* createOperatorNode(char* operator) {
+    // Create an OperatorNode with the provided operator
+}
+
+// ... Other node creation functions ...
+
+int main() 
+    // Read user input
+    char userInput[256];
+    fgets(userInput, sizeof(userInput), stdin);
+
+    // Tokenize the input
+    char* tokens[64]; // Adjust the array size as needed
+    int numTokens = tokenize(userInput, tokens);
+
+    // Construct the AST nodes based on the tokens
+    struct TreeNode* rootNode = createCommandNode(tokens[0]);
+
+    // ***Connect nodes and structure the AST based on the syntax rules****
+
+
+
+    3 steps
+
+    criar nodes, linkar, executadora
+
+
+
+
+
+    simple
+
+     -----------------------
+
+     #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Define node types
+typedef enum {
+    COMMAND_NODE,
+    ARGUMENT_NODE,
+    PIPE_NODE
+} NodeType;
+
+// Define AST node structure
+struct ASTNode {
+    NodeType type;
+    char* value;
+    struct ASTNode* left;
+    struct ASTNode* right;
+};
+
+// Function to create a new AST node
+struct ASTNode* createNode(NodeType type, const char* value) {
+    struct ASTNode* node = (struct ASTNode*)malloc(sizeof(struct ASTNode));
+    node->type = type;
+    node->value = strdup(value);
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+// Function to tokenize input
+int tokenizeInput(const char* input, char** tokens, int maxTokens) {
+    int numTokens = 0;
+    char* token = strtok((char*)input, " ");
+    while (token != NULL && numTokens < maxTokens) {
+        tokens[numTokens] = strdup(token);
+        numTokens++;
+        token = strtok(NULL, " ");
+    }
+    return numTokens;
+}
+
+// Function to build AST from tokens
+struct ASTNode* buildAST(char** tokens, int numTokens) {
+    if (numTokens == 0) {
+        return NULL;
+    }
+
+    // Create a node for the first token (command)
+    struct ASTNode* root = createNode(COMMAND_NODE, tokens[0]);
+
+    // Loop through tokens to create nodes for arguments
+    for (int i = 1; i < numTokens; i++) {
+        struct ASTNode* argumentNode = createNode(ARGUMENT_NODE, tokens[i]);
+        argumentNode->left = root->right;
+        root->right = argumentNode;
+    }
+
+    return root;
+}
+
+int main() {
+    char userInput[256];
+    fgets(userInput, sizeof(userInput), stdin);
+
+    char* tokens[64]; // Adjust the array size as needed
+    int numTokens = tokenizeInput(userInput, tokens, sizeof(tokens) / sizeof(tokens[0]));
+
+    struct ASTNode* astRoot = buildAST(tokens, numTokens);
+
+    // You can now traverse and manipulate the AST as needed
+    // ...
+
+    return 0;
+}
