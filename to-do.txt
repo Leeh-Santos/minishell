@@ -50,9 +50,14 @@ struct Node { ----------------- parsing pa isso aqui fela
 };
 
 
+
 echo "vai carai seu viado" | wc -l > aqui.txt 
 
 echo "vai carai" > vai.txt
+
+echo -vai > oi.txt -carai | grep "a" | wc > aqui.txt ----- printa os dois direitinho sempre cria o redir
+
+echo -vai > oi.txt -carai -- sempre depois do redir tem o nome do ficheiro, ate bater o pipe tudo vira arg pro 1 cmd
 
 opcion1 
 
