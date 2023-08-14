@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/09 16:11:27 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/14 15:07:53 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	envparse(char **envp)
 int	main(int argc, char *argv[] ,char **envp)
 {
 	char *input;
-	
+
 	(void)argc;
 	(void)argv;
 	envparse(envp);
+	shell()->head =	NULL;
 	while (1)
 	{
 		//signal(SIGINT, handle_sigint);
