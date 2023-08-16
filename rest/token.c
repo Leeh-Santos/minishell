@@ -6,81 +6,160 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/14 16:56:36 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/16 20:56:20 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
 
-/*void	create_it(char *in, int *i)
-{
-	char	tmp[999];
-	char c;
-	
-	while (in[*i] && (in[*i] =! ' ' || in[*i] != '\t'))
-	{
-		if (in[*i] == 39 || in[*i] == '"')
-		{
-			tmp[*i] = in[*i]; 
-			c = in[*i];
-			i++;
-			while (in[*i] != c) // cai dentro das aspas
-			{
-				tmp[*i] = in[*i];
-				i++;
-			}
-			tmp[*i + 1] = c;
-			tmp[*i + 2] = '\0';
-		}
-		
-		if (in[*i])
-			i++;
-	}
-}*/
 
-char 	*aspasword(char *in, char *tmp, int *i, char c)
+void	aspasword(char *in, char *tmp, int *i, char c)
 {
+	int	k;
+	int	flag;
+
+	k = 0;
+	flag = 0;
+	while(in[*i])
+	{
+		if(in[*i] == c && flag)
+		{
+			tmp[k] = c;
+			tmp[k + 1] = '\0';
+			(*i)++;
+			return;
+		}
+		flag = 1;
+		tmp[k] = in[*i];
+		(*i)++;
+		k++;
+	}
+}
+
+void	delword(char c, char *in, char *tmp, int *i)
+{
+	int	k;
+
+	k = 0;
+	if (c == '|')
+	{
+		tmp[k] = c;
+		tmp[k + 1] ='\0';
+		(*i)++;
+		return;
+	}
+	else if (c == '>')
+	{
+		if (in[*i + 1] == '>')
+		{
+			tmp[k] = c;
+			tmp[k + 1] = c;
+			tmp[k + 2] = '\0';
+			(*i) += 2;
+			return;
+		}
+		tmp[k] = c;
+		tmp[k + 1] = '\0';
+		(*i)++;
+		return;
+	}else if (c == '<')
+	{
+		if (in[*i + 1] == '<')
+		{
+			tmp[k] = c;
+			tmp[k + 1] = c;
+			tmp[k + 2] = '\0';
+			(*i) += 2; //proteger nesses casos
+			return;
+		}
+		tmp[k] = c;
+		tmp[k + 1] = '\0';
+		(*i)++;
+		return;
+	}
+}
+
+void	facin(char *in, char *tmp, int *i)
+{
+	int	k;
+
+	k = 0;
+	while((in[*i]))
+	{
+		if ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ') || (in[*i] == '\t') || (in[*i] == 39) || (in[*i] == '"'))
+		{
+			break;
+		}
+		tmp[k] = in[*i];
+		(*i)++;
+		k++;
+	}
+	tmp[k] = '\0';
 	
+
 }
 
 char	*take_w(char *in, int *i) // sempre cai aqui no 1 index da subs
 {
 	char	*tmp = malloc(999 * sizeof(char));
-	int	k;
-
+	
 	if(!tmp)
 		return NULL;
-	k = 0;
-	
+		
 	while(in[*i])
 	{
 		if(in[*i] == 39 || in[*i] == '"')
-			tmp = aspasword(in, tmp, i, in[*i]);
+			aspasword(in, tmp, i, in[*i]);
 		else if(in[*i] == '|' || in[*i] == '<'  || in[*i] == '>')
-			tmp = delword(in, tmp, i);
+			delword(in[*i],in, tmp, i);
 		else if(in[*i] >= 35 && in[*i] <= 126)
-			tmp = facin(in, tmp);                             // avanca ate bater no pipe ou del e devolve a palavra, mandra outra vez no loop
-	}
-	return (tmp); // cuidado de nao tiver nada aqui
+			facin(in, tmp, i);
+		break; // tava travado aqui antes no oioioi
+		}
+	return (tmp);
 	
 }
 
 void	killspc(char *in, int *i)
 {
 
-	while(in && (in[*i] == ' ') || (in[*i] == '\t'))
+	while ((in[*i]) && (in[*i] == ' '))
 	{
 		(*i)++;
 	}
 }
 
-void	token_it(char *in) // mesmo contadorr??
+void	insert(char *in)
+{
+	t_token	*new;
+	t_token	*tmp;
+
+	new = malloc(sizeof(t_token));
+	if (!new)
+		display_error("deu pau no malloc", 0);
+	new->token = in;
+	new->next = NULL;
+	tmp = shell()->head;
+	if (!tmp)
+	{
+		shell()->head = new;
+		return;
+	}
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
+	
+}
+void	token_it(char *in) 
 {
 	int i;
 
-	while (in)
+	i = 0;
+	while (in[i] != '\0')
 	{
 		killspc(in, &i);
+		if (in[i] == '\0')
+			return;
 		insert(take_w(in, &i));
 	}
 	

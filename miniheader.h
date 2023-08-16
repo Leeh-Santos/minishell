@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/11 16:44:24 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/16 16:40:23 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 # include <signal.h>
 # include <errno.h>
 
+
 typedef struct s_token
 {
 	char *token;
-    struct t_token *next;
+    struct s_token *next;
 }t_token;
 
 
@@ -37,7 +38,7 @@ typedef struct s_shell
 	int exit_s;
 	int	nb_pipe;
 	int	expand;
-	struct t_token *head; // ou na uma global
+	t_token *head;
 }t_shell;
 
 
@@ -48,7 +49,7 @@ t_shell *shell(void);
 
 //libft
 
-int	ft_strlen(char *s);
+int		ft_strlen(char *s);
 char    *ft_strcpy(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 
@@ -63,7 +64,10 @@ void	display_error(char *str, int x);
 void	inputcheck(char *input);
 void	quotecheck(char *input, int i, int flag);
 void	forbidenchar(char *input);
-void		verify_c(char c, int i, char *in);
+void	verify_c(char c, int i, char *in);
 void	redicheck(char *input, int i);
+void	token_it(char *in);
+//free
+void	free_linked(void);
 
 #endif

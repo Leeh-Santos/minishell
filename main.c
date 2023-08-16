@@ -6,11 +6,18 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/14 15:07:53 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/16 20:54:47 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "miniheader.h"
+
+
+/// dando pau no espaco|espaco
+///dando pau com char e espaco no final
+
+
+void	print_token();
 
 
 void	envparse(char **envp)
@@ -53,9 +60,21 @@ int	main(int argc, char *argv[] ,char **envp)
 		if (input && *input)
 		{
 			add_history(input);
-			//token_it(input, 0);
+			token_it(input);
+			print_token();	
 		}
 		free(input);
+		free_linked();
 	}
 	return 0;
+}
+
+void	print_token(){
+	
+	t_token *tmp = shell()->head;
+
+	while (tmp){
+		printf("direto da lista - %s\n", tmp->token);
+		tmp = tmp->next;
+	}
 }

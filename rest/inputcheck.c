@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/02 15:23:46 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/16 20:44:09 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	quotecheck(char *input, int i, int flag)
 			i++;
 	}
 	if (flag)
-		display_error("unclosed quotes bro", 1);
+		display_error("unclosed quotes bro", 0);
 }
 
 void		verify_c(char c, int i, char *in)
@@ -65,15 +65,13 @@ void		verify_c(char c, int i, char *in)
 
 void	redicheck(char *input, int i)
 {
-	char c;
 	
 	while (input[i])
 	{
 		if (input[i] == '|' || input[i] == '>' || input[i] == '<')
 		{
+			shell()->nb_pipe++;
 			verify_c(input[i], i + 1, input);
-			if (input[i] == '|')
-				shell()->nb_pipe++;
 		}
 		i++;
 	}
