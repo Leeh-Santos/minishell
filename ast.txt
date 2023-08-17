@@ -16,20 +16,19 @@ struct TreeNode {
     NodeType type;
     char* value;
     struct TreeNode* left;
-    struct TreeNode* right;
+    struct TreeNode* rigecho 
 };
 
 echo "vai carai seu viado" | wc -l > aqui.txt
 
                 PIPE
               /     \
-           ECHO     REDIRECTION
+           ECHO     
            /  \         /      \
-   ARGUMENT   STRING   FILE     wc
-              "vai      aqui.txt
-              carai
-              seu
-              viado"
+                    
+            
+            
+              
 
 // Pre-order traversal function
 
@@ -39,7 +38,7 @@ void preOrderTraversal(struct TreeNode* node) {  AKA ENGINE SAMPLE
     }
 
     // Visit the current node
-    if (node->type == ECHO_NODE) {
+    if (node->type == Ecomando {
         // Execute the echo command
         // Output the result
     } else if (node->type == PIPE_NODE) {

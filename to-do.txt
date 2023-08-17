@@ -1,7 +1,21 @@
 
+**heredoc first
+
+ls > abc | wc -l | echo a
+
+
 
 *checkar redirects < para dps aplicar logica ---- | > | < só cria doc.
 *check >txt.txt for token 
+
+echo "vai carai" | wc | asd >meucu2 ---- da medrda
+
+cat imprime de pipe
+echo str pa frente
+cat /dev/random | head
+cat|cat|cat| ls   ---> trava tres veis, no ls
+
+ERRO DE ACESSO DE ARQUIVO PARA
 
 * expand somente com aspas duplas
 
@@ -14,6 +28,20 @@
 ** se nao for arg ele ignora : cat Makefile ls main.c
 
 **sempre depois do pipe tem que ter um comando e sempre depois do redirect tem um nome do arquivo - usar indexes e verificar comando com access
+
+******************** exit $ faz pelo sighand 
+********************echo -nnnnnnnnnnnnnnnnnnn quebra o barra \n, tem que quebrar a poha toda, se tiver um diferente da pau
+******************** erro de syntax $2   
+********************* export var env 
+*********************** $a$b$c Makefile - nas var env dps vira *cat e executa o comando
+////////////////////////// cd oi | cd  -- fica na mesma pasta
+************************* echo "asdasd" | wc -l | < Makefile cat   -- caga nos out cmd antes do pipe 
+******************************* echo "asdasd" > sad | wc -l | < Makefile cat --------- same thing as above, mas com red funcionando
+***********************************echo "asdasd" > sad | wc -l | wc < Makefile cat
+
+
+
+
 
 try : escanea a str, verifica pipes or redir, e segue o baile
 
@@ -35,7 +63,7 @@ linked list paraa segurar os tokens dps sair criando a tree
 dup2 ja forca doc ou cmd como input ou out
 
 pipes = numero de foks;
-< red_in precisa ter uma palavra dps se nao da syxtax
+< red_in precisa ter uma palavra dps se nao da syxtax**********
 
 < << >> > | delimitador;
 
@@ -112,3 +140,18 @@ ate bater no pipe o resto tudo é arg, joga na mtx a nao ser redir e aspa,atenca
 
 tratar cada node como realmente um objeto que com ifs e regras que se comunicar, por exemplo, criar funcao que vai sair escaneado os nodes e tratando dos redir primeiro
 e depois outra funcao executadora
+
+
+int	test(int a, int b)
+{
+	return (a + b);
+}
+
+int main(void)
+{
+	int	(*function)();
+
+	function = test;
+
+	printf("%i\n", function(5 + 4));
+}
