@@ -4,7 +4,7 @@ typedef enum {
     COMMAND_NODE,
     ARGUMENT_NODE,
     OPERATOR_NODE,
-     PIPE_NODE,
+    PIPE_NODE,
     REDIRECTION_NODE
 } NodeType;
  

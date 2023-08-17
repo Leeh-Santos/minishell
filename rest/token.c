@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/16 20:56:20 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/17 10:34:40 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	insert(char *in)
 	tmp->next = new;
 	
 }
-void	token_it(char *in) 
+void	token_it(char *in)
 {
 	int i;
 

@@ -34,22 +34,37 @@ linked list paraa segurar os tokens dps sair criando a tree
 
 dup2 ja forca doc ou cmd como input ou out
 
-pipes = numero de foks
+pipes = numero de foks;
+< red_in precisa ter uma palavra dps se nao da syxtax
 
 < << >> > | delimitador;
 
+built or cmd - checar depois, de tiver no node command_node, ver se é build ou cmd, funcao executer
+sempre o primeiro da linked list, e sempre que node for pipe checa o seguinte faz a mesma funcao
+
+typedef enum {
+    COMMAND_NODE,
+    RED_PADENTRO,
+    PIPE_NODE,
+    RED_PAFORA,
+    DOUBLE_RED_FORA;
+    HEREFUCINDOCK;
+} NodeType;
+
 struct Node { ----------------- parsing pa isso aqui fela
     NodeType;
-    char* command;
     char** arguments;
-    int num_arguments;
     int pipe[2];
     struct Node* up;    
     struct Node* left;
     struct Node* right;
 };
 
+nodes individuas | < > >> <<
 
+treenode{
+    
+}
 
 echo "vai carai seu viado" | wc -l > aqui.txt 
 
@@ -74,7 +89,6 @@ talvez criar dicionario ou hash para ver se é built in, se nao lanca no exceve*
 atencao que pipes e redir ainda funcionam,
 inportancia o is simple_command
 
-array of structs como o filo - cada elemento struct existe para cada pipe, com isso pode ter tamanho da array para depois escanear e ver oque faz
 
 APPLY --------------------------------------------------------------------
 

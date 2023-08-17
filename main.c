@@ -6,16 +6,11 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/16 20:54:47 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/17 15:09:47 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "miniheader.h"
-
-
-/// dando pau no espaco|espaco
-///dando pau com char e espaco no final
-
 
 void	print_token();
 
@@ -73,8 +68,11 @@ void	print_token(){
 	
 	t_token *tmp = shell()->head;
 
+	int i = 0;
+
 	while (tmp){
-		printf("direto da lista - %s\n", tmp->token);
+		printf("node %d - %s\n", i, tmp->token);
 		tmp = tmp->next;
+		i++;
 	}
 }

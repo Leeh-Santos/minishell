@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/16 20:44:09 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/17 15:05:26 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,25 @@ void		verify_c(char c, int i, char *in)
 
 void	redicheck(char *input, int i)
 {
+	char	c;
 	
 	while (input[i])
 	{
+		if (input[i] == '"' || input[i] == 39)
+		{
+			c = input[i];
+			if (input[i])
+				i++;
+			while (input[i] && input[i] != c)
+				i++;
+		}
 		if (input[i] == '|' || input[i] == '>' || input[i] == '<')
 		{
 			shell()->nb_pipe++;
 			verify_c(input[i], i + 1, input);
 		}
-		i++;
+		if (input[i])
+			i++;
 	}
 }
 
