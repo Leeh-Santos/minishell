@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/22 20:49:18 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:27:19 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,24 @@ void	aspasword(char *in, char *tmp, int *i, char c)
 		if(in[*i] == c && flag)
 		{
 			tmp[k] = c;
-			tmp[k + 1] = '\0';
-			(*i)++;
-			return;
+			if (in[*i + 1] == ' ' || in[*i + 1] == '\0')
+			{
+				tmp[k + 1] = '\0';
+				(*i)++;
+				return;
+			}else
+			{
+				k++;
+				(*i)++;
+				while (in[*i] && in[*i] != ' ' && in[*i] != '|' && in[*i] != '<')
+				{
+					tmp[k] = in[*i];
+					k++;
+					(*i)++;
+				}
+				tmp[k + 1] = '\0';
+				return;
+			}
 		}
 		flag = 1;
 		tmp[k] = in[*i];
