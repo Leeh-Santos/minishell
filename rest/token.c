@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/22 21:27:19 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:34:54 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	aspasword(char *in, char *tmp, int *i, char c)
 					k++;
 					(*i)++;
 				}
-				tmp[k + 1] = '\0';
+				tmp[k] = '\0';
 				return;
 			}
 		}
