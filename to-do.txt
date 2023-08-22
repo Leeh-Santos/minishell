@@ -39,9 +39,11 @@ ERRO DE ACESSO DE ARQUIVO PARA
 ******************************* echo "asdasd" > sad | wc -l | < Makefile cat --------- same thing as above, mas com red funcionando
 ***********************************echo "asdasd" > sad | wc -l | wc < Makefile cat
 
+cat jsda.txt | cat  Makefile >ghsd  <shjs | ls ahhhh
 
 
 
+--------------------------echo "sadasd"f
 
 try : escanea a str, verifica pipes or redir, e segue o baile
 

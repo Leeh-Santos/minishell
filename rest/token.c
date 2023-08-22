@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/17 10:34:40 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/22 20:49:18 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,26 @@ void	delword(char c, char *in, char *tmp, int *i)
 void	facin(char *in, char *tmp, int *i)
 {
 	int	k;
+	int	flag;
+	int	dale;
+	char	c;
 
 	k = 0;
+	flag = 0;
+	dale = 0;
 	while((in[*i]))
 	{
-		if ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ') || (in[*i] == '\t') || (in[*i] == 39) || (in[*i] == '"'))
+		if (c == in[*i])
+			dale++;
+		if ((in[*i] == 39) || (in[*i] == '"'))
 		{
-			break;
+			flag++;
+			c = in[*i];
 		}
+		if ((!flag) && ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ')))
+			break;
+		if ((dale) && ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ')))
+			break;
 		tmp[k] = in[*i];
 		(*i)++;
 		k++;
@@ -108,14 +120,14 @@ char	*take_w(char *in, int *i) // sempre cai aqui no 1 index da subs
 		
 	while(in[*i])
 	{
-		if(in[*i] == 39 || in[*i] == '"')
-			aspasword(in, tmp, i, in[*i]);
-		else if(in[*i] == '|' || in[*i] == '<'  || in[*i] == '>')
+		if (in[*i] == '|' || in[*i] == '<' || in[*i] == '>')
 			delword(in[*i],in, tmp, i);
 		else if(in[*i] >= 35 && in[*i] <= 126)
 			facin(in, tmp, i);
+		else if(in[*i] == 39 || in[*i] == '"')
+			aspasword(in, tmp, i, in[*i]);
 		break; // tava travado aqui antes no oioioi
-		}
+	}
 	return (tmp);
 	
 }
