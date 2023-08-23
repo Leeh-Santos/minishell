@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/22 18:26:50 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/23 17:46:05 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char *argv[] ,char **envp)
 	while (1)
 	{
 		//signal(SIGINT, handle_sigint);
-		input = readline("zicashell$ ");
+		input = readline("picashell$ ");
 		inputcheck(input);
 		if (input && *input)
 		{
