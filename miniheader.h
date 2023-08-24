@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/17 12:59:55 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/24 20:45:30 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,32 @@
 # include <signal.h>
 # include <errno.h>
 
+typedef enum e_type
+{
+    E_CMD,
+    E_PIPE,
+    E_IN,
+    E_OUT,
+    E_APPEND,
+    E_HDOC,
+    E_BUILT
+} t_type;
+
 
 typedef struct s_token
 {
 	char *token;
     struct s_token *next;
 }t_token;
+
+typedef struct s_node {
+    int nodeType;
+    char** arguments;
+    int pipe[2];
+    struct Node* up;    
+    struct Node* left;
+    struct Node* right;
+}t_node;
 
 
 typedef struct s_shell
@@ -39,6 +59,7 @@ typedef struct s_shell
 	int	nb_pipe;
 	int	expand;
 	t_token *head;
+	t_node *root;
 }t_shell;
 
 
@@ -69,5 +90,9 @@ void	redicheck(char *input, int i);
 void	token_it(char *in);
 //free
 void	free_linked(void);
+
+//tree
+
+void	token_tree(void);
 
 #endif

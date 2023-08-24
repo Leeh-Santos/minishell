@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/22 21:34:54 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:50:41 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,5 +189,6 @@ void	token_it(char *in)
 			return;
 		insert(take_w(in, &i));
 	}
+	token_tree();
 	
 }
