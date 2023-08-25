@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputcheck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/17 15:05:26 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/25 21:02:59 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		verify_c(char c, int i, char *in)
 			flag++;
 		i++;
 	}
-		
+	//"echo >| ola" precisa funcionar, mas "echo >>| ola" não pode, 	
 	if (c == '|' && (in[i] == '|'))
 		display_error("check pipes or redirects syntax error", 0);
 	if (c == '<' && (in[i] == '>' || in[i] == '|'))
@@ -67,6 +67,15 @@ void	redicheck(char *input, int i)
 {
 	char	c;
 	
+	if(input[i] == '|')
+		display_error("pipe ao inicio", 0);
+	while ((input[i]) && (input[i] == ' ' || input[i] == '\t'))
+	{
+		if(input[i + 1] != ' ' || input[i + 1] != '\t')
+			if(input[i + 1] == '|')
+				display_error("pipe ao inicio", 0);
+		i++;
+	}
 	while (input[i])
 	{
 		if (input[i] == '"' || input[i] == 39)
