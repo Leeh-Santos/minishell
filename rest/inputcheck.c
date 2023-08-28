@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/28 01:23:13 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/08/28 03:26:43 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void		verify_c(char c, int i, char *in)
 			flag1++;
 		i++;
 	}
+	//falta: "echo |< ola" & "echo |> ola" funcionar mas "echo |<" & "echo |>" não pode funcionar, e o mesmo para ">>" & "<<"
 	if (c == '|' && (in[i] == '|'))
 		display_error("check pipes or redirects syntax error", 0);
 	if (c == '<' && (in[i] == '>' || in[i] == '|'))
