@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/24 18:50:41 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:25:00 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void	insert(char *in)
 	if (!new)
 		display_error("deu pau no malloc", 0);
 	new->token = in;
+	new->type = 0;
 	new->next = NULL;
 	tmp = shell()->head;
 	if (!tmp)
@@ -180,8 +181,9 @@ void	insert(char *in)
 void	token_it(char *in)
 {
 	int i;
-
+	
 	i = 0;
+	shell()->root = NULL;
 	while (in[i] != '\0')
 	{
 		killspc(in, &i);
@@ -189,6 +191,7 @@ void	token_it(char *in)
 			return;
 		insert(take_w(in, &i));
 	}
-	token_tree();
+	token_type();
+	shell()->root = token_tree(shell()->head);
 	
 }

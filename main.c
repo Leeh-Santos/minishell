@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/24 21:46:28 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:18:19 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,12 @@ void	print_token(){
 
 	int i = 0;
 
-	printf("linked list carai \n");
+	printf("\n");
 
 	while (tmp){
-		printf("node %d - %s\n", i, tmp->token);
+		printf("node %d -- %s -- %d\n", i, tmp->token, tmp->type);
 		tmp = tmp->next;
 		i++;
 	}
-
 
 }

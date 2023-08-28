@@ -3,29 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/24 22:04:44 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:54:30 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
 
-void	token_tree()
+void	token_type(void)
 {
 	t_token	*tmp;
-	t_token	*tmp2;
-	
-	int flag;
 
 	tmp = shell()->head;
 	if (!tmp)
-		return;
+		return ;
+
+	while(tmp)
+	{
+		if (tmp->token[0] == '<' || tmp->token[0] == '>')
+		{
+			tmp->type = 1;
+			if (tmp->next)
+				tmp->next->type = 1;
+		}
+		tmp = tmp->next;
+	}
+}
+
+t_node *newnode()
+{
+
+}
+
+t_token *for_cmd(t_token *start) // contar quantas strs para matriz, 
+{
+	t_token *tmp;
 	
-    printf("\n\n\n\n");
+	tmp = start;
 
 	while (tmp)
+	{
+		if (tmp->token[0] == '|')
+			return(tmp);
+		
+	}
+	
+}
+
+t_node *token_tree(t_token *head)
+{
+	t_token	*tmp;
+	t_token	*pipe;
+	
+	pipe = NULL;
+	tmp = head;
+	if (!tmp)
+		return;
+
+	pipe = for_cdm(tmp); //manda node para arvore
+	for_redir(tmp); // manda node para arover
+
+	if (pipe)
+	{
+		insert_tr(new_node(pipe));
+		token_tree(pipe);
+	}
+
+}
+
+
+/*
+{
+    E_CMD,
+    E_PIPE,
+    E_IN,
+    E_OUT,
+    E_APPEND,
+    E_HDOC,
+    E_BUILT
+} t_type;*/
+
+/*while (tmp)
 	{
 		flag = 2;
 		while (flag != 0 && (tmp->token[0] != '|' || tmp))
@@ -40,47 +100,4 @@ void	token_tree()
 			}
 		}
 		
-	}
-
-	//manda arvore
-
-	while (tmp)
-	{
-		if (flag == 2)
-		{
-			while (tmp && tmp->token != '|')
-			{
-				if (tmp->token[0] == '<' || tmp->token[0] == '>')
-					tmp = tmp->next->next; // porque tem que haver algo aqui, se nao quebra antes de entrar
-				//cria node e joga o bagui
-				//ve o tipo ou add tipo
-				//manda tree
-				tmp = tmp->next;
-				flag--;
-				continue;
-				//tmp se mantem ingual e roda linked list again?
-			} 
-		}
-		if (flag == 1)
-		{
-			
-		}
-		if(flag == 0)
-		{
-			
-		}
-		
-	}
-}
-
-/*
-{
-    E_CMD,
-    E_PIPE,
-    E_IN,
-    E_OUT,
-    E_APPEND,
-    E_HDOC,
-    E_BUILT
-} t_type;*/
-
+	}*/

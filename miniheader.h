@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/24 20:45:30 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/28 16:25:54 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum e_type
 typedef struct s_token
 {
 	char *token;
+    int type;
     struct s_token *next;
 }t_token;
 
@@ -92,7 +93,7 @@ void	token_it(char *in);
 void	free_linked(void);
 
 //tree
-
-void	token_tree(void);
+void	token_type(void);
+t_node *token_tree(t_token *head);
 
 #endif
