@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/17 12:59:55 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/28 01:00:16 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	display_error(char *str, int x);
 
 //input & parse
 
+int 	char_checker(char c);
 void	inputcheck(char *input);
 void	quotecheck(char *input, int i, int flag);
 void	forbidenchar(char *input);
