@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/25 21:02:59 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:23:13 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,38 @@ void	quotecheck(char *input, int i, int flag)
 
 void		verify_c(char c, int i, char *in)
 {
-	int flag;
+	int flag1;
+	int flag2;
 
-	flag = 0;
+	flag1 = 0;
+	flag2 = 0;
+	if(in[i - 2] == '<' || in[i - 2] == '>')
+		flag2++;
 	while((in[i]) && (in[i] == '\t' || in[i] == ' ')){
 		if ((c == '>' || c == '<') && (in[i] == '\t' || in[i] == ' '))
-			flag++;
+			flag1++;
 		i++;
 	}
-	//"echo >| ola" precisa funcionar, mas "echo >>| ola" não pode, 	
 	if (c == '|' && (in[i] == '|'))
 		display_error("check pipes or redirects syntax error", 0);
 	if (c == '<' && (in[i] == '>' || in[i] == '|'))
 		display_error("check pipes or redirects syntax error", 0);
-	if (c == '>' && (in[i] == '<' || in[i] == '|'))
-		display_error("check pipes or redirects syntax error", 0);
-	if (c == '>' && (in[i] == '>') && flag)
+	if (c == '>' && (in[i] == '>') && flag1)
 		display_error("espaco entre redir", 0);
-	if (c == '<' && (in[i] == '<') && flag)
-		display_error("espaco entre redir", 0);	
+	if (c == '<' && (in[i] == '<') && flag1)
+		display_error("espaco entre redir", 0);
+	if (c == '>' && (in[i] == '<' || in[i] == '|'))
+	{
+		if(in[i++] == '|')
+		{
+			while((in[i]) && (in[i] == '\t' || in[i] == ' '))
+				i++;
+			if(char_checker(in[i]) || flag2)
+				display_error("check pipes or redirects syntax error", 0);
+		}
+		else
+			display_error("check pipes or redirects syntax error", 0);
+	}	
 }
 
 void	redicheck(char *input, int i)
