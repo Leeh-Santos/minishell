@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/28 16:25:54 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/29 12:29:18 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_shell *shell(void);
 int		ft_strlen(char *s);
 char    *ft_strcpy(char *s1, char *s2);
 char	*ft_strdup(char *s1);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 //signal
 void	handle_sigint(int sig);

@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:12:21 by learodri          #+#    #+#             */
-/*   Updated: 2023/06/26 15:50:42 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/29 12:30:08 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,22 @@ char	*ft_strdup(char *s1)
 		scpy[i] = s1[i];
 	scpy[i] = 0;
 	return (scpy);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*ptr1;
+	unsigned char	*ptr2;
+
+	ptr1 = (unsigned char *)s1;
+	ptr2 = (unsigned char *)s2;
+	if (!n)
+		return (0);
+	while (n > 1 && *ptr1 && *ptr2 && (*ptr1 == *ptr2))
+	{
+		ptr1++;
+		ptr2++;
+		n--;
+	}
+	return (*ptr1 - *ptr2);
 }
