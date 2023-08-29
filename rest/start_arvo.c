@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/29 16:44:27 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/29 18:20:50 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
+
+// echo ola >| echo ola - ok - out +ola ola
+// echo ola > | echo ola - da ruim 
 
 static int	built_ou_cmd(t_token *node)
 {
