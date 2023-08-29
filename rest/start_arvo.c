@@ -6,14 +6,11 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/29 18:20:50 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/29 19:47:06 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
-
-// echo ola >| echo ola - ok - out +ola ola
-// echo ola > | echo ola - da ruim 
 
 static int	built_ou_cmd(t_token *node)
 {
@@ -122,27 +119,49 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 	
 }
 
-void	redir_node(t_token *token_node, char *arg)
+static int redir_tipo(t_token *redir)
 {
+	t_token *tmp;
+
+	tmp = redir;
+
 	
+	if (tmp->token[0] == '<' && tmp->token[1] == '<')
+		return (E_HDOC);
+	else if (tmp->token[0] == '>' && tmp->token[1] == '>')
+		return (E_APPEND);
+	else if (tmp->token[0] == '<' && !tmp->token[1])
+		return (E_IN);
+	else if (tmp->token[0] == '>' && !tmp->token[1])
+		return (E_OUT);
+	else
+		return (-1);
+	
+}
+
+t_node*	redir_node(t_token *token_node, char *arg)
+{
+	t_token *tmp;
+
+	tmp = token_node;
 	t_node *new = malloc(sizeof(t_node));
-		if (!new)
-			display_error("falha no malloc tree node", 0);	
-		new->left = NULL;
-		new->right = NULL;
-		new->up = NULL;
-		new->pipe[0] = -1;
-		new->pipe[1] = -1;
+	if (!new)
+		display_error("falha no malloc tree node", 0);
+	new->nodeType = redir_tipo(tmp);
+	new->arguments = malloc(sizeof(char *) * 2);
+	new->left = NULL;
+	new->right = NULL;
+	new->up = NULL;
+	new->pipe[0] = -1;
+	new->pipe[1] = -1;
+	
 }
 
 void	for_redir(t_token *start) // ja manda o tipo do redir, o parsing que q ta ok! se nao da ruim
 {
 	t_token	*tmp;
-	
-	
-	tmp = start;
-
 		
+	tmp = start;
 
 	while (tmp)
 	{

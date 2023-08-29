@@ -1,5 +1,7 @@
 
 **heredoc first
+-abre todos os heredoc
+- guardar o ultimo here de cada cdm, ou seja abre os here e depois executa, abrir dentro de pipes
 
 ls > abc | wc -l | echo a
 

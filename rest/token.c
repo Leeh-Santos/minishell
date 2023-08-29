@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/28 16:56:48 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/29 18:47:01 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ void	token_it(char *in)
 			return;
 		insert(take_w(in, &i));
 	}
+	
 	token_type();
 	shell()->root = token_tree(shell()->head); //talvez ter puxar aqui o root node para ver se da merda
 	
