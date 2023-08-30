@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/30 16:27:14 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/30 16:30:45 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	send_to_tree(t_node *node)
 	t_node *tmp = node;
 
 	if (node->nodeType != E_PIPE)
-		printf("treenodetype %d - 1str %s - 2str %s \n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
+		printf("treenodetype %d - #1str %s - #2str %s \n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
 	else
 		printf("PIPE CARAI \n");
 	
