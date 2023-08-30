@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/30 20:02:08 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/30 20:13:28 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,10 @@ static int redir_tipo(t_token *redir)
 t_node*	redir_node(t_token *token_node, char *arg)
 {
 	t_token *tmp;
+	t_node *new;
 
 	tmp = token_node;
-	t_node *new = malloc(sizeof(t_node));
+	new = malloc(sizeof(t_node));
 	
 	new->nodeType = redir_tipo(tmp);
 	new->arguments = malloc(sizeof(char *) * 2);
@@ -164,7 +165,6 @@ t_node*	redir_node(t_token *token_node, char *arg)
 	new->up = NULL;
 	new->pipe[0] = -1;
 	new->pipe[1] = -1;
-	
 	return (new);
 }
 
@@ -219,8 +219,8 @@ void	token_tree(t_token *head)
 	if (!tmp)
 		return ;
 
-	pipe = for_cmd(tmp); //manda node para arvore
-	for_redir(tmp); // manda node para arover
+	pipe = for_cmd(tmp); 
+	for_redir(tmp); 
 
 	if (pipe)
 	{
