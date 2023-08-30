@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/30 12:22:19 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/30 15:48:55 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	print_token(){
 	printf("\n");
 
 	while (tmp){
-		printf("linkedlistnode %d -- %s -- %d\n", i, tmp->token, tmp->type);
+		printf("linkedlistnode %d -- %s -- id:%d\n", i, tmp->token, tmp->type);
 		tmp = tmp->next;
 		i++;
 	}

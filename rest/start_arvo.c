@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/30 12:58:52 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/30 16:27:14 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ void	token_type(void)
 void	send_to_tree(t_node *node)
 {
 	t_node *tmp = node;
-	printf("treenodetype %d - 1str %s - 2str %s \n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
+
+	if (node->nodeType != E_PIPE)
+		printf("treenodetype %d - 1str %s - 2str %s \n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
+	else
+		printf("PIPE CARAI \n");
+	
 	
 }
 
@@ -65,7 +70,7 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 {
 	t_token *tmp;
 	t_node *new;
-	int	nb_str;
+	int	nb_str = 0;
 	int i = 0;
 	
 	tmp = start;
@@ -76,9 +81,13 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
+	new->pipe[0] = -1;
+	new->pipe[1] = -1;
 
 	while (tmp)
 	{
+		if (tmp->token[0] == '|')
+			break;
 		if (tmp->type == 0)
 			nb_str++;
 		tmp = tmp->next;
@@ -91,8 +100,7 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 			free(new);
 		return NULL; 
 	}
-	new->pipe[0] = -1;
-	new->pipe[1] = -1;
+	
 	tmp = start;
 
 	while (tmp)
@@ -106,8 +114,6 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 		if (tmp->type == 0)
 		{
 			new->arguments[i] = ft_strdup(tmp->token);
-			if (!new->arguments[i])
-			display_error("deu ruim na mtx node-arvore", 0);
 			i++;
 		}
 		tmp = tmp->next;
@@ -190,7 +196,7 @@ t_node *pipe_node(void)
 
 	new = malloc(sizeof(t_node));
 	if (!new)
-		return NULL;
+		display_error("deu ruim pipemalloc", 0);
 	new->nodeType = E_PIPE;
 	new->arguments = NULL;	
 	new->left = NULL;
@@ -203,7 +209,7 @@ t_node *pipe_node(void)
 	
 }
 
-t_node *token_tree(t_token *head)
+void	token_tree(t_token *head)
 {
 	t_token	*tmp;
 	t_token	*pipe;
@@ -211,7 +217,7 @@ t_node *token_tree(t_token *head)
 	pipe = NULL;
 	tmp = head;
 	if (!tmp)
-		return NULL;
+		return ;
 
 	pipe = for_cmd(tmp); //manda node para arvore
 	for_redir(tmp); // manda node para arover
@@ -219,9 +225,9 @@ t_node *token_tree(t_token *head)
 	if (pipe)
 	{
 		send_to_tree(pipe_node());
-		token_tree(pipe);
+		token_tree(pipe->next);
 	}
-	return (shell()->root);
+	
 }
 
 
