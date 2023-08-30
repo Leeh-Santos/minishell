@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/30 16:30:45 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/08/30 20:02:08 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
+
 
 static int	built_ou_cmd(t_token *node)
 {
@@ -61,7 +62,6 @@ void	send_to_tree(t_node *node)
 		printf("treenodetype %d - #1str %s - #2str %s \n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
 	else
 		printf("PIPE CARAI \n");
-	
 	
 }
 
@@ -158,7 +158,7 @@ t_node*	redir_node(t_token *token_node, char *arg)
 	if (!new->arguments || !new)	
 		display_error("falha no malloc tree node", 0);
 	new->arguments[0] = ft_strdup(arg);
-	new->arguments[1] = '\0';
+	new->arguments[1] = NULL;  
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
@@ -229,16 +229,4 @@ void	token_tree(t_token *head)
 	}
 	
 }
-
-
-/*
-{
-    E_CMD,
-    E_PIPE,
-    E_IN,
-    E_OUT,
-    E_APPEND,
-    E_HDOC,
-    E_BUILT
-} t_type;*/
 
