@@ -1,0 +1,7 @@
+==1227336== Memcheck, a memory error detector
+==1227336== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1227336== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1227336== Command: ./minishell
+==1227336== Parent PID: 1227307
+==1227336== 
+==1227336== FATAL: can't open suppressions file "txt/.ignore_readline"

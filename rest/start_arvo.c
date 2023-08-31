@@ -6,12 +6,20 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/30 20:13:28 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/31 22:37:20 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
 
+ // >a echo "tomar no c"
+ //manda sempre na sequencia ou talvez nao seja necesario
+ //<a ls l
+ //<a ou >a
+
+
+
+ //<a manda outro nodetype 0 NULL
 
 static int	built_ou_cmd(t_token *node)
 {
@@ -56,12 +64,30 @@ void	token_type(void)
 
 void	send_to_tree(t_node *node)
 {
+
+	//iniciar treeroot null aqui para ir mandando para cada funcoao na colocacao da arvore
 	t_node *tmp = node;
 
-	if (node->nodeType != E_PIPE)
-		printf("treenodetype %d - #1str %s - #2str %s \n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
-	else
+	int i = 0;
+	
+
+	
+	if (node->nodeType >= E_IN && node->nodeType <= E_HDOC)
+		printf("treenodetype %d - #0 %s - #1 %s\n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
+	else if (node->nodeType == E_PIPE)
 		printf("PIPE CARAI \n");
+	else if (node->nodeType == E_CMD || node->nodeType == E_BUILT)
+	{
+		printf("treenodetype %d", tmp->nodeType);
+		while (node->arguments[i])
+		{
+			printf(" - #%d %s",i , tmp->arguments[i]);
+			i++;
+		}
+		printf("\n");
+		
+	}
+		
 	
 }
 
@@ -74,17 +100,9 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 	int i = 0;
 	
 	tmp = start;
-	new = malloc(sizeof(t_node));
-	if (!new || !tmp)
-		return NULL;
-	new->nodeType = built_ou_cmd(tmp);
-	new->left = NULL;
-	new->right = NULL;
-	new->up = NULL;
-	new->pipe[0] = -1;
-	new->pipe[1] = -1;
 
-	while (tmp)
+	
+	while (tmp)                                   // acima do new maloc para de funcionar <a porqie manda errado o ponteiro tmp
 	{
 		if (tmp->token[0] == '|')
 			break;
@@ -93,6 +111,22 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 		tmp = tmp->next;
 	}
 
+	if (!nb_str)   //com NULL nao manda node
+		return (NULL);
+	
+	tmp = start;
+	
+	new = malloc(sizeof(t_node));
+	if (!new || !tmp) //tava tranvando aqui antes tava if (!tmp)
+		return NULL;
+	new->nodeType = built_ou_cmd(tmp);
+	new->left = NULL;
+	new->right = NULL;
+	new->up = NULL;
+	new->pipe[0] = -1;
+	new->pipe[1] = -1;
+
+	
 	new->arguments = malloc(sizeof(char *) * (nb_str + 1)); ///verify here
 	if (!new->arguments) //voltar aqui para o final free talbez
 	{
@@ -220,7 +254,7 @@ void	token_tree(t_token *head)
 		return ;
 
 	pipe = for_cmd(tmp); 
-	for_redir(tmp); 
+	for_redir(tmp);
 
 	if (pipe)
 	{
