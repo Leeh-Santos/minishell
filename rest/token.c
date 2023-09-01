@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/17 10:34:40 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/01 04:45:17 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	insert(char *in)
 	tmp->next = new;
 	
 }
+
 void	token_it(char *in)
 {
 	int i;
@@ -161,6 +162,7 @@ void	token_it(char *in)
 		if (in[i] == '\0')
 			return;
 		insert(take_w(in, &i));
+		del_emptyquotes();
 	}
 	
 }
