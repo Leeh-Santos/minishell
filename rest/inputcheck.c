@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputcheck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <msimoes-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/29 20:07:37 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:28:49 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,17 @@ void		verify_c(char c, int i, char *in)
 			flag++;
 		i++;
 	}
-	//falta: echo ola |>> |<<
 	if (c == '|' && (in[i] == '|'))
 		display_error("check pipes or redirects syntax error", 0);
 	if (c == '|' && ((in[i] == '>') || (in[i] == '<')))
 	{
-		while((in[i++]) && (in[i] == '\t' || in[i] == ' '))
+		if(((in[i] == '>' && in[i + 1] == '>') || (in[i] == '<' && in[i + 1] == '<')))
 			i++;
+		i++;
+		while((in[i]) && (in[i] == '\t' || in[i] == ' '))
+				i++;
 		if(char_checker(in[i]))
-			display_error("check pipes or redirects syntax error", 0);
+			display_error("check pipes or redirects syntax errorr", 0);
 	}
 	if (c == '<' && (in[i] == '>' || in[i] == '|'))
 		display_error("check pipes or redirects syntax error", 0);
