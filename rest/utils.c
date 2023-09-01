@@ -31,3 +31,44 @@ int skip_spaces(char c, int *i, char **in)
     }
     return flag;
 }
+
+static void	remove_token(t_token **prev, t_token **tmp)
+{
+	(*prev)->next = (*tmp)->next;
+	free((*tmp)->token);
+	free(*tmp);
+	*tmp = (*prev)->next;
+}
+
+static void	process_tokens(t_token **tmp, t_token **prev)
+{
+	if (((*tmp)->token[0] == '"' && (*tmp)->token[1] == '"' && (*tmp)->token[2] == '\0') || \
+	((*tmp)->token[0] == 39 && (*tmp)->token[1] == 39 && (*tmp)->token[2] == '\0') || ((*tmp)->token[0] == '\0'))
+	{
+		if (*prev)
+			remove_token(prev, tmp);
+		else
+		{
+			shell()->head = (*tmp)->next;
+			free((*tmp)->token);
+			free(*tmp);
+			*tmp = shell()->head;
+		}
+	}
+	else
+	{
+		*prev = *tmp;
+		*tmp = (*tmp)->next;
+	}
+}
+
+void	del_emptyQuotes(void)
+{
+	t_token	*tmp;
+	t_token	*prev;
+
+	tmp = shell()->head;
+	prev = NULL;
+	while (tmp)
+		process_tokens(&tmp, &prev);
+}
