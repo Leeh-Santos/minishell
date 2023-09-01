@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/01 03:26:11 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:35:58 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,8 @@ void		verify_c(char c, int i, char *in)
 {
 	int flag;
 
-	flag = 0;
-	while((in[i]) && (in[i] == '\t' || in[i] == ' ')){
-		if ((c == '>' || c == '<') && (in[i] == '\t' || in[i] == ' '))
-			flag++;
-		i++;
-	}
+	flag = skip_spaces(c, &i, &in);
+	
 	if (c == '|' && ((in[i] == '|') || in[i] == '\0'))
 		display_error("check pipes or redirects syntax error", 0);
 	if (c == '|' && ((in[i] == '>') || (in[i] == '<')))

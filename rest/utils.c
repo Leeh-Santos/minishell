@@ -18,3 +18,16 @@ int char_checker(char c)
         return 1;
     return 0;
 }
+
+int skip_spaces(char c, int *i, char **in)
+{
+    int flag;
+
+    flag = 0;
+    while(((*in)[*i]) && ((*in)[*i] == '\t' || (*in)[*i] == ' ')){
+        if ((c == '>' || c == '<') && ((*in)[*i] == '\t' || (*in)[*i] == ' '))
+            flag++;
+        (*i)++;
+    }
+    return flag;
+}

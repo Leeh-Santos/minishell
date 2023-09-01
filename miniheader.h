@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/28 01:00:16 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:37:42 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	display_error(char *str, int x);
 //input & parse
 
 int 	char_checker(char c);
+int 	skip_spaces(char c, int *i, char **in);
 void	inputcheck(char *input);
 void	quotecheck(char *input, int i, int flag);
 void	forbidenchar(char *input);
