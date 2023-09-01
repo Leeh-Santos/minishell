@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/30 17:28:49 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:26:11 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		verify_c(char c, int i, char *in)
 			flag++;
 		i++;
 	}
-	if (c == '|' && (in[i] == '|'))
+	if (c == '|' && ((in[i] == '|') || in[i] == '\0'))
 		display_error("check pipes or redirects syntax error", 0);
 	if (c == '|' && ((in[i] == '>') || (in[i] == '<')))
 	{
@@ -60,7 +60,7 @@ void		verify_c(char c, int i, char *in)
 		while((in[i]) && (in[i] == '\t' || in[i] == ' '))
 				i++;
 		if(char_checker(in[i]))
-			display_error("check pipes or redirects syntax errorr", 0);
+			display_error("check pipes or redirects syntax error", 0);
 	}
 	if (c == '<' && (in[i] == '>' || in[i] == '|'))
 		display_error("check pipes or redirects syntax error", 0);
