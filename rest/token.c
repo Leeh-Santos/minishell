@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/01 04:45:17 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/03 06:52:17 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,25 @@ void	aspasword(char *in, char *tmp, int *i, char c)
 	{
 		if(in[*i] == c && flag)
 		{
-			tmp[k] = c;
-			tmp[k + 1] = '\0';
-			(*i)++;
-			return;
+			tmp[k++] = c;
+			if (in[*i + 1] == ' ' || in[*i + 1] == '\t' || in[*i + 1] == '\0' || (in[*i + 1] == '|') || (in[*i + 1] == '>') || (in[*i + 1] == '<'))
+			{
+				tmp[k] = '\0';
+				(*i)++;
+				return;
+			}
+			else
+			{
+				(*i)++;
+				while (in[*i] >= 35 && in[*i] <= 126)
+				{
+					tmp[k] = in[*i];
+					(*i)++;
+					k++;
+				}
+				tmp[k] = '\0';
+				return;
+			}
 		}
 		flag = 1;
 		tmp[k] = in[*i];
@@ -86,7 +101,7 @@ void	facin(char *in, char *tmp, int *i)
 	k = 0;
 	while((in[*i]))
 	{
-		if ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ') || (in[*i] == '\t') || (in[*i] == 39) || (in[*i] == '"'))
+		if ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ') || (in[*i] == '\t'))
 		{
 			break;
 		}
@@ -162,7 +177,7 @@ void	token_it(char *in)
 		if (in[i] == '\0')
 			return;
 		insert(take_w(in, &i));
-		del_emptyquotes();
+		del_emptyQuotes();
 	}
 	
 }
