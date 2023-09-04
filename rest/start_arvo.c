@@ -3,23 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/31 22:37:20 by learodri         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:39:08 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
 
- // >a echo "tomar no c"
- //manda sempre na sequencia ou talvez nao seja necesario
- //<a ls l
- //<a ou >a
 
+void	print_node_recebido(t_node *node)
+{
+	t_node *tmp = node;
 
+	int i = 0;
+	
 
- //<a manda outro nodetype 0 NULL
+	if (node->nodeType >= E_IN && node->nodeType <= E_HDOC)
+		printf("treenodetype %d - #0 %s - #1 %s\n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
+	else if (node->nodeType == E_PIPE)
+		printf("PIPE CARAI \n");
+	else if (node->nodeType == E_CMD || node->nodeType == E_BUILT)
+	{
+		printf("treenodetype %d", tmp->nodeType);
+		while (node->arguments[i])
+		{
+			printf(" - #%d %s",i , tmp->arguments[i]);
+			i++;
+		}
+		printf("\n");
+		
+	}
+		
+}
 
 static int	built_ou_cmd(t_token *node)
 {
@@ -65,29 +82,14 @@ void	token_type(void)
 void	send_to_tree(t_node *node)
 {
 
-	//iniciar treeroot null aqui para ir mandando para cada funcoao na colocacao da arvore
-	t_node *tmp = node;
+	print_node_recebido(node);
 
-	int i = 0;
-	
-
-	
-	if (node->nodeType >= E_IN && node->nodeType <= E_HDOC)
-		printf("treenodetype %d - #0 %s - #1 %s\n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
-	else if (node->nodeType == E_PIPE)
-		printf("PIPE CARAI \n");
-	else if (node->nodeType == E_CMD || node->nodeType == E_BUILT)
-	{
-		printf("treenodetype %d", tmp->nodeType);
-		while (node->arguments[i])
-		{
-			printf(" - #%d %s",i , tmp->arguments[i]);
-			i++;
-		}
-		printf("\n");
-		
-	}
-		
+	if (check_redir_node(node)) 
+		where_redir(node);
+	else if (check_cmd_node(node)) 
+		where_cmd(node);
+	else if (check_pipe_node(node))
+		add_on_top(node);
 	
 }
 

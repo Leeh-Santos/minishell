@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/30 15:21:25 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/04 17:01:51 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ typedef struct s_node {
     int nodeType;
     char** arguments;
     int pipe[2];
-    struct Node* up;    
-    struct Node* left;
-    struct Node* right;
+    struct s_node *up;    
+    struct s_node *left;
+    struct s_node *right;
 }t_node;
 
 
@@ -96,5 +96,10 @@ void	free_linked(void);
 //tree
 void	token_type(void);
 void token_tree(t_token *head);
+int	check_redir_node(t_node *node);
+int	check_pipe_node(t_node *node);
+int	check_cmd_node(t_node *node);
+void		where_redir(t_node *node);
+void	where_cmd(t_node *node);
 
 #endif
