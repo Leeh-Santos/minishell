@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: msimoes- <msimoes-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/09/03 06:52:17 by msimoes-         ###   ########.fr       */
-=======
-/*   Updated: 2023/09/05 16:28:25 by learodri@st      ###   ########.fr       */
->>>>>>> teste
+/*   Updated: 2023/09/05 20:21:48 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +41,6 @@ void print2D(t_node* root)
     print2DUtil(root, 0);
 }
 
-
 void	aspasword(char *in, char *tmp, int *i, char c)
 {
 	int	k;
@@ -57,7 +52,6 @@ void	aspasword(char *in, char *tmp, int *i, char c)
 	{
 		if(in[*i] == c && flag)
 		{
-<<<<<<< HEAD
 			tmp[k++] = c;
 			if (in[*i + 1] == ' ' || in[*i + 1] == '\t' || in[*i + 1] == '\0' || (in[*i + 1] == '|') || (in[*i + 1] == '>') || (in[*i + 1] == '<'))
 			{
@@ -73,23 +67,6 @@ void	aspasword(char *in, char *tmp, int *i, char c)
 					tmp[k] = in[*i];
 					(*i)++;
 					k++;
-=======
-			tmp[k] = c;
-			if (in[*i + 1] == ' ' || in[*i + 1] == '\0')
-			{
-				tmp[k + 1] = '\0';
-				(*i)++;
-				return;
-			}else
-			{
-				k++;
-				(*i)++;
-				while (in[*i] && in[*i] != ' ' && in[*i] != '|' && in[*i] != '<')
-				{
-					tmp[k] = in[*i];
-					k++;
-					(*i)++;
->>>>>>> teste
 				}
 				tmp[k] = '\0';
 				return;
@@ -148,30 +125,14 @@ void	delword(char c, char *in, char *tmp, int *i)
 void	facin(char *in, char *tmp, int *i)
 {
 	int	k;
-	int	flag;
-	int	dale;
-	char	c;
 
 	k = 0;
-	flag = 0;
-	dale = 0;
 	while((in[*i]))
 	{
-<<<<<<< HEAD
 		if ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ') || (in[*i] == '\t'))
-=======
-		if (c == in[*i])
-			dale++;
-		if ((in[*i] == 39) || (in[*i] == '"'))
->>>>>>> teste
 		{
-			flag++;
-			c = in[*i];
+			break;
 		}
-		if ((!flag) && ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ')))
-			break;
-		if ((dale) && ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ')))
-			break;
 		tmp[k] = in[*i];
 		(*i)++;
 		k++;
@@ -190,14 +151,14 @@ char	*take_w(char *in, int *i) // sempre cai aqui no 1 index da subs
 		
 	while(in[*i])
 	{
-		if (in[*i] == '|' || in[*i] == '<' || in[*i] == '>')
+		if(in[*i] == 39 || in[*i] == '"')
+			aspasword(in, tmp, i, in[*i]);
+		else if(in[*i] == '|' || in[*i] == '<'  || in[*i] == '>')
 			delword(in[*i],in, tmp, i);
 		else if(in[*i] >= 35 && in[*i] <= 126)
 			facin(in, tmp, i);
-		else if(in[*i] == 39 || in[*i] == '"')
-			aspasword(in, tmp, i, in[*i]);
 		break; // tava travado aqui antes no oioioi
-	}
+		}
 	return (tmp);
 	
 }
