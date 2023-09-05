@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/17 19:03:30 by learodri         ###   ########.fr       */
+/*   Updated: 2023/08/30 15:48:55 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ int	main(int argc, char *argv[] ,char **envp)
 	while (1)
 	{
 		//signal(SIGINT, handle_sigint);
-		input = readline("minishell$ ");
+		input = readline("picashell$ ");
 		inputcheck(input);
 		if (input && *input)
 		{
 			add_history(input);
 			token_it(input);
+			//checkar input ante de criar arvore, redir sem arg, checa com linked
 			print_token();	
 		}
 		free(input);
@@ -70,9 +71,12 @@ void	print_token(){
 
 	int i = 0;
 
+	printf("\n");
+
 	while (tmp){
-		printf("node %d - %s\n", i, tmp->token);
+		printf("linkedlistnode %d -- %s -- id:%d\n", i, tmp->token, tmp->type);
 		tmp = tmp->next;
 		i++;
 	}
+
 }
