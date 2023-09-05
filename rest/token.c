@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/30 19:55:11 by learodri         ###   ########.fr       */
+/*   Updated: 2023/09/05 16:28:25 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
+
+void print2DUtil(t_node* root, int space)
+{
+    int COUNT = 10;
+	
+    if (root == NULL)
+        return;
+ 
+
+    space += COUNT;
+ 
+    
+    print2DUtil(root->right, space);
+ 
+    
+    printf("\n");
+    for (int i = COUNT; i < space; i++)
+        printf(" ");
+    printf("%d\n", root->nodeType);
+ 
+    
+    print2DUtil(root->left, space);
+}
+ 
+
+void print2D(t_node* root)
+{
+    print2DUtil(root, 0);
+}
 
 
 void	aspasword(char *in, char *tmp, int *i, char c)
@@ -194,5 +223,6 @@ void	token_it(char *in)
 	
 	token_type();
 	token_tree(shell()->head); //talvez ter puxar aqui o root node para ver se da merda
-	
+	print2D(shell()->root);
+	// free no shell root	
 }

@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/04 16:39:08 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/05 12:56:20 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	token_type(void)
 void	send_to_tree(t_node *node)
 {
 
-	print_node_recebido(node);
+	//print_node_recebido(node);
 
 	if (check_redir_node(node)) 
 		where_redir(node);

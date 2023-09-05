@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/04 17:01:51 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/05 12:51:18 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void token_tree(t_token *head);
 int	check_redir_node(t_node *node);
 int	check_pipe_node(t_node *node);
 int	check_cmd_node(t_node *node);
+void	add_on_top(t_node *node);
 void		where_redir(t_node *node);
 void	where_cmd(t_node *node);
 
