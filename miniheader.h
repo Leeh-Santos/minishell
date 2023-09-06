@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/06 11:19:53 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/06 20:27:02 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_shell
 }t_shell;
 
 
+void	print_node_recebido(t_node *node);
 
 //struct -- 
 
@@ -96,7 +97,7 @@ void	token_it(char *in);
 //free
 void	free_linked(void);
 
-//tree
+//tree stuff
 void	token_type(void);
 void token_tree(t_token *head);
 int	check_redir_node(t_node *node);
@@ -105,5 +106,9 @@ int	check_cmd_node(t_node *node);
 void	add_on_top(t_node *node);
 void		where_redir(t_node *node);
 void	where_cmd(t_node *node);
+
+//exec tree
+
+void	exec_tree(void);
 
 #endif

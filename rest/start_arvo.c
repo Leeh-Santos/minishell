@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/05 12:56:20 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/06 20:30:04 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	print_node_recebido(t_node *node)
 	
 
 	if (node->nodeType >= E_IN && node->nodeType <= E_HDOC)
-		printf("treenodetype %d - #0 %s - #1 %s\n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
+		printf("nodetype %d - #0 %s - #1 %s\n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
 	else if (node->nodeType == E_PIPE)
 		printf("PIPE CARAI \n");
 	else if (node->nodeType == E_CMD || node->nodeType == E_BUILT)
 	{
-		printf("treenodetype %d", tmp->nodeType);
+		printf("nodetype %d", tmp->nodeType);
 		while (node->arguments[i])
 		{
 			printf(" - #%d %s",i , tmp->arguments[i]);

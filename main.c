@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/30 15:48:55 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/06 20:25:26 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	main(int argc, char *argv[] ,char **envp)
 			add_history(input);
 			token_it(input);
 			//checkar input ante de criar arvore, redir sem arg, checa com linked
-			print_token();	
+			print_token();
+			//exec_tree();
 		}
 		free(input);
 		free_linked();
