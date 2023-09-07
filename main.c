@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/06 20:25:26 by learodri         ###   ########.fr       */
+/*   Updated: 2023/09/07 09:47:36 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, char *argv[] ,char **envp)
 			token_it(input);
 			//checkar input ante de criar arvore, redir sem arg, checa com linked
 			print_token();
-			//exec_tree();
+			exec_tree();
 		}
 		free(input);
 		free_linked();
@@ -71,7 +71,7 @@ void	print_token(){
 	t_token *tmp = shell()->head;
 
 	int i = 0;
-
+	
 	printf("\n");
 
 	while (tmp){

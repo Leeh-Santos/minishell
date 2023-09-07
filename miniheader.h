@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/06 20:27:02 by learodri         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:30:08 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <errno.h>
+# include <fcntl.h>
 
 typedef enum e_type
 {
@@ -64,6 +65,7 @@ typedef struct s_shell
 }t_shell;
 
 
+
 void	print_node_recebido(t_node *node);
 
 //struct -- 
@@ -76,6 +78,8 @@ int		ft_strlen(char *s);
 char    *ft_strcpy(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putchar_fd(char c, int fd);
 
 //signal
 void	handle_sigint(int sig);

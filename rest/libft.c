@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:12:21 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/29 12:30:08 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/07 16:29:25 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,23 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (*ptr1 - *ptr2);
 }
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	index;
+
+	if (!s)
+		return ;
+	index = 0;
+	while (s[index] != '\0')
+	{
+		ft_putchar_fd(s[index], fd);
+		index++;
+	}
+}
+
