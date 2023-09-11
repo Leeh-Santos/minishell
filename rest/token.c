@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <msimoes-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/05 20:21:48 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/11 04:41:31 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void	delword(char c, char *in, char *tmp, int *i)
 		tmp[k + 1] = '\0';
 		(*i)++;
 		return;
-	}else if (c == '<')
+	}
+	else if (c == '<')
 	{
 		if (in[*i + 1] == '<')
 		{
@@ -122,17 +123,29 @@ void	delword(char c, char *in, char *tmp, int *i)
 	}
 }
 
+static int is_redir_pipe(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return 1;
+	return 0;
+}
+
 void	facin(char *in, char *tmp, int *i)
 {
 	int	k;
+	int quote;
 
+	quote = 0;
 	k = 0;
 	while((in[*i]))
 	{
-		if ((in[*i] == '|') || (in[*i] == '>') || (in[*i] == '<') || (in[*i] == ' ') || (in[*i] == '\t'))
-		{
+		if(is_redir_pipe(in[*i]))
 			break;
-		}
+		if(in[*i] == 39 || in[*i] == '"')
+			quote++;
+		if(quote % 2 == 0)
+			if ((in[*i] == ' ') || ((in[*i] == '\t')))
+				break;
 		tmp[k] = in[*i];
 		(*i)++;
 		k++;
