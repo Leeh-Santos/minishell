@@ -6,11 +6,18 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/11 04:41:31 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/11 05:14:26 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
+
+static int is_redir_pipe(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return 1;
+	return 0;
+}
 
 void print2DUtil(t_node* root, int space)
 {
@@ -53,7 +60,7 @@ void	aspasword(char *in, char *tmp, int *i, char c)
 		if(in[*i] == c && flag)
 		{
 			tmp[k++] = c;
-			if (in[*i + 1] == ' ' || in[*i + 1] == '\t' || in[*i + 1] == '\0' || (in[*i + 1] == '|') || (in[*i + 1] == '>') || (in[*i + 1] == '<'))
+			if (in[*i + 1] == ' ' || in[*i + 1] == '\t' || in[*i + 1] == '\0' || is_redir_pipe(in[*i + 1]))
 			{
 				tmp[k] = '\0';
 				(*i)++;
@@ -123,13 +130,6 @@ void	delword(char c, char *in, char *tmp, int *i)
 	}
 }
 
-static int is_redir_pipe(char c)
-{
-	if (c == '|' || c == '<' || c == '>')
-		return 1;
-	return 0;
-}
-
 void	facin(char *in, char *tmp, int *i)
 {
 	int	k;
@@ -193,6 +193,8 @@ void	insert(char *in)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		display_error("deu pau no malloc", 0);
+	expand_check(); // se for preciso dar expand dá
+	del_quotes(); // apaga todas as quotes (depois da pra remover as funcs do del_emptyquotes)
 	new->token = in;
 	new->type = 0;
 	new->next = NULL;
