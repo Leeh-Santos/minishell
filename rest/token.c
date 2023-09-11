@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/11 05:14:26 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/11 08:20:02 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,15 +193,14 @@ void	insert(char *in)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		display_error("deu pau no malloc", 0);
-	expand_check(); // se for preciso dar expand dá
-	del_quotes(); // apaga todas as quotes (depois da pra remover as funcs do del_emptyquotes)
+	expand_check(in, shell()->env); //tratar do expand
 	new->token = in;
 	new->type = 0;
 	new->next = NULL;
 	tmp = shell()->head;
 	if (!tmp)
 	{
-		shell()->head = new;
+		shell()->head = new;	
 		return;
 	}
 	while (tmp->next != NULL)

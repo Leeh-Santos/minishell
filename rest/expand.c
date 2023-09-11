@@ -12,9 +12,13 @@
 
 # include "../miniheader.h"
 
-//func expand_check pra verificar se é preciso ou não expand, caso seja, chama a expand	
+void expand_check(char *in, char **env)
+{
+    //se econtrar ' é preciso avançar até enontrar a outra
+    //caso encontre dollar e existe algo na frente vai pra função de expandir
+}
 
 
-//func pra dar expand
+//função de expandir
 
-//func pra apagar as quotes todas depois
+//função de apagar quotes
