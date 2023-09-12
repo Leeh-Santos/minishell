@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/07 16:36:21 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/12 16:10:45 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	simple_built(t_node *root)
 			open_ins(node);
 		if (node->nodeType == E_OUT || node->nodeType == E_APPEND)
 		{
-			if (!flag)
+			if (!flag) // para pegar sempre o primeiro outfd na sub three - echo asd >a asd >b asd >c, cria o resto, pega >c e o primeiro da subtree e joga
 			{
 				if (node->nodeType == E_OUT)
 					fd = open(node->arguments[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -133,5 +133,6 @@ void	exec_tree(void)
 	if (!root->up && root->nodeType == E_BUILT)
 		return (simple_built(root));
 
+	
 		
 }
