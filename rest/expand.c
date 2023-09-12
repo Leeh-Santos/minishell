@@ -12,13 +12,30 @@
 
 # include "../miniheader.h"
 
-void expand_check(char *in, char **env)
+static char *do_expand(char *str, char **env, int i)
 {
-    //se econtrar ' é preciso avançar até enontrar a outra
-    //caso encontre dollar e existe algo na frente vai pra função de expandir
+    //encontrar o nome da var
+    //verificar se a var existe
+    //encontrar o valor da var
+    //substituir os valores 
 }
 
+char *expand_check(char *in, char **env)
+{
+    int i;
+    char *ret;
 
-//função de expandir
+    ret = in;
+    i = -1;
+    while (ret[++i])
+    {
+        if (ret[i] == '$' && ret[i + i])
+        {
+            ret = do_expand(ret, env, i);
+            i = -1;
+        }
+    }
+    return ret;
+}
 
 //função de apagar quotes

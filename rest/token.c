@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: msimoes- <msimoes-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/11 08:20:02 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:18:35 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,7 @@ void	insert(char *in)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		display_error("deu pau no malloc", 0);
-	expand_check(in, shell()->env); //tratar do expand
-	new->token = in;
+	new->token = expand_check(in, shell()->env); //tratar do expand
 	new->type = 0;
 	new->next = NULL;
 	tmp = shell()->head;
