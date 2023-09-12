@@ -42,6 +42,7 @@ char *expand_check(char *in, char **env)
         {
             ret = do_expand(ret, env, i);
             i = -1;
+            c = 0;
         }
     }
 
