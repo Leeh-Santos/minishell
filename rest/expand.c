@@ -14,10 +14,15 @@
 
 static char *do_expand(char *str, char **env, int i)
 {
-    //encontrar o nome da var
-    //verificar se a var existe
-    //encontrar o valor da var
-    //substituir os valores 
+    char *var_name;
+    char *var_content;
+    char *ret;
+
+    var_name = get_name(str, i);     //encontrar o nome da var
+    var_content = get_content(var_name, env, str, i);     //encontrar o valor da var
+    if(!value)
+        return 0;
+    ret = replace_var(str, var_content, i);     //substituir a var pelo valor
 }
 
 char *expand_check(char *in, char **env)
