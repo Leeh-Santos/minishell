@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/11 16:11:59 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/14 19:25:32 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	envparse(char **envp) // essa poha gurda o env inteirp e o PATH
 	shell()->path = getenv("PATH");
 }
 
-int	main(int argc, char *argv[] ,char **envp)
+int	main(int argc, char **argv ,char **envp)
 {
 	char *input;
 
@@ -58,10 +58,15 @@ int	main(int argc, char *argv[] ,char **envp)
 			token_it(input);
 			//checkar input ante de criar arvore, redir sem arg, checa com linked
 			print_token();
+			free_linked();
+			free(input);
 			//exec_tree();
 		}
-		free(input);
-		free_linked();
+		else
+		{
+			// sair do programa
+			free(input);
+		}
 	}
 	return 0;
 }

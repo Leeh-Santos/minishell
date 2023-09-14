@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/12 16:10:45 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/14 22:27:47 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	simple_built(t_node *root)
 			open_ins(node);
 		if (node->nodeType == E_OUT || node->nodeType == E_APPEND)
 		{
-			if (!flag) // para pegar sempre o primeiro outfd na sub three - echo asd >a asd >b asd >c, cria o resto, pega >c e o primeiro da subtree e joga
+			if (!flag)
 			{
 				if (node->nodeType == E_OUT)
 					fd = open(node->arguments[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
@@ -120,6 +120,41 @@ void	simple_built(t_node *root)
 	which_builtin(root, fd);
 }
 
+void	pipe_it(t_node *sub)
+{
+	int future.in = 0;
+	
+	if (sub.left != E_PIPE)
+	{
+		if (pipe(sub->pipe) == -1)
+			ft_putendl_fd("Error: Pipe failed", 2);
+		shell.out = sub.pipe[1];
+		in.shell = sub.pipe[0];//close(sub.pipe[0]); //fecha no righ[0] end no kid
+		kid_it(sub.left); // escreve e fecha
+		wait();
+	}
+	if (sub.up)
+	{
+		// in vem do sub.pipe
+		if (pipe(sub->up->pipe) == -1)
+			ft_putendl_fd("Error: Pipe failed", 2);
+		if (future.in != 0)
+			in.shell = future.in;
+		out.shell = sub.up.pipe[1]; //escreve e fecha esse end no kid??
+		future.in = sub.up.pipe[0];
+		kid_it(sub.right);
+		wait();
+		pipe_it(sub.up);
+	}
+	else
+	{
+		if (future.in)
+			in.shell = future.in;
+		kid_it(sub.right);
+		wait();
+	}
+}
+
 void	exec_tree(void)
 {
 	t_node	*root = shell()->root;
@@ -128,11 +163,17 @@ void	exec_tree(void)
 	if (!root)
 		return ;
 
+	while (root->left == E_PIPE)
+		root = root->left;
 	if (!root->up && root->nodeType == E_HDOC)
 		return (wtf_hdoc(root));
 	if (!root->up && root->nodeType == E_BUILT)
 		return (simple_built(root));
+	if (root->nodeType == E_PIPE)
+		return(pipe_it(root));
+	else
+		//simple cmd shit
 
 	
 		
-}
+}	
