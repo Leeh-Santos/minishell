@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <msimoes-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/12 19:18:35 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/14 09:54:21 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,16 @@ void	aspasword(char *in, char *tmp, int *i, char c)
 {
 	int	k;
 	int	flag;
+	int quote;
 
 	k = 0;
 	flag = 0;
+	quote = 0;
 	while(in[*i])
 	{
 		if(in[*i] == c && flag)
 		{
+			flag = 0;
 			tmp[k++] = c;
 			if (in[*i + 1] == ' ' || in[*i + 1] == '\t' || in[*i + 1] == '\0' || is_redir_pipe(in[*i + 1]))
 			{
@@ -69,8 +72,12 @@ void	aspasword(char *in, char *tmp, int *i, char c)
 			else
 			{
 				(*i)++;
-				while (in[*i] >= 35 && in[*i] <= 126)
+				while (in[*i] && (in[*i] >= 32 && in[*i] <= 126))
 				{
+					if(in[*i] == 39 || in[*i] == '"')
+						quote++;
+					if(quote % 2 == 0 && (in[*i] == ' ' || in[*i] == '\t' || is_redir_pipe(in[*i])))
+						break;
 					tmp[k] = in[*i];
 					(*i)++;
 					k++;

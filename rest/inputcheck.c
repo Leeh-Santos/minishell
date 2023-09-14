@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/01 03:35:58 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/14 09:53:37 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void		verify_c(char c, int i, char *in)
 		if(char_checker(in[i]))
 			display_error("check pipes or redirects syntax error", 0);
 	}
+	if ((c == '<' || c == '>') && !(in[i]))
+		display_error("check pipes or redirects syntax error", 0);
 	if (c == '<' && (in[i] == '>' || in[i] == '|'))
 		display_error("check pipes or redirects syntax error", 0);
 	if (c == '>' && (in[i] == '<' || in[i] == '|'))
