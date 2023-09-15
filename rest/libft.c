@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:12:21 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/07 16:29:25 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/15 12:57:28 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,3 +88,17 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	index;
+
+	index = 0;
+	if (!s)
+		return ;
+	while (s[index] != '\0')
+	{
+		ft_putchar_fd(s[index], fd);
+		index++;
+	}
+	ft_putchar_fd('\n', fd);
+}
