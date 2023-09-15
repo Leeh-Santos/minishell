@@ -12,6 +12,27 @@
 
 # include "../miniheader.h"
 
+static char *get_name(char *str, int i)
+{
+    char *ret;
+    int j;
+
+    j = 0;
+    if (str[i + 1] == '?')
+        return (ft_itoa(shell()->exit_s));
+    while (str[++i] && str[i] != ' ' && str[i] != '\t' \
+    && str[i] != '\'' && str[i] != '\"' && str[i] != '$')
+        j++;
+    ret = malloc(sizeof(char) * (j + 1));
+    if(!ret)
+        return 0;
+    ret[j] = 0;
+    while (--j > -1)
+        ret[j] = str[i--];
+    return (ret);
+    
+}
+
 static char *do_expand(char *str, char **env, int i)
 {
     char *var_name;
@@ -51,6 +72,6 @@ char *expand_check(char *in, char **env)
         }
     }
 
-    return ret;
+    return (ret);
 }
 

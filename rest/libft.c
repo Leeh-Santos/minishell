@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:12:21 by learodri          #+#    #+#             */
-/*   Updated: 2023/08/29 12:30:08 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/15 05:05:50 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,28 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		n--;
 	}
 	return (*ptr1 - *ptr2);
+}
+
+char *ft_itoa(int n)
+{
+	int i;
+	int j;
+	char *str;
+
+	i = 0;
+	j = n;
+	while (j > 0)
+	{
+		j /= 10;
+		i++;
+	}
+	str = malloc(sizeof(char) * (i + 1));
+	str[i] = '\0';
+	while (i > 0)
+	{
+		str[i - 1] = (n % 10) + '0';
+		n /= 10;
+		i--;
+	}
+	return (str);
 }
