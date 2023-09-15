@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/11 04:27:36 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/15 08:47:59 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		ft_strlen(char *s);
 char    *ft_strcpy(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char    *ft_itoa(int n);
 
 //signal
 void	handle_sigint(int sig);
@@ -93,6 +94,13 @@ void	forbidenchar(char *input);
 void	verify_c(char c, int i, char *in);
 void	redicheck(char *input, int i);
 void	token_it(char *in);
+
+//expand
+int	    expander_len(char *str);
+int	    verify_var(char *str, char *env);
+int	    env_char(char c);
+char	*expand_check(char *input, char **env);
+
 //free
 void	free_linked(void);
 

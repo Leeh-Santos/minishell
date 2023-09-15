@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/14 09:54:21 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/15 05:36:38 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,8 @@ void	insert(char *in)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		display_error("deu pau no malloc", 0);
-	new->token = expand_check(in, shell()->env); //tratar do expand
+	in = expand_check(in, shell()->env);
+	new->token = in; //tratar do expand
 	new->type = 0;
 	new->next = NULL;
 	tmp = shell()->head;

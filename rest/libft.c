@@ -6,18 +6,20 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:12:21 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/15 05:05:50 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/15 06:50:33 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
 
-int	ft_strlen(char *s)
+int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	if (!str)
+		return (0);
+	while (str[i])
 		i++;
 	return (i);
 }
