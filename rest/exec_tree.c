@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/15 12:59:43 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/15 16:52:47 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,15 +122,18 @@ void	simple_built(t_node *root)
 
 void	kid_it(t_node *node)
 {
+	printf("entrou");
+	(void)*node;
 	if (shell()->in)
 	{
 		dup2(shell()->in, STDIN_FILENO);
+		ft_putendl_fd("recebi", 1);
 		close(shell()->in);
 	} 
 	if (shell()->out)
 	{
 		dup2(shell()->out, STDOUT_FILENO);
-		printf("escrevi no end[1] - %s", node->arguments[1]);
+		ft_putendl_fd("escrevi", 1);
 		close(shell()->out);
 	}
 
@@ -183,8 +186,9 @@ void	exec_tree(void)
 	if (!root)
 		return ;
 
-	while (root->left->nodeType == E_PIPE)
-		root = root->left;
+	printf("%d\n", root->nodeType);
+	/*while (root->left->nodeType == E_PIPE && root->left != NULL)
+		root = root->left;*/
 	if (!root->up && root->nodeType == E_HDOC)
 		return (wtf_hdoc(root));
 	if (!root->up && root->nodeType == E_BUILT)

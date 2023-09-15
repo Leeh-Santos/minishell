@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/15 12:37:04 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/15 16:55:46 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,11 @@ int	main(int argc, char **argv ,char **envp)
 			token_it(input);
 			//checkar input ante de criar arvore, redir sem arg, checa com linked
 			print_token();
-			free_linked();
-			free(input);
-			//exec_tree();
+			exec_tree();
 		}
-		else
-		{
-			// sair do programa
-			free(input);
-		}
+		free_linked();
+		free(input);
+		
 	}
 	return 0;
 }
