@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/15 16:52:47 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/16 14:16:36 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,27 +120,30 @@ void	simple_built(t_node *root)
 	which_builtin(root, fd);
 }
 
-void	kid_it(t_node *node)
+void	kid_it(t_node *node) // quebrei no dup,
 {
-	printf("entrou");
+	
 	(void)*node;
 	if (shell()->in)
 	{
-		dup2(shell()->in, STDIN_FILENO);
+		//dup2(shell()->in, STDIN_FILENO);
 		ft_putendl_fd("recebi", 1);
 		close(shell()->in);
+		
 	} 
 	if (shell()->out)
 	{
-		dup2(shell()->out, STDOUT_FILENO);
+		//dup2(shell()->out, STDOUT_FILENO);
 		ft_putendl_fd("escrevi", 1);
 		close(shell()->out);
 	}
+	printf("nao foi nos ifs\n");
 
 }
 
 void	pipe_it(t_node *sub)
 {
+	
 	
 	if (sub->left->nodeType != E_PIPE)
 	{
@@ -172,7 +175,7 @@ void	pipe_it(t_node *sub)
 			shell()->in = shell()->next_in;
 		else
 			shell()->in = sub->pipe[0];
-		shell()->out = STDOUT_FILENO;
+		//shell()->out = STDOUT_FILENO; // tava a dar hanging, ao comentar os dups e deixar aqui
 		kid_it(sub->right);
 		//wait();
 	}
@@ -185,10 +188,10 @@ void	exec_tree(void)
 
 	if (!root)
 		return ;
-
-	printf("%d\n", root->nodeType);
-	/*while (root->left->nodeType == E_PIPE && root->left != NULL)
-		root = root->left;*/
+	
+	printf(" esse é %d\n", root->nodeType);
+	while (root->left->nodeType == E_PIPE && root->left != NULL)
+		root = root->left;
 	if (!root->up && root->nodeType == E_HDOC)
 		return (wtf_hdoc(root));
 	if (!root->up && root->nodeType == E_BUILT)

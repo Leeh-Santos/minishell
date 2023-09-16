@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/10 20:54:52 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/16 14:07:59 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	send_to_tree(t_node *node)
 }
 
 
-t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pra arvore, fodase, nao precisa devolver o t_
+t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 {
 	t_token *tmp;
 	t_node *new;
@@ -104,11 +104,11 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 	tmp = start;
 
 	
-	while (tmp)                                   // acima do new maloc para de funcionar <a porqie manda errado o ponteiro tmp
+	while (tmp) //quantas str pa nois maloca
 	{
 		if (tmp->token[0] == '|')
 			break;
-		if (tmp->type == 0)
+		if (tmp->type == 0) // 1 para redir 0 para cmd nao esquece poha
 			nb_str++;
 		tmp = tmp->next;
 	}
@@ -125,8 +125,6 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
-	new->pipe[0] = -1;
-	new->pipe[1] = -1;
 
 	
 	new->arguments = malloc(sizeof(char *) * (nb_str + 1)); ///verify here
@@ -141,11 +139,11 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 
 	while (tmp)
 	{
-		if (tmp->token[0] == '|')
+		if (tmp->token[0] == '|') 
 		{
 			new->arguments[i] = NULL;
 			send_to_tree(new); 
-			return(tmp);
+			return(tmp); // pa nois rodar a recursividade dps
 		}
 		if (tmp->type == 0)
 		{
@@ -199,8 +197,6 @@ t_node*	redir_node(t_token *token_node, char *arg)
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
-	new->pipe[0] = -1;
-	new->pipe[1] = -1;
 	return (new);
 }
 
@@ -238,14 +234,13 @@ t_node *pipe_node(void)
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
-	new->pipe[0] = -1;
-	new->pipe[1] = -1;
+	
 
 	return (new);
 	
 }
 
-void	token_tree(t_token *head)
+void	token_tree(t_token *head) /*antes que eu esqueca, essa poha vai criando */
 {
 	t_token	*tmp;
 	t_token	*pipe;
