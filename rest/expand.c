@@ -21,7 +21,7 @@ static char *get_name(char *str, int i)
     if (str[i + 1] == '?')
         return ("status");
     while (str[++i] && str[i] != ' ' && str[i] != '\t' \
-    && str[i] != '\'' && str[i] != '"' && str[i] != '$')
+&& str[i] != '\'' && str[i] != '"' && str[i] != '$')
         j++;
     ret = malloc(sizeof(char) * (j + 1));
     if(!ret)
@@ -102,6 +102,32 @@ static char *do_expand(char *str, char **env, int i)
     return (ret);
 }
 
+char *del_quotes(char *str)
+{
+    int i;
+    int j;
+    char *ret;
+
+    i = -1;
+    j = -1;
+    while(str[++i])
+        if(str[i] == '\'' || str[i] == '\"')
+            j++;
+    ret = malloc(sizeof(char) * ((ft_strlen(str) - j) + 1));
+    if(!ret)
+        return 0;
+    i = -1;
+    j = -1;
+    while (str[++i])
+    {
+        if (str[i] != '\'' && str[i] != '\"')
+            ret[++j] = str[i];
+    }
+    ret[++j] = 0;
+    free(str);
+    return (ret);
+}
+
 char *expand_check(char *in, char **env)
 {
     int i;
@@ -127,6 +153,7 @@ char *expand_check(char *in, char **env)
             c = 0;
         }
     }
+    ret = del_quotes(ret);
     return (ret);
 }
 
