@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/18 15:29:36 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/18 16:47:13 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 		tmp = tmp->next;
 	}
 
-	if (!nb_str)   //com NULL nao manda node
+	if (!nb_str)   //com NULL nao manda node, atencao que com >a | ls >a na segunda pipe line nao executa
 		return (NULL);
 	
 	tmp = start;

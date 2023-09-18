@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/18 15:29:33 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/18 16:26:00 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,5 +213,5 @@ void	token_it(char *in)
 	token_type();
 	token_tree(shell()->head); 
 	print2D(shell()->root);
-	// free no shell root	
+	
 }
