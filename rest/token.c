@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/15 05:36:38 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:59:28 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,8 @@ void	token_it(char *in)
 	}
 	
 	token_type();
-	token_tree(shell()->head); //talvez ter puxar aqui o root node para ver se da merda
+	token_tree(shell()->head); 
 	print2D(shell()->root);
-	// free no shell root	
+	free_na_tree(shell()->root); // talvez jogar na exec_fuc depois
+		
 }

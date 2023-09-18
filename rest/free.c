@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:13:43 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/08/16 20:48:24 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/18 16:00:26 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,29 @@ void	free_linked()
 	}
 	shell()->head =	NULL;
 
+}
+
+void	free_na_tree(t_node *root)
+{
+	int	i;
+
+	i = 0;
+
+	if (!root)
+		return;
+	free_na_tree(root->left);
+	free_na_tree(root->right);
+
+	if (root->arguments)
+	{
+		while (root->arguments[i])
+		{
+			free(root->arguments[i]);
+			i++;
+		}
+		free(root->arguments);
+	}
+	printf("node deletado %d\n", root->nodeType);
+	free(root);
+	
 }
