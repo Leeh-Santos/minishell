@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/16 14:07:59 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/18 15:29:36 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,8 +234,6 @@ t_node *pipe_node(void)
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
-	
-
 	return (new);
 	
 }
@@ -244,6 +242,7 @@ void	token_tree(t_token *head) /*antes que eu esqueca, essa poha vai criando */
 {
 	t_token	*tmp;
 	t_token	*pipe;
+	
 	
 	pipe = NULL;
 	tmp = head;

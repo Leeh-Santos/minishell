@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/16 14:16:36 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/18 15:48:55 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,17 +190,17 @@ void	exec_tree(void)
 		return ;
 	
 	printf(" esse é %d\n", root->nodeType);
-	while (root->left->nodeType == E_PIPE && root->left != NULL)
-		root = root->left;
+	//while (root->left->nodeType == E_PIPE && root->left != NULL) // da pau aqui depois de criar node mandar qualquer coisa sem pipe
+		//root = root->left;
 	if (!root->up && root->nodeType == E_HDOC)
 		return (wtf_hdoc(root));
 	if (!root->up && root->nodeType == E_BUILT)
 		return (simple_built(root));
-	if (root->nodeType == E_PIPE)
-		return(pipe_it(root));
+	//if (root->nodeType == E_PIPE)
+		//return(pipe_it(root));
 	//else
 		//simple cmd shit
 
-	
+	free_na_tree(shell()->root); 
 		
 }	

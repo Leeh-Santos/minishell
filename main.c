@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/15 17:08:42 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/18 15:22:54 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv ,char **envp)
 	{
 		//signal(SIGINT, handle_sigint);
 		input = readline("picashell$ ");
-		inputcheck(input);
+		inputcheck(input); // case der erro de syntax, fazer dar free e volvar a inputline
 		if (input && *input)
 		{
 			add_history(input);
