@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/19 16:10:24 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/19 21:03:21 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,26 +120,6 @@ void	simple_built(t_node *root)
 	which_builtin(root, fd);
 }
 
-void	kid_it(t_node *node) // quebrei no dup,
-{
-	
-	(void)*node;
-	if (shell()->in)
-	{
-		//dup2(shell()->in, STDIN_FILENO);
-		ft_putendl_fd("recebi", 1);
-		close(shell()->in);
-		
-	} 
-	if (shell()->out)
-	{
-		//dup2(shell()->out, STDOUT_FILENO);
-		ft_putendl_fd("escrevi", 1);
-		close(shell()->out);
-	}
-	printf("nao foi nos ifs\n");
-
-}
 
 void	pipe_it(t_node *sub)
 {
@@ -187,57 +167,22 @@ void	cmd_simplao(t_node *node, int flag1, int flag2)
 	char *path;
 
 	env_cpy = shell()->env;
-	int	flag1;
-	int flag2;
-	int	fd;
-	int	fdin;
-
 	path = getpath(node->arguments[0]);
+	//rl_clear_history();
+	dale_redir(node);
+	if (path)
+		execve(path, node->arguments, env_cpy);
 
-	while (node->left)
-	{
-		node = node->left;
-		if (node->nodeType == E_IN || node->nodeType == E_HDOC)
-		{
-			if (!flag2)
-			{
-				if (node->nodeType == E_IN)
-				{
-					fdin = open(node->arguments[0], O_RDONLY, 0644);
-					//checa fs -1
-					//dupeia
-				}
-				else
-					//fd = heredocshit
-					// dupeia
-				flag2++;
-			}
-			else
-				open_ins(node);
-		}	
-		if (node->nodeType == E_OUT || node->nodeType == E_APPEND)
-		{
-			if (!flag1)
-			{
-				if (node->nodeType == E_OUT)
-					fd = open(node->arguments[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-				else
-					fd = open(node->arguments[0], O_CREAT | O_WRONLY | O_APPEND, 0644);
-				if (fd == -1)
-					redir_error(node);
-				flag1++;
-			}
-			else
-				open_outs(node);
-			//dupeia
-		}		
-	}
+	// close?
+	//redir
+	//if e_built
 
 }
 
 
 void	exec_tree(void)
 {
+	int exit_status;
 	t_node	*root = shell()->root;
 	shell()->next_in = 0;
 
@@ -259,14 +204,16 @@ void	exec_tree(void)
 		printf("calma que ainda nao ta pronto\n");
 		free_na_tree(shell()->root); 
 		return;
-		
 	}
 	else
-		cmd_simplao(root, 0, 0);
-	//if (root->nodeType == E_PIPE)
-		//return(pipe_it(root));
-	//else
-		//simple cmd shit
+	{
+		shell()->pid = fork();
+		if (shell()->pid < 0)
+			ft_putendl_fd("Error: Fork failed", 2);
+		if (shell()->pid == 0);
+			cmd_simplao(root, 0, 0);
+		waitpid(shell()->pid, &exit_status, 0);
+	}
 
 	free_na_tree(shell()->root); 
 		

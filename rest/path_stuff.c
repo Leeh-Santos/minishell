@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:06:47 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/19 16:47:52 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/19 18:49:29 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,58 @@ char	*search_rpath(char *cmd)
 	return (NULL);
 }
 
-char	*relative_normal(char *cmd)
+char	**grab_paths(char **envp)
 {
-	if (cmd[0] && cmd[0] == '.')
-		return (search_rpath(cmd));
+	char	**paths;
+	int		i;
 
+	i = 0;
+	while (!ft_strnstr(envp[i], "PATH", 4)) 
+		i++;
+	paths = ft_split(envp[i] + 5, ':');
+	return (paths);
 }
+
+char	*find_path(char *cmd)
+{
+	char	**paths;
+	char	*final_path;
+	char	*add_bar;
+	int		i;
+	
+
+	paths = grab_paths(shell()->env);
+	i = -1;
+	while (paths[++i])
+	{
+		add_bar = ft_strjoin(paths[i], "/"); // add bar at the end of each possible path
+		final_path = ft_strjoin(add_bar, cmd); // add (ex. "ls") after the end of each path
+		free(add_bar);
+		if (!access(final_path, F_OK))
+		{
+			free_split(paths);
+			return (final_path);
+		}
+		free(final_path);
+	}
+	rlp_error_msg(cmd); // correu todo e nao achou no access
+	free_split(paths);
+	return (0);
+}
+
+void	rlp_error_msg(char *cmd)
+{
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": Command not found", 2);
+}
+
 
 char	*getpath(char *cmd)
 {
 	if (cmd[0] == '/')
 		return (absolute_path(cmd));
+	if (cmd[0] && cmd[0] == '.')
+		return (search_rpath(cmd));
 	else
-		return (relative_normal(cmd));
+		return (find_path(cmd));
 }
