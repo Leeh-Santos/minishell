@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/18 16:53:09 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/19 16:10:24 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,61 @@ void	pipe_it(t_node *sub)
 	}
 }
 
+void	cmd_simplao(t_node *node, int flag1, int flag2)
+{
+	char **env_cpy;
+	char *path;
+
+	env_cpy = shell()->env;
+	int	flag1;
+	int flag2;
+	int	fd;
+	int	fdin;
+
+	path = getpath(node->arguments[0]);
+
+	while (node->left)
+	{
+		node = node->left;
+		if (node->nodeType == E_IN || node->nodeType == E_HDOC)
+		{
+			if (!flag2)
+			{
+				if (node->nodeType == E_IN)
+				{
+					fdin = open(node->arguments[0], O_RDONLY, 0644);
+					//checa fs -1
+					//dupeia
+				}
+				else
+					//fd = heredocshit
+					// dupeia
+				flag2++;
+			}
+			else
+				open_ins(node);
+		}	
+		if (node->nodeType == E_OUT || node->nodeType == E_APPEND)
+		{
+			if (!flag1)
+			{
+				if (node->nodeType == E_OUT)
+					fd = open(node->arguments[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+				else
+					fd = open(node->arguments[0], O_CREAT | O_WRONLY | O_APPEND, 0644);
+				if (fd == -1)
+					redir_error(node);
+				flag1++;
+			}
+			else
+				open_outs(node);
+			//dupeia
+		}		
+	}
+
+}
+
+
 void	exec_tree(void)
 {
 	t_node	*root = shell()->root;
@@ -199,7 +254,15 @@ void	exec_tree(void)
 		simple_built(root);
 		return (free_na_tree(shell()->root)); // atencao com os free
 	}
+	if (root->nodeType == E_PIPE)
+	{
+		printf("calma que ainda nao ta pronto\n");
+		free_na_tree(shell()->root); 
+		return;
 		
+	}
+	else
+		cmd_simplao(root, 0, 0);
 	//if (root->nodeType == E_PIPE)
 		//return(pipe_it(root));
 	//else
