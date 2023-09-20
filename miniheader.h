@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/18 15:08:53 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/20 21:48:23 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # include <signal.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+
 
 typedef enum e_type
 {
@@ -84,14 +89,18 @@ char	*ft_strdup(char *s1);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
-
+char	**ft_split(const char *s, char c);
 void	ft_putendl_fd(char *s, int fd);
-
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strjoin(char *s1, char *s2);
+void	*ft_memset(void *b, int c, size_t len);
 //signal
 void	handle_sigint(int sig);
 
 //errors
 void	display_error(char *str, int x);
+void	rlp_error_msg(char *cmd);
+
 
 //input & parse
 
@@ -107,6 +116,7 @@ void	token_it(char *in);
 //free
 void	free_linked(void);
 void	free_na_tree(t_node *root);
+void	free_split(char **args);
 
 //tree stuff
 void	token_type(void);
@@ -121,5 +131,23 @@ void	where_cmd(t_node *node);
 //exec tree
 
 void	exec_tree(void);
+
+//path shit
+
+char	*absolute_path(char *cmd);
+int	is_path(char *str, char *path);
+char	*search_rpath(char *cmd);
+char	*getpath(char *cmd);
+
+//redir
+
+void	open_outs(t_node *node);
+void	redir_error(t_node *node);
+void	open_ins(t_node *node);
+void	dale_redir(t_node *node);
+
+//builts
+
+void	echo_func(t_node *branch, int fd);
 
 #endif

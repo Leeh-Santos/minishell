@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:12:21 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/15 12:57:28 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/20 11:48:48 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,68 @@ void	ft_putendl_fd(char *s, int fd)
 		index++;
 	}
 	ft_putchar_fd('\n', fd);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*d;
+	size_t	i;
+	size_t	j;
+
+	if (!s1 || !s2)
+		return (NULL);
+	d = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (d == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		d[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		d[i + j] = s2[j];
+		j++;
+	}
+	d[i + j] = 0;
+	return (d);
+}
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+	size_t	i;
+	size_t	j;
+
+	if (!(*needle))
+		return ((char *)haystack);
+	i = 0;
+	while (haystack[i] && len && i < len)
+	{
+		j = 0;
+		while (haystack[i + j] == needle[j] && (i + j) < len)
+		{
+			j++;
+			if (!needle[j])
+				return ((char *)&haystack[i]);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+void	*ft_memset(void *b, int c, size_t n)
+{
+	size_t			index;
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)b;
+	index = 0;
+	while (index < n)
+	{
+		*(ptr + index) = (unsigned char)c;
+		index++;
+	}
+	return (b);
 }

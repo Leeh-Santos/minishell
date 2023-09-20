@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:13:43 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/18 16:06:59 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/20 11:58:04 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,18 @@ void	free_linked()
 	}
 	shell()->head =	NULL;
 
+}
+
+void	free_split(char **args)
+{
+	int	size;
+	int	i;
+
+	i = 0;
+	size = 0;
+	while (args[size])
+		size++;
+	while (i < size)
+		free(args[i++]);
+	free(args);
 }

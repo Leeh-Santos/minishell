@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   path_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:06:47 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/19 18:49:29 by learodri         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:44:13 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
+
+void	rlp_error_msg(char *cmd)
+{
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": Command not found", 2);
+}
 
 char	*absolute_path(char *cmd)
 {
@@ -111,12 +117,6 @@ char	*find_path(char *cmd)
 	rlp_error_msg(cmd); // correu todo e nao achou no access
 	free_split(paths);
 	return (0);
-}
-
-void	rlp_error_msg(char *cmd)
-{
-	ft_putstr_fd(cmd, 2);
-	ft_putendl_fd(": Command not found", 2);
 }
 
 

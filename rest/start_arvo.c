@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/18 20:21:31 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/20 11:05:06 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 		tmp = tmp->next;
 	}
 
-	if (!nb_str)   //com NULL nao manda node, atencao que com >a | ls >a na segunda pipe line nao executa
+	if (!nb_str)   //com NULL nao manda node, atencao que com >a | ls >a na segunda pipe line nao executa, pode ter bug no futuro
 		return (NULL);
 	
 	tmp = start;
@@ -127,8 +127,8 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 	new->up = NULL;
 
 	
-	new->arguments = malloc(sizeof(char *) * (nb_str + 1)); ///verify here
-	if (!new->arguments) //voltar aqui para o final free talbez
+	new->arguments = malloc(sizeof(char *) * (nb_str + 1));
+	if (!new->arguments) 
 	{
 		if (new)
 			free(new);
