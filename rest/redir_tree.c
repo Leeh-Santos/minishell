@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 19:59:22 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/20 21:34:40 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/21 16:48:06 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,26 +76,52 @@ void	for_outs(t_node *node, int flag)
     }
 }
 
+int		check_outs(t_node *node)
+{
+	while (node->left)
+	{
+		node = node->left;
+		if (node->nodeType == E_OUT || node->nodeType == E_APPEND)
+			return (1);
+	}
+	return (0);
+}
+
+int		check_ins(t_node *node)
+{
+	while (node->left)
+	{
+		node = node->left;
+		if (node->nodeType == E_APPEND || node->nodeType == E_HDOC)
+			return (1);
+	}
+	return (0);
+}
+
 void	dale_redir(t_node *node)  //redir2 somente com esses dois ifs deve dar
 {
+	for_ins(node, 0);
+	for_outs(node, 0);			
+}
+
+void	dale_redir2(t_node *node)  //redir2 somente com esses dois ifs deve dar
+{
 	//sginal here?
-	
-	if (!check_out()) // se nao tiver > >> node vai ter que cuspir no pipe
+	if (!check_ins(node)) //nao tem in? entao o in fdpipe vira       --tavez com next in aqui
 	{
-		dup2(shellout, finenoout); //cospe neesse pipefd[1]
-		close(shelout);
-	}
-	else //é porque ja tem out entao fechamos esse end pipefd[1]
-		close(shell_out);
-		
-	if (!check_in) //nao tem in? entao o in fdpipe vira       --tavez com next in aqui
-	{
-		dup2(shellin, filein)
-		close(shellin); //cuidado para nao fechar na primeira exec
+		dup2(shell()->in, STDIN_FILENO);
+		close(shell()->in); //cuidado para nao fechar na primeira exec
 	}
 	else
-		close(shell.in);
-
+		close(shell()->in); //se comenta ls vai 
+	if (!check_outs(node)) // se nao tiver > >> node vai ter que cuspir no pipe
+	{
+		dup2(shell()->out, STDOUT_FILENO); //cospe neesse pipefd[1]
+		close(shell()->out);
+	}
+	else //é porque ja tem out entao fechamos esse end pipefd[1]
+		close(shell()->out);	
+	
 	for_ins(node, 0);
 	for_outs(node, 0);
 			

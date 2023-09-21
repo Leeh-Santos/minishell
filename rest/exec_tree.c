@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/20 22:02:54 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/21 16:46:52 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,17 +124,21 @@ void	simple_built(t_node *root)
 void	pipe_it(t_node *sub)
 {
 	
-	
 	if (sub->left->nodeType != E_PIPE)
 	{
 		if (pipe(sub->pipe) == -1)
 			ft_putendl_fd("Error: Pipe failed", 2);
 		shell()->out = sub->pipe[1];
-		shell()->in = 0; //toma close aqui no in na primeira, talvez mandar como 0 para evitar? // cuidado pra isso nao cair no primeiro process
-		kid_it(sub->left); // escreve e fecha
-		//wait();
+		//shell()->in = sub->pipe[0]; //toma close aqui no in na primeira, talvez mandar como 0 para evitar? // cuidado pra isso nao cair no primeiro process
+		
+		shell()->pid = fork();
+		if (shell()->pid < 0)
+			ft_putendl_fd("Error: Fork failed", 2);
+		if (shell()->pid == 0)
+			cmd_simplao(sub->left, 1); // escreve e fecha
+		waitpid(shell()->pid, &shell()->kid_stats, 0);
 	}
-	if (sub->up == E_PIPE)
+	if (sub->up && sub->up->nodeType == E_PIPE)
 	{
 		
 		if (pipe(sub->up->pipe) == -1)
@@ -145,27 +149,33 @@ void	pipe_it(t_node *sub)
 		else
 			shell()->in = sub->pipe[0];
 		shell()->next_in = sub->up->pipe[0];
-		
-		/*if (shell()->next_out != 0)
-			shell()->out = shell()->next_out;
-		else
-			shell()->in = sub->pipe[0];*/
-		kid_it(sub->right);
-		//wait();
+
+		shell()->pid = fork();
+		if (shell()->pid < 0)
+			ft_putendl_fd("Error: Fork failed", 2);
+		if (shell()->pid == 0)
+			cmd_simplao(sub->right, 1); // escreve e fecha
+		waitpid(shell()->pid, &shell()->kid_stats, 0);
 		pipe_it(sub->up);
 	}
 	else
 	{
-		if (!shell()->in)
-			shell()->in = sub->pipe[0];
+		
 		if (shell()->next_in)
 			shell()->in = shell()->next_in;
-		kid_it(sub->right);
-		//wait();
+		else 
+			shell()->in = sub->pipe[0];
+		shell()->pid = fork();
+		if (shell()->pid < 0)
+			ft_putendl_fd("Error: Fork failed", 2);
+		if (shell()->pid == 0)
+			cmd_simplao(sub->right, 1); // escreve e fecha
+		waitpid(shell()->pid, &shell()->kid_stats, 0);
+		
 	}
 }
 
-void	cmd_simplao(t_node *node)
+void	cmd_simplao(t_node *node, int key)
 {
 	char **env_cpy;
 	char *path;
@@ -174,24 +184,23 @@ void	cmd_simplao(t_node *node)
 	env_cpy = shell()->env;
 	path = getpath(node->arguments[0]);
 	rl_clear_history();
-	dale_redir(node);
-
+	if (key)
+		dale_redir2(node);
+	else
+		dale_redir(node);
 	if (node->nodeType == E_BUILT)
 	{
 		which_builtin(node, 1);
 		//exit
 		return;
 	}
+	ft_putendl_fd("escrevi \n", 2);
 	if (path)
 		execve(path, node->arguments, env_cpy);
-	printf("nao rolou\n");
+	ft_putendl_fd("nao rolouo o exec", 2);
 	dup2(stdouti, 1);
 	//close_out
 	//close_in?
-
-
-	// close?
-	//if e_built
 
 }
 
@@ -218,7 +227,7 @@ void	exec_tree(void)
 	}
 	if (root->nodeType == E_PIPE)
 	{
-		printf("calma que ainda nao ta pronto\n");
+		pipe_it(root);
 		free_na_tree(shell()->root); 
 		return;
 	}
@@ -228,7 +237,7 @@ void	exec_tree(void)
 		if (shell()->pid < 0)
 			ft_putendl_fd("Error: Fork failed", 2);
 		if (shell()->pid == 0)
-			cmd_simplao(root);
+			cmd_simplao(root, 0);
 		waitpid(shell()->pid, &exit_status, 0);
 	}
 
