@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputcheck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/01 03:35:58 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/09/25 15:19:10 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	redicheck(char *input, int i)
 		}
 		if (input[i] == '|' || input[i] == '>' || input[i] == '<')
 		{
-			shell()->nb_pipe++;
 			verify_c(input[i], i + 1, input);
 		}
 		if (input[i])

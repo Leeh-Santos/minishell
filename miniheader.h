@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/21 15:25:47 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/25 14:53:26 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_shell
     int in;
     int out;
     int next_in;
-	int	nb_pipe;
+	int	nb_cmd;
 	int	expand;
 	t_token *head;
 	t_node *root;

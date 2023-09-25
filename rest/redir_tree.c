@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 19:59:22 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/21 16:48:06 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/25 16:05:05 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		check_ins(t_node *node)
 	while (node->left)
 	{
 		node = node->left;
-		if (node->nodeType == E_APPEND || node->nodeType == E_HDOC)
+		if (node->nodeType == E_IN || node->nodeType == E_HDOC)
 			return (1);
 	}
 	return (0);
@@ -106,23 +106,31 @@ void	dale_redir(t_node *node)  //redir2 somente com esses dois ifs deve dar
 
 void	dale_redir2(t_node *node)  //redir2 somente com esses dois ifs deve dar
 {
-	//sginal here?
-	if (!check_ins(node)) //nao tem in? entao o in fdpipe vira       --tavez com next in aqui
+	if (check_ins(node))
 	{
-		dup2(shell()->in, STDIN_FILENO);
-		close(shell()->in); //cuidado para nao fechar na primeira exec
+		if (shell()->in)
+			close(shell()->in);
+		for_ins(node, 0);
 	}
 	else
-		close(shell()->in); //se comenta ls vai 
-	if (!check_outs(node)) // se nao tiver > >> node vai ter que cuspir no pipe
+		dup2(shell()->in, 0);
+	if (check_outs(node))
 	{
-		dup2(shell()->out, STDOUT_FILENO); //cospe neesse pipefd[1]
-		close(shell()->out);
+		close(node->pipe[1]);
+		for_outs(node, 0);
 	}
-	else //é porque ja tem out entao fechamos esse end pipefd[1]
-		close(shell()->out);	
+	else
+	{
+		if (shell()->nb_cmd > 1)
+		{
+			dup2(node->pipe[1], 1);
+			close(node->pipe[1]);
+		}
+		else
+			close(node->pipe[1]);
+	}
 	
-	for_ins(node, 0);
-	for_outs(node, 0);
+	
+	
 			
 }

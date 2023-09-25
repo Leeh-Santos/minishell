@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/19 18:08:39 by learodri         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:42:29 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	main(int argc, char **argv ,char **envp)
 		}
 		free_linked();
 		free(input);
-		
 	}
 	return 0;
 }
