@@ -1,0 +1,2 @@
+cat | cat | cat <Makefile - talvez na var pid
+ls | wc x2 ------------ ------ shell()->nb_cmd = 3; nao da pau, resolvido com shell->in = 0;    

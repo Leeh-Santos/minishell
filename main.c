@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/25 16:42:29 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/26 14:56:36 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	main(int argc, char **argv ,char **envp)
 	{
 		//signal(SIGINT, handle_sigint);
 		input = readline("picashell$ ");
-		inputcheck(input); // case der erro de syntax, fazer dar free e volvar a inputline
 		if (input && *input)
 		{
+			inputcheck(input);
 			add_history(input);
 			token_it(input);
 			//checkar input ante de criar arvore, redir sem arg, checa com linked

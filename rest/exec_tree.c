@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/25 16:44:55 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/26 16:39:09 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ void	papa_process(t_node *node)
 
 void	pipe_it(t_node *sub)
 {
-	
 	if (pipe(sub->pipe) == -1)
 	{
 		ft_putstr_fd("Error: couldn't open pipe\n", STDERR_FILENO);
@@ -183,6 +182,7 @@ void	cmd_simplao(t_node *node, int key)
 	close(node->pipe[1]);
 	close(node->pipe[0]);
 	close(shell()->in);
+	exit(shell()->exit_s); //>a loop infinito
 
 }
 
@@ -196,6 +196,8 @@ void	nb_cmds(t_node *root)
 		shell()->nb_cmd++;
 		tmp = tmp->up;
 	}
+
+	printf(" numero de comandos -- %d\n", shell()->nb_cmd);
 	
 }
 
@@ -226,6 +228,7 @@ void	exec_tree(void)
 {
 	t_node	*root = shell()->root;
 	int exit_status;
+	shell()->in = 0; // para limpar fd se nao da merda no proximo uso dos pipes
 	
 	if (!root)
 		return ;
@@ -241,7 +244,7 @@ void	exec_tree(void)
 	}
 	if (root->nodeType == E_PIPE)
 	{
-		shell()->nb_cmd = 3; // com 2 aqui dava hanging depois de executar dois comandos com pipes
+		shell()->nb_cmd = 2; // com 2 aqui dava hanging depois de executar dois comandos com pipes
 		nb_cmds(root);
 		pipe_it(root->left);
 		shell()->nb_cmd--;
