@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/26 16:39:09 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/28 12:50:20 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,27 +138,28 @@ void	papa_process(t_node *node)
 	}
 }
 
-void	pipe_it(t_node *sub)
+void	pipe_it(t_node *sub, t_try *bora)
 {
+	
 	if (pipe(sub->pipe) == -1)
 	{
 		ft_putstr_fd("Error: couldn't open pipe\n", STDERR_FILENO);
 		shell()->exit_s = 1;
 		exit(shell()->exit_s);
 	}
-	shell()->pid = fork();
-	if (shell()->pid < 0)
+	bora->pid = fork();
+	if (bora->pid < 0)
 	{
 		ft_putstr_fd("Error: couldn't create a new process\n", STDERR_FILENO);
 		shell()->exit_s = 1;
 		exit(shell()->exit_s);
 	}
-	else if (shell()->pid == 0)
-		cmd_simplao(sub, 1);
+	else if (bora->pid == 0)
+		cmd_simplao(sub, 1, bora);
 	papa_process(sub);
 }
 
-void	cmd_simplao(t_node *node, int key)
+void	cmd_simplao(t_node *node, int key, t_try *bora)
 {
 	char **env_cpy;
 	char *path;
@@ -168,7 +169,7 @@ void	cmd_simplao(t_node *node, int key)
 	rl_clear_history();
 	close(node->pipe[0]);
 	if (key)
-		dale_redir2(node);
+		dale_redir2(node, bora);
 	else
 		dale_redir(node);
 	if (node->nodeType == E_BUILT)
@@ -229,6 +230,9 @@ void	exec_tree(void)
 	t_node	*root = shell()->root;
 	int exit_status;
 	shell()->in = 0; // para limpar fd se nao da merda no proximo uso dos pipes
+
+	t_try bora;
+	
 	
 	if (!root)
 		return ;
@@ -246,29 +250,29 @@ void	exec_tree(void)
 	{
 		shell()->nb_cmd = 2; // com 2 aqui dava hanging depois de executar dois comandos com pipes
 		nb_cmds(root);
-		pipe_it(root->left);
+		pipe_it(root->left, &bora);
 		shell()->nb_cmd--;
-		pipe_it(root->right);
+		pipe_it(root->right, &bora);
 		shell()->nb_cmd--;
 		while (root->up)
 		{
 			root = root->up;
-			pipe_it(root->right); // tem que criar aqui fork aqui se nao fecha 
+			pipe_it(root->right, &bora); // tem que criar aqui fork aqui se nao fecha 
 			shell()->nb_cmd--;
 		}
 		//signal
-		wait_process(shell()->pid, shell()->nb_cmd);
+		wait_process(bora.pid, 2); //INICIAAAAAAAAAAAAAAAAAAR AQUI COM O NUMERO DE CMDS CARALHO
 		free_na_tree(shell()->root);
 		return;
 	}
-	else
+	else // se node simplre cmd echo 
 	{
-		shell()->pid = fork();
-		if (shell()->pid < 0)
+		bora.pid = fork();
+		if (bora.pid < 0)
 			ft_putendl_fd("Error: Fork failed", 2);
-		if (shell()->pid == 0)
-			cmd_simplao(root, 0);
-		waitpid(shell()->pid, &exit_status, 0);
+		if (bora.pid == 0)
+			cmd_simplao(root, 0, &bora);
+		waitpid(bora.pid, &exit_status, 0);
 	}
 
 	free_na_tree(shell()->root); 

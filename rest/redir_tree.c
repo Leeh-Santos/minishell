@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 19:59:22 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/25 16:05:05 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/28 12:21:14 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	for_outs(t_node *node, int flag)
 						redir_error(node);
 					flag++;
 					printf("trava aqui\n"); 
-					if (dup2(fd, 1) == - 1){
+					if (dup2(fd, 1) == -1){
 						printf("pau no dup\n");
 					} //aqui pohaa, asda >a s
 					printf("nao fica infinito\n");
@@ -104,8 +104,9 @@ void	dale_redir(t_node *node)  //redir2 somente com esses dois ifs deve dar
 	for_outs(node, 0);			
 }
 
-void	dale_redir2(t_node *node)  //redir2 somente com esses dois ifs deve dar
+void	dale_redir2(t_node *node, t_try *bora)  //redir2 somente com esses dois ifs deve dar
 {
+	(void)bora;
 	if (check_ins(node))
 	{
 		if (shell()->in)

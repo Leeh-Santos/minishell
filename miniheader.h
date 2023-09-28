@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/25 14:53:26 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/27 22:03:37 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_shell
 	char *path;
 	int exit_s;
     int	kid_stats;
-    int pid;
+    //int pid;
     int in;
     int out;
     int next_in;
@@ -73,6 +73,13 @@ typedef struct s_shell
 	t_token *head;
 	t_node *root;
 }t_shell;
+
+typedef struct s_try
+{
+	int pid;
+	int ffd;
+	
+}t_try;
 
 
 
@@ -128,7 +135,7 @@ int	check_cmd_node(t_node *node);
 void	add_on_top(t_node *node);
 void		where_redir(t_node *node);
 void	where_cmd(t_node *node);
-void	cmd_simplao(t_node *node, int key);
+void	cmd_simplao(t_node *node, int key, t_try *bora);
 
 //exec tree
 
@@ -147,7 +154,7 @@ void	open_outs(t_node *node);
 void	redir_error(t_node *node);
 void	open_ins(t_node *node);
 void	dale_redir(t_node *node);
-void	dale_redir2(t_node *node);
+void	dale_redir2(t_node *node, t_try *bora);
 
 //builts
 

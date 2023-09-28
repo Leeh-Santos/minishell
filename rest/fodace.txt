@@ -1,0 +1,25 @@
+1 - parsing - $? 
+
+2 - linked list - echo >s oi oi |  - trasnforma no tree node - ja manda para contruir arvore 
+
+
+3 - executar tree
+
+
+
+echo >as >>1 <2 <<3 oi | wc  >a >b >c | ls
+
+
+looop - ok
+errors ---
+
+
+
+exit_s -- 
+
+
+builts -- 
+here --
+cat | ls --  
+env 
+./ 

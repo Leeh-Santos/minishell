@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/20 11:05:06 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/27 19:38:01 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 		if (tmp->token[0] == '|') 
 		{
 			new->arguments[i] = NULL;
-			send_to_tree(new); 
+			send_to_tree(new);
 			return(tmp); // pa nois rodar a recursividade dps
 		}
 		if (tmp->type == 0)
@@ -249,7 +249,7 @@ void	token_tree(t_token *head) /*antes que eu esqueca, essa poha vai criando */
 	if (!tmp)
 		return ;
 
-	pipe = for_cmd(tmp); 
+	pipe = for_cmd(tmp); // echo >as asd asd 
 	for_redir(tmp);
 
 	if (pipe)
