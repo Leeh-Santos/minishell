@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/28 12:50:20 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/29 16:19:04 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	close(node->pipe[0]);
 	close(shell()->in);
 	exit(shell()->exit_s); //>a loop infinito
+	if (shell()->hdoc)
+		unlink(".h_doc_tmp");
 
 }
 
@@ -197,7 +199,6 @@ void	nb_cmds(t_node *root)
 		shell()->nb_cmd++;
 		tmp = tmp->up;
 	}
-
 	printf(" numero de comandos -- %d\n", shell()->nb_cmd);
 	
 }
@@ -230,7 +231,7 @@ void	exec_tree(void)
 	t_node	*root = shell()->root;
 	int exit_status;
 	shell()->in = 0; // para limpar fd se nao da merda no proximo uso dos pipes
-
+	shell()->hdoc = 0;
 	t_try bora;
 	
 	
@@ -238,7 +239,7 @@ void	exec_tree(void)
 		return ;
 	while (root->left != NULL && root->left->nodeType == E_PIPE)
 		root = root->left;
-	printf(" chaaama no root poha %d\n", root->nodeType);
+	printf(" chaaama no root poha, resultados abaixo : %d\n", root->nodeType);
 	if (!root->up && root->nodeType == E_HDOC)
 		return (wtf_hdoc(root));
 	if (!root->up && root->nodeType == E_BUILT)

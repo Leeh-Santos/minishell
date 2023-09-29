@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 19:59:22 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/28 12:21:14 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/29 12:23:15 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void	for_ins(t_node *node, int flag)
 					dup2(fdin, STDIN_FILENO);
 				}
 				else
-					printf("heredoc ainda nao");
-					//fd = heredocshit
-					// dupeia
+					dale_hdoc(node);
 				flag++;
 			}
 			else
@@ -54,20 +52,14 @@ void	for_outs(t_node *node, int flag)
 				if (!flag)
 				{
 					if (node->nodeType == E_OUT)
-					{
 						fd = open(node->arguments[0], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-						printf("fd é desse node %s\n", node->arguments[0]);
-					}
 					else
 						fd = open(node->arguments[0], O_CREAT | O_WRONLY | O_APPEND, 0644);
 					if (fd == -1)
 						redir_error(node);
 					flag++;
-					printf("trava aqui\n"); 
-					if (dup2(fd, 1) == -1){
-						printf("pau no dup\n");
-					} //aqui pohaa, asda >a s
-					printf("nao fica infinito\n");
+					if (dup2(fd, 1) == -1)
+						ft_putendl_fd("not able to dup2 bro", 2);
 					close(fd);
 				}
 				else
@@ -130,8 +122,6 @@ void	dale_redir2(t_node *node, t_try *bora)  //redir2 somente com esses dois ifs
 		else
 			close(node->pipe[1]);
 	}
-	
-	
 	
 			
 }

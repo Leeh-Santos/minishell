@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/27 22:03:37 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/09/29 16:14:01 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_shell
     int	kid_stats;
     //int pid;
     int in;
-    int out;
+    int hdoc;
     int next_in;
 	int	nb_cmd;
 	int	expand;
@@ -155,6 +155,7 @@ void	redir_error(t_node *node);
 void	open_ins(t_node *node);
 void	dale_redir(t_node *node);
 void	dale_redir2(t_node *node, t_try *bora);
+void    dale_hdoc(t_node *node);
 
 //builts
 
