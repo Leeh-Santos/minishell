@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builts.c                                           :+:      :+:    :+:   */
+/*   builts1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:36:54 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/20 19:49:28 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/02 11:11:16 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,24 @@ void	echo_func(t_node *branch, int fd)
 		print_args(branch->arguments, fd, 2);
 	else // echo com null node, sem arg, 2 str nao tem '-', ou nao tem sequencia correcta de n - echo normal
 		print_args_nl(branch->arguments, fd, 1);
+}
+
+void	pwd_func(int fd)
+{
+	char	*path;
+
+	path = getcwd(NULL, 1025);
+	if (path == NULL)
+	{
+		ft_putstr_fd("Error: ", fd);
+		ft_putstr_fd(strerror(errno), fd);
+		ft_putchar_fd('\n', fd);
+		free(path);
+	}
+	else
+	{
+		ft_putstr_fd(path, fd);
+		ft_putchar_fd('\n', fd);
+	}
+	free(path);
 }

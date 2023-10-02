@@ -3,7 +3,7 @@ TO DO :
 main lopp
 error
 exit_s --- $? -- vai ter que ser pelo linked list 
-heredoc 
+heredoc -- OK 
 env 
 ./
 builts

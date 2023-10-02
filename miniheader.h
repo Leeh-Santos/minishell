@@ -6,11 +6,11 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/29 16:14:01 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/02 11:12:31 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+# ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <stdio.h>
@@ -160,5 +160,6 @@ void    dale_hdoc(t_node *node);
 //builts
 
 void	echo_func(t_node *branch, int fd);
+void	pwd_func(int fd);
 
 #endif
