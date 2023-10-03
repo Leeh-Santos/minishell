@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/02 11:12:31 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/02 16:48:35 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ void	ft_putendl_fd(char *s, int fd);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 void	*ft_memset(void *b, int c, size_t len);
+int		ft_isascii(int a);
+int		ft_isdigit(int c);
+int		ft_atoi(const char *str);
+int		ft_isalnum(int c);
 //signal
 void	handle_sigint(int sig);
 
@@ -161,5 +165,12 @@ void    dale_hdoc(t_node *node);
 
 void	echo_func(t_node *branch, int fd);
 void	pwd_func(int fd);
+void	env_print(char **env, int fd);
+void	cd_func(char **line, char **env);
+void	export_it(char **line, char **env, int fd);
+void	unset_it(char **line, char **env);
+void	exit_it(char **line, char **env);
+void	delete_var(char *var, char **env);
+int	exist_var(char *var, char **env);
 
 #endif

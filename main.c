@@ -6,14 +6,13 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/27 20:59:44 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/02 16:46:34 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "miniheader.h"
 
 void	print_token();
-
 
 void	envparse(char **envp) // essa poha gurda o env inteirp e o PATH
 {

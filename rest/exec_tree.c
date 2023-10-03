@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/02 11:14:48 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/02 16:45:39 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,18 @@ void	which_builtin(t_node *node, int fd)
 	
 	if (!ft_strncmp(node->arguments[0], "echo", 5))
 		echo_func(node, fd);
-	if (!ft_strncmp(node->arguments[0], "pwd", 4))
+	else if (!ft_strncmp(node->arguments[0], "pwd", 4))
 		pwd_func(fd);
-	/*else if (!ft_strncmp(node->arguments[0], "env", 4))
-		
 	else if (!ft_strncmp(node->arguments[0], "cd", 3))
-		
+		cd_func(node->arguments, shell()->env);
+	else if (!ft_strncmp(node->arguments[0], "env", 4))
+		env_print(shell()->env, fd);
+	else if (!ft_strncmp(node->arguments[0], "exit", 5))
+		exit_it(node->arguments, shell()->env);
 	else if (!ft_strncmp(node->arguments[0], "export", 7))
-	
+		export_it(node->arguments, shell()->env, fd);
 	else if (!ft_strncmp(node->arguments[0], "unset", 6))
-		
-	else if (!ft_strncmp(node->arguments[0], "exit", 5))*/
-
+		unset_it(node->arguments, shell()->env);
 }
 
 void	simple_built(t_node *root)

@@ -6,12 +6,11 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:36:54 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/02 11:11:16 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/02 15:53:42 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
-
 
 void	print_args(char **token, int fd, int i)
 {
@@ -81,4 +80,34 @@ void	pwd_func(int fd)
 		ft_putchar_fd('\n', fd);
 	}
 	free(path);
+}
+
+int	var_ok(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	env_print(char **env, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (var_ok(env[i]))
+		{
+			ft_putstr_fd(env[i], fd);
+			ft_putchar_fd('\n', fd);
+		}
+		i++;
+	}
 }
