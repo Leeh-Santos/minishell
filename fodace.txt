@@ -2,8 +2,10 @@ TO DO :
 
 main lopp
 error
-exit_s & exparder --- $? -- vai ter que ser pelo linked list 
-heredoc -- OK 
 ./
-builts / env
 signal
+exit_s & exparder --- $? -- vai ter que ser pelo linked list 
+
+heredoc -- OK 
+builts / env -------------- ok
+
