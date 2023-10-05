@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/03 16:44:42 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/04 16:25:33 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	redir_error(t_node *node)
 	ft_putstr_fd("Error: couldn't open file: ", 2);
 	ft_putstr_fd(node->arguments[0] , 2);
 	ft_putstr_fd("\n", 2);
-	exit(1);
+	shell()->exit_s = 1;
+	exit(shell()->exit_s);
 }
 
 void	open_ins(t_node *node)
@@ -182,10 +183,10 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	close(node->pipe[1]);
 	close(node->pipe[0]);
 	close(shell()->in);
-	exit(shell()->exit_s); //>a loop infinito
 	if (shell()->hdoc)
 		unlink(".h_doc_tmp");
-
+	shell()->exit_s = 127;
+	exit(shell()->exit_s); // para only redir nodes
 }
 
 void	nb_cmds(t_node *root)

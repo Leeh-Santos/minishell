@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/02 16:48:35 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/05 14:54:52 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_putchar_fd(char c, int fd);
 char	**ft_split(const char *s, char c);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memset(void *b, int c, size_t len);
 int		ft_isascii(int a);
 int		ft_isdigit(int c);

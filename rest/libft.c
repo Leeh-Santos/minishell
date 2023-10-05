@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:12:21 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/02 16:49:24 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/05 15:32:04 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,32 +103,35 @@ void	ft_putendl_fd(char *s, int fd)
 	ft_putchar_fd('\n', fd);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*d;
-	size_t	i;
-	size_t	j;
+	char	*snew;
+	size_t	n1;
+	size_t	n2;
+	size_t	slen;
 
 	if (!s1 || !s2)
 		return (NULL);
-	d = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (d == NULL)
+	slen = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	snew = (char *)malloc(sizeof(char) * (slen + 1));
+	n1 = 0;
+	n2 = 0;
+	if (snew == NULL)
 		return (NULL);
-	i = 0;
-	while (s1[i])
+	while (s1[n1] != '\0')
 	{
-		d[i] = s1[i];
-		i++;
+		snew[n1] = s1[n1];
+		n1++;
 	}
-	j = 0;
-	while (s2[j])
+	while (s2[n2] != '\0')
 	{
-		d[i + j] = s2[j];
-		j++;
+		snew[n1 + n2] = s2[n2];
+		n2++;
 	}
-	d[i + j] = 0;
-	return (d);
+	snew[n1 + n2] = '\0';
+	return (snew);
 }
+
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {

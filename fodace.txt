@@ -2,10 +2,12 @@ TO DO :
 
 main lopp
 error
-./
+
 signal
 exit_s & exparder --- $? -- vai ter que ser pelo linked list 
 
+
+./`------------------ ok 
 heredoc -- OK 
 builts / env -------------- ok
 
