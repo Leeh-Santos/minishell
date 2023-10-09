@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/05 11:36:51 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/05 16:37:26 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ char	*take_w(char *in, int *i) // sempre cai aqui no 1 index da subs
 		else if(in[*i] >= 35 && in[*i] <= 126)
 			facin(in, tmp, i);
 		break; // tava travado aqui antes no oioioi
-		}
+	}
 	return (tmp);
 	
 }
@@ -198,7 +198,7 @@ void	insert(char *in)
 void	token_it(char *in)
 {
 	int i;
-	
+
 	i = 0;
 	shell()->root = NULL;
 	while (in[i] != '\0')

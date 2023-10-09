@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/04 16:25:33 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/09 11:33:20 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	char **env_cpy;
 	char *path;
 
+	signal_in(SIGINT, SIG_DFL);
+	signal_in(SIGQUIT, SIG_DFL);
 	env_cpy = shell()->env;
 	path = getpath(node->arguments[0]);
 	rl_clear_history();
@@ -261,7 +263,7 @@ void	exec_tree(void)
 			pipe_it(root->right, &bora); // tem que criar aqui fork aqui se nao fecha 
 			shell()->nb_cmd--;
 		}
-		//signal
+		signal_in(SIGINT, SIG_IGN);
 		wait_process(bora.pid, 2); //INICIAAAAAAAAAAAAAAAAAAR AQUI COM O NUMERO DE CMDS CARALHO
 		free_na_tree(shell()->root);
 		return;
@@ -273,6 +275,7 @@ void	exec_tree(void)
 			ft_putendl_fd("Error: Fork failed", 2);
 		if (bora.pid == 0)
 			cmd_simplao(root, 0, &bora);
+		signal_in(SIGINT, SIG_IGN);
 		waitpid(bora.pid, &exit_status, 0);
 	}
 

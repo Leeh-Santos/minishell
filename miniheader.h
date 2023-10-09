@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/05 14:54:52 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/09 11:20:47 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct s_try
 {
 	int pid;
 	int ffd;
-	
 }t_try;
 
 
@@ -172,5 +171,10 @@ void	unset_it(char **line, char **env);
 void	exit_it(char **line, char **env);
 void	delete_var(char *var, char **env);
 int	exist_var(char *var, char **env);
+
+//signal
+
+void	signal_in(int sig, void (*func)());
+void	sig_int(int signal);
 
 #endif

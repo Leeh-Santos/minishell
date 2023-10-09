@@ -6,13 +6,30 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/05 11:37:54 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/09 14:27:48 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "miniheader.h"
 
 void	print_token();
+
+void	bye_shell()
+{
+	int	i;
+
+	i = 0;
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	rl_clear_history();
+	while (shell()->env[i])
+	{
+		free(shell()->env[i]);
+		i++;
+	}
+	if (shell()->env)
+		free(shell()->env);
+	exit(shell()->exit_s);
+}
 
 void	envparse(char **envp) // essa poha gurda o env inteirp e o PATH
 {
@@ -48,8 +65,11 @@ int	main(int argc, char **argv ,char **envp)
 	shell()->head =	NULL;
 	while (1)
 	{
-		//signal(SIGINT, handle_sigint);
+		signal_in(SIGQUIT, SIG_IGN);
+		signal_in(SIGINT, sig_int);
 		input = readline("picashell$ ");
+		if (!input)
+			bye_shell();
 		if (input && *input)
 		{
 			inputcheck(input);
@@ -57,7 +77,7 @@ int	main(int argc, char **argv ,char **envp)
 			token_it(input);
 			//checkar input ante de criar arvore, redir sem arg, checa com linked
 			print_token();
-			exec_tree();// quebra quando eu chamo
+			exec_tree();
 		}
 		free_linked();
 		free(input);
