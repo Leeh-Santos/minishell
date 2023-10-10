@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:57:54 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/09 11:16:17 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/09 16:18:24 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,4 @@ void	signal_in(int sig, void (*func)())
 	sigs.sa_handler = func;
 	if (sigaction(sig, &sigs, NULL) == -1)
 		sig_error("ERROR: sigaction\n");
-
 }

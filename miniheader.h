@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/09 11:20:47 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/10 15:29:54 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_shell
 	char *path;
 	int exit_s;
     int	kid_stats;
-    //int pid;
+    int	nb_cmd_wait;
     int in;
     int hdoc;
     int next_in;

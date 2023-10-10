@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/09 14:27:48 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/09 16:12:52 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	bye_shell()
 	exit(shell()->exit_s);
 }
 
-void	envparse(char **envp) // essa poha gurda o env inteirp e o PATH
+void	envparse(char **envp)
 {
 	int i;
 	
@@ -75,7 +75,6 @@ int	main(int argc, char **argv ,char **envp)
 			inputcheck(input);
 			add_history(input);
 			token_it(input);
-			//checkar input ante de criar arvore, redir sem arg, checa com linked
 			print_token();
 			exec_tree();
 		}

@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/09 11:33:20 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/10 15:31:17 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ void	nb_cmds(t_node *root)
 		shell()->nb_cmd++;
 		tmp = tmp->up;
 	}
+	shell()->nb_cmd_wait = shell()->nb_cmd;
 	printf(" numero de comandos -- %d\n", shell()->nb_cmd);
 	
 }
@@ -264,7 +265,7 @@ void	exec_tree(void)
 			shell()->nb_cmd--;
 		}
 		signal_in(SIGINT, SIG_IGN);
-		wait_process(bora.pid, 2); //INICIAAAAAAAAAAAAAAAAAAR AQUI COM O NUMERO DE CMDS CARALHO
+		wait_process(bora.pid, shell()->nb_cmd_wait); //INICIAAAAAAAAAAAAAAAAAAR AQUI COM O NUMERO DE CMDS CARALHO
 		free_na_tree(shell()->root);
 		return;
 	}
