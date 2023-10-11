@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/11 04:47:25 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:58:12 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	envparse(char **envp) // essa poha gurda o env inteirp e o PATH
 int	main(int argc, char *argv[] ,char **envp)
 {
 	char *input;
+	int validation;
 
 	(void)argc;
 	(void)argv;
@@ -51,13 +52,15 @@ int	main(int argc, char *argv[] ,char **envp)
 	{
 		//signal(SIGINT, handle_sigint);
 		input = readline("picashell$ ");
-		inputcheck(input);
 		if (input && *input)
 		{
+			validation = inputcheck(input);
 			add_history(input);
-			token_it(input);
-			//checkar input ante de criar arvore, redir sem arg, checa com linked
-			print_token();	
+			if (!validation)
+			{
+				token_it(input);
+				print_token();	
+			}	
 		}
 		free(input);
 		free_linked();

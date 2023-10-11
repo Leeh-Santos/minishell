@@ -6,13 +6,13 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/14 09:53:37 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:50:58 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
 
-void	quotecheck(char *input, int i, int flag)
+int	quotecheck(char *input, int i, int flag)
 {
 	char quote;
 
@@ -37,17 +37,18 @@ void	quotecheck(char *input, int i, int flag)
 			i++;
 	}
 	if (flag)
-		display_error("unclosed quotes bro", 0);
+		return 1; 							//display_error("unclosed quotes bro", 0);
+	return 0;
 }
 
-void		verify_c(char c, int i, char *in)
+int		verify_c(char c, int i, char *in)
 {
 	int flag;
 
 	flag = skip_spaces(c, &i, &in);
 	
 	if (c == '|' && ((in[i] == '|') || in[i] == '\0'))
-		display_error("check pipes or redirects syntax error", 0);
+		return 1; 							//display_error("check pipes or redirects syntax error", 0);
 	if (c == '|' && ((in[i] == '>') || (in[i] == '<')))
 	{
 		if(((in[i] == '>' && in[i + 1] == '>') || (in[i] == '<' && in[i + 1] == '<')))
@@ -56,31 +57,34 @@ void		verify_c(char c, int i, char *in)
 		while((in[i]) && (in[i] == '\t' || in[i] == ' '))
 				i++;
 		if(char_checker(in[i]))
-			display_error("check pipes or redirects syntax error", 0);
+			return 1; 							//display_error("check pipes or redirects syntax error", 0);
 	}
 	if ((c == '<' || c == '>') && !(in[i]))
-		display_error("check pipes or redirects syntax error", 0);
+		return 1; 							//display_error("check pipes or redirects syntax error", 0);
 	if (c == '<' && (in[i] == '>' || in[i] == '|'))
-		display_error("check pipes or redirects syntax error", 0);
+		return 1; 							//display_error("check pipes or redirects syntax error", 0);
 	if (c == '>' && (in[i] == '<' || in[i] == '|'))
-		display_error("check pipes or redirects syntax error", 0);
+		return 1; 							//display_error("check pipes or redirects syntax error", 0);
 	if (c == '>' && (in[i] == '>') && flag)
-		display_error("espaco entre redir", 0);
+		return 1; 							//display_error("espaco entre redir", 0);
 	if (c == '<' && (in[i] == '<') && flag)
-		display_error("espaco entre redir", 0);
+		return 1;							//display_error("espaco entre redir", 0);
+	return 0;
 }
 
-void	redicheck(char *input, int i)
+int	redicheck(char *input, int i)
 {
 	char	c;
+	int j;
 	
+	j = 0;
 	if(input[i] == '|')
-		display_error("pipe ao inicio", 0);
+		return 1; 							//display_error("pipe ao inicio", 0);
 	while ((input[i]) && (input[i] == ' ' || input[i] == '\t'))
 	{
 		if(input[i + 1] != ' ' || input[i + 1] != '\t')
 			if(input[i + 1] == '|')
-				display_error("pipe ao inicio", 0);
+				return 1; 							//display_error("pipe ao inicio", 0);
 		i++;
 	}
 	while (input[i])
@@ -96,14 +100,17 @@ void	redicheck(char *input, int i)
 		if (input[i] == '|' || input[i] == '>' || input[i] == '<')
 		{
 			shell()->nb_pipe++;
-			verify_c(input[i], i + 1, input);
+			j = verify_c(input[i], i + 1, input);
+			if (j)
+				return 1;
 		}
 		if (input[i])
 			i++;
 	}
+	return 0;
 }
 
-void	forbidenchar(char *input)
+int	forbidenchar(char *input)
 {
 	int i;
 	char c;
@@ -122,15 +129,32 @@ void	forbidenchar(char *input)
 		}
 		if (input[i]== ';' || input[i] == '\\' || input[i] == '[' || input[i] == ']' || input[i] == '{'
 		|| input[i] == '}' || input[i] == '(' || input[i] == ')')
-			display_error("char que nao pode ai fera", 0);
+			return 1; 							//display_error("char que nao pode ai fera", 0);
 		if (input[i])
 			i++;
 	}
-}
+	return 0;
+}	
 
-void	inputcheck(char *input)
+int	inputcheck(char *input)
 {
-	quotecheck(input, 0, 0);
-	redicheck(input, 0);
-	forbidenchar(input);
+	if (quotecheck(input, 0, 0))
+	{
+		ft_putstr_fd("unclosed quotes\n", STDERR_FILENO);
+		shell()->exit_s = 2;
+		return 1;
+	}
+	else if (redicheck(input, 0))
+	{
+		ft_putstr_fd("syntax error: check pipes or redirects\n", STDERR_FILENO);
+		shell()->exit_s = 2;
+		return 1;
+	}
+	else if (forbidenchar(input))
+	{
+		ft_putstr_fd("forbiden char\n", STDERR_FILENO);
+		shell()->exit_s = 2;
+		return 1;
+	}
+	return 0;
 }

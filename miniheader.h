@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/18 15:58:05 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/11 16:55:37 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char    *ft_strcpy(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char    *ft_itoa(int n);
+void	ft_putstr_fd(char *s, int fd);
 
 //signal
 void	handle_sigint(int sig);
@@ -88,11 +89,11 @@ void	display_error(char *str, int x);
 int 	char_checker(char c);
 int 	skip_spaces(char c, int *i, char **in);
 void	del_emptyQuotes(void);
-void	inputcheck(char *input);
-void	quotecheck(char *input, int i, int flag);
-void	forbidenchar(char *input);
-void	verify_c(char c, int i, char *in);
-void	redicheck(char *input, int i);
+int 	inputcheck(char *input);
+int 	quotecheck(char *input, int i, int flag);
+int 	forbidenchar(char *input);
+int 	verify_c(char c, int i, char *in);
+int 	redicheck(char *input, int i);
 void	token_it(char *in);
 
 //expand
