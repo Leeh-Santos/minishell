@@ -33,7 +33,7 @@ norm :
 m: fclean
 
 e:
-	@make re && make clean && clear && valgrind --suppressions=txt/.ignore_readline --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=valgrind-out.txt ./minishell
+	@make && valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=txt/.ignore_readline ./minishell
 r:
 	@make re && make clean && clear && ./minishell
 
