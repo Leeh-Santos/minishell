@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 21:59:27 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/11 22:01:41 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	redicheck(char *input, int i)
 		}
 		if (input[i] == '|' || input[i] == '>' || input[i] == '<')
 		{
-			shell()->nb_pipe++;
 			j = verify_c(input[i], i + 1, input);
 			if (j)
 				return 1;
