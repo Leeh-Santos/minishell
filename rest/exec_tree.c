@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/10 15:31:17 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/11 16:31:30 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ void	exec_tree(void)
 		free_na_tree(shell()->root);
 		return;
 	}
-	else // se node simplre cmd echo 
+	else 
 	{
 		bora.pid = fork();
 		if (bora.pid < 0)
