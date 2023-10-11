@@ -1,0 +1,15 @@
+TO DO :
+
+main lopp
+error
+exit_s & exparder --- $? -- vai ter que ser pelo linked list
+norminette
+
+
+
+signal - ok 
+./`------------------ ok 
+heredoc -- OK 
+builts / env -------------- ok
+
+

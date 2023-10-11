@@ -6,11 +6,11 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 16:55:37 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:58:03 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+# ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <stdio.h>
@@ -21,6 +21,12 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <errno.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
+
 
 typedef enum e_type
 {
@@ -57,13 +63,26 @@ typedef struct s_shell
 	char *input;
 	char *path;
 	int exit_s;
-	int	nb_pipe;
+    int	kid_stats;
+    int	nb_cmd_wait;
+    int in;
+    int hdoc;
+    int next_in;
+	int	nb_cmd;
 	int	expand;
 	t_token *head;
 	t_node *root;
 }t_shell;
 
+typedef struct s_try
+{
+	int pid;
+	int ffd;
+}t_try;
 
+
+
+void	print_node_recebido(t_node *node);
 
 //struct -- 
 
@@ -77,12 +96,23 @@ char	*ft_strdup(char *s1);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char    *ft_itoa(int n);
 void	ft_putstr_fd(char *s, int fd);
-
+void	ft_putchar_fd(char c, int fd);
+char	**ft_split(const char *s, char c);
+void	ft_putendl_fd(char *s, int fd);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	*ft_memset(void *b, int c, size_t len);
+int		ft_isascii(int a);
+int		ft_isdigit(int c);
+int		ft_atoi(const char *str);
+int		ft_isalnum(int c);
 //signal
 void	handle_sigint(int sig);
 
 //errors
 void	display_error(char *str, int x);
+void	rlp_error_msg(char *cmd);
+
 
 //input & parse
 
@@ -105,8 +135,9 @@ char	*expand_check(char *input, char **env);
 //free
 void	free_linked(void);
 void	free_na_tree(t_node *root);
+void	free_split(char **args);
 
-//tree
+//tree stuff
 void	token_type(void);
 void token_tree(t_token *head);
 int	check_redir_node(t_node *node);
@@ -115,5 +146,43 @@ int	check_cmd_node(t_node *node);
 void	add_on_top(t_node *node);
 void		where_redir(t_node *node);
 void	where_cmd(t_node *node);
+void	cmd_simplao(t_node *node, int key, t_try *bora);
+
+//exec tree
+
+void	exec_tree(void);
+
+//path shit
+
+char	*absolute_path(char *cmd);
+int	is_path(char *str, char *path);
+char	*search_rpath(char *cmd);
+char	*getpath(char *cmd);
+
+//redir
+
+void	open_outs(t_node *node);
+void	redir_error(t_node *node);
+void	open_ins(t_node *node);
+void	dale_redir(t_node *node);
+void	dale_redir2(t_node *node, t_try *bora);
+void    dale_hdoc(t_node *node);
+
+//builts
+
+void	echo_func(t_node *branch, int fd);
+void	pwd_func(int fd);
+void	env_print(char **env, int fd);
+void	cd_func(char **line, char **env);
+void	export_it(char **line, char **env, int fd);
+void	unset_it(char **line, char **env);
+void	exit_it(char **line, char **env);
+void	delete_var(char *var, char **env);
+int	exist_var(char *var, char **env);
+
+//signal
+
+void	signal_in(int sig, void (*func)());
+void	sig_int(int signal);
 
 #endif

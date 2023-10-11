@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 16:58:12 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:56:42 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,24 @@
 
 void	print_token();
 
+void	bye_shell()
+{
+	int	i;
 
-void	envparse(char **envp) // essa poha gurda o env inteirp e o PATH
+	i = 0;
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	rl_clear_history();
+	while (shell()->env[i])
+	{
+		free(shell()->env[i]);
+		i++;
+	}
+	if (shell()->env)
+		free(shell()->env);
+	exit(shell()->exit_s);
+}
+
+void	envparse(char **envp)
 {
 	int i;
 	
@@ -39,7 +55,7 @@ void	envparse(char **envp) // essa poha gurda o env inteirp e o PATH
 	shell()->path = getenv("PATH");
 }
 
-int	main(int argc, char *argv[] ,char **envp)
+int	main(int argc, char **argv ,char **envp)
 {
 	char *input;
 	int validation;
@@ -50,8 +66,11 @@ int	main(int argc, char *argv[] ,char **envp)
 	shell()->head =	NULL;
 	while (1)
 	{
-		//signal(SIGINT, handle_sigint);
+		signal_in(SIGQUIT, SIG_IGN);
+		signal_in(SIGINT, sig_int);
 		input = readline("picashell$ ");
+		if (!input)
+			bye_shell();
 		if (input && *input)
 		{
 			validation = inputcheck(input);
@@ -59,12 +78,14 @@ int	main(int argc, char *argv[] ,char **envp)
 			if (!validation)
 			{
 				token_it(input);
-				print_token();	
-			}	
+				print_token();
+				exec_tree();
+			}
 		}
-		free(input);
 		free_linked();
+		free(input);
 	}
+	
 	return 0;
 }
 
@@ -73,7 +94,7 @@ void	print_token(){
 	t_token *tmp = shell()->head;
 
 	int i = 0;
-
+	
 	printf("\n");
 
 	while (tmp){

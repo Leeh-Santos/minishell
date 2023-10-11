@@ -1,5 +1,5 @@
 CC			= 	cc
-CFLAGS		= 	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS		= 	-Wall -Wextra -Werror -g #-fsanitize=address
 RM			= 	/bin/rm -f
 NAME		= 	minishell
 INCLUDES	= 	./headers -I /usr/include/readline
@@ -33,8 +33,9 @@ norm :
 m: fclean
 
 e:
-	@make re && make clean && clear && valgrind --suppressions=txt/.ignore_readline --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --log-file=valgrind-out.txt ./minishell
+	@make re && valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=txt/.ignore_readline ./minishell
 r:
 	@make re && make clean && clear && ./minishell
 
 .PHONY: all re clean fclean m
+#valgrind  --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes ./minishell

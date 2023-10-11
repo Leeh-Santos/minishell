@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/05 12:56:20 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/11 20:25:49 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	print_node_recebido(t_node *node)
 	
 
 	if (node->nodeType >= E_IN && node->nodeType <= E_HDOC)
-		printf("treenodetype %d - #0 %s - #1 %s\n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
+		printf("nodetype %d - #0 %s - #1 %s\n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
 	else if (node->nodeType == E_PIPE)
 		printf("PIPE CARAI \n");
 	else if (node->nodeType == E_CMD || node->nodeType == E_BUILT)
 	{
-		printf("treenodetype %d", tmp->nodeType);
+		printf("nodetype %d", tmp->nodeType);
 		while (node->arguments[i])
 		{
 			printf(" - #%d %s",i , tmp->arguments[i]);
@@ -94,7 +94,7 @@ void	send_to_tree(t_node *node)
 }
 
 
-t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pra arvore, fodase, nao precisa devolver o t_
+t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 {
 	t_token *tmp;
 	t_node *new;
@@ -104,16 +104,16 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 	tmp = start;
 
 	
-	while (tmp)                                   // acima do new maloc para de funcionar <a porqie manda errado o ponteiro tmp
+	while (tmp) //quantas str pa nois maloca
 	{
 		if (tmp->token[0] == '|')
 			break;
-		if (tmp->type == 0)
+		if (tmp->type == 0) // 1 para redir 0 para cmd nao esquece poha
 			nb_str++;
 		tmp = tmp->next;
 	}
 
-	if (!nb_str)   //com NULL nao manda node
+	if (!nb_str)   //com NULL nao manda node, atencao que com >a | ls >a na segunda pipe line nao executa, pode ter bug no futuro
 		return (NULL);
 	
 	tmp = start;
@@ -125,12 +125,10 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
-	new->pipe[0] = -1;
-	new->pipe[1] = -1;
-
-	
-	new->arguments = malloc(sizeof(char *) * (nb_str + 1)); ///verify here
-	if (!new->arguments) //voltar aqui para o final free talbez
+	new->pipe[0] = 0;
+	new->pipe[1] = 0;
+	new->arguments = malloc(sizeof(char *) * (nb_str + 1));
+	if (!new->arguments) 
 	{
 		if (new)
 			free(new);
@@ -141,11 +139,11 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz, ja manda pr
 
 	while (tmp)
 	{
-		if (tmp->token[0] == '|')
+		if (tmp->token[0] == '|') 
 		{
 			new->arguments[i] = NULL;
-			send_to_tree(new); 
-			return(tmp);
+			send_to_tree(new);
+			return(tmp); // pa nois rodar a recursividade dps
 		}
 		if (tmp->type == 0)
 		{
@@ -199,8 +197,6 @@ t_node*	redir_node(t_token *token_node, char *arg)
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
-	new->pipe[0] = -1;
-	new->pipe[1] = -1;
 	return (new);
 }
 
@@ -238,24 +234,22 @@ t_node *pipe_node(void)
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
-	new->pipe[0] = -1;
-	new->pipe[1] = -1;
-
 	return (new);
 	
 }
 
-void	token_tree(t_token *head)
+void	token_tree(t_token *head) /*antes que eu esqueca, essa poha vai criando */
 {
 	t_token	*tmp;
 	t_token	*pipe;
+	
 	
 	pipe = NULL;
 	tmp = head;
 	if (!tmp)
 		return ;
 
-	pipe = for_cmd(tmp); 
+	pipe = for_cmd(tmp); // echo >as asd asd 
 	for_redir(tmp);
 
 	if (pipe)

@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/11 17:02:55 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:59:52 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void print2DUtil(t_node* root, int space)
     printf("\n");
     for (int i = COUNT; i < space; i++)
         printf(" ");
-    printf("%d\n", root->nodeType);
+    print_node_recebido(root);//printf("%d\n", root->nodeType);
  
     
     print2DUtil(root->left, space);
@@ -178,7 +178,7 @@ char	*take_w(char *in, int *i) // sempre cai aqui no 1 index da subs
 		else if(in[*i])
 			facin(in, tmp, i);
 		break; // tava travado aqui antes no oioioi
-		}
+	}
 	return (tmp);
 	
 }
@@ -219,7 +219,7 @@ void	insert(char *in)
 void	token_it(char *in)
 {
 	int i;
-	
+
 	i = 0;
 	shell()->root = NULL;
 	while (in[i] != '\0')
@@ -234,6 +234,4 @@ void	token_it(char *in)
 	token_type();
 	token_tree(shell()->head); 
 	print2D(shell()->root);
-	free_na_tree(shell()->root); // talvez jogar na exec_fuc depois
-		
 }
