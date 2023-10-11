@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/18 15:59:28 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/11 17:02:55 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ char	*take_w(char *in, int *i) // sempre cai aqui no 1 index da subs
 			aspasword(in, tmp, i, in[*i]);
 		else if(in[*i] == '|' || in[*i] == '<'  || in[*i] == '>')
 			delword(in[*i],in, tmp, i);
-		else if(in[*i] >= 35 && in[*i] <= 126)
+		else if(in[*i])
 			facin(in, tmp, i);
 		break; // tava travado aqui antes no oioioi
 		}
