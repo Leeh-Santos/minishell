@@ -6,7 +6,7 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 18:42:13 by learodri         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:33:12 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,12 +182,15 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	if (path)
 		execve(path, node->arguments, env_cpy);
 	free(path);
-	close(node->pipe[1]);
-	close(node->pipe[0]);
+	if (node->pipe[1])
+		close(node->pipe[1]);
+	if (node->pipe[0])
+		close(node->pipe[0]);
 	close(shell()->in);
 	if (shell()->hdoc)
 		unlink(".h_doc_tmp");
 	shell()->exit_s = 127;
+	free_na_tree(shell()->root); // add aqui em caso de single arg errado ex : lls dava leak	 
 	exit(shell()->exit_s); // para only redir nodes
 }
 

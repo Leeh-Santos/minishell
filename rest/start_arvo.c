@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/09/27 19:38:01 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/11 20:25:49 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,8 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
-
-	
+	new->pipe[0] = 0;
+	new->pipe[1] = 0;
 	new->arguments = malloc(sizeof(char *) * (nb_str + 1));
 	if (!new->arguments) 
 	{
