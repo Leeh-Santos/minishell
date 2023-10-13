@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 20:33:12 by learodri         ###   ########.fr       */
+/*   Updated: 2023/10/13 08:50:54 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,8 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	env_cpy = shell()->env;
 	path = getpath(node->arguments[0]);
 	rl_clear_history();
-	//close(node->pipe[0]);
+	if (node->pipe[0])
+		close(node->pipe[0]);
 	if (key)
 		dale_redir2(node, bora);
 	else
