@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 21:46:59 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:07:48 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,13 @@ void	envparse(char **envp)
 int	main(int argc, char **argv ,char **envp)
 {
 	char *input;
+	int validation;
 
 	(void)argc;
 	(void)argv;
 	envparse(envp);
 	shell()->head =	NULL;
+	shell()->exit_s = 0;
 	while (1)
 	{
 		signal_in(SIGQUIT, SIG_IGN);
@@ -72,11 +74,14 @@ int	main(int argc, char **argv ,char **envp)
 			bye_shell();
 		if (input && *input)
 		{
-			inputcheck(input);
+			validation = inputcheck(input);
 			add_history(input);
-			token_it(input);
-			print_token();
-			exec_tree();
+			if (!validation)
+			{
+				token_it(input);
+				print_token();
+				exec_tree();
+			}
 		}
 		free_linked();
 		free(input);

@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:06:47 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/05 16:14:29 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/17 16:04:10 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	rlp_error_msg(char *cmd)
 {
 	ft_putstr_fd(cmd, 2);
 	ft_putendl_fd(": Command not found", 2);
+
 }
 
 char	*absolute_path(char *cmd)

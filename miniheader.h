@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/10 15:29:54 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/17 16:49:10 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+
+int exit_try;
 
 
 typedef enum e_type
@@ -94,6 +96,7 @@ int		ft_strlen(char *s);
 char    *ft_strcpy(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char    *ft_itoa(int n);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 char	**ft_split(const char *s, char c);
@@ -118,12 +121,19 @@ void	rlp_error_msg(char *cmd);
 int 	char_checker(char c);
 int 	skip_spaces(char c, int *i, char **in);
 void	del_emptyQuotes(void);
-void	inputcheck(char *input);
-void	quotecheck(char *input, int i, int flag);
-void	forbidenchar(char *input);
-void	verify_c(char c, int i, char *in);
-void	redicheck(char *input, int i);
+int 	inputcheck(char *input);
+int 	quotecheck(char *input, int i, int flag);
+int 	forbidenchar(char *input);
+int 	verify_c(char c, int i, char *in);
+int 	redicheck(char *input, int i);
 void	token_it(char *in);
+
+//expand
+int	    expander_len(char *str);
+int	    verify_var(char *str, char *env);
+int	    env_char(char c);
+char	*expand_check(char *input, char **env);
+
 //free
 void	free_linked(void);
 void	free_na_tree(t_node *root);
