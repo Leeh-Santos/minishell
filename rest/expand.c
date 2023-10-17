@@ -42,7 +42,10 @@ static char *get_content(char *var_name, char **env, char *str, int x)
 
 	i = -1;
 	if (str[x + 1] == '?' && (!ft_strncmp("status", var_name, 7)))
+    {
+        printf("bateu aqui exit ta como %d\n", shell()->exit_s);
 		return (ft_itoa(shell()->exit_s));
+    }
 	while (env[++i] && !verify_var(var_name, env[i]))
 		;
 	len = -1;
@@ -67,6 +70,7 @@ char *replace_var(char *str, char *var_content, int x)
 	int		k;
 	char	*ret;
 
+    
 	ret = malloc(sizeof(char) * (expander_len(str) + ft_strlen(var_content) + 1));
 	if (!ret)
 		return 0;

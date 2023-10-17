@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 21:56:42 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/17 16:07:48 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int argc, char **argv ,char **envp)
 	(void)argv;
 	envparse(envp);
 	shell()->head =	NULL;
+	shell()->exit_s = 0;
 	while (1)
 	{
 		signal_in(SIGQUIT, SIG_IGN);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 20:33:12 by learodri         ###   ########.fr       */
+/*   Updated: 2023/10/17 17:26:05 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,8 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	env_cpy = shell()->env;
 	path = getpath(node->arguments[0]);
 	rl_clear_history();
-	//close(node->pipe[0]);
+	if (node->pipe[0])
+		close(node->pipe[0]);
 	if (key)
 		dale_redir2(node, bora);
 	else
@@ -177,11 +178,13 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	if (node->nodeType == E_BUILT)
 	{
 		which_builtin(node, 1);
+		shell()->exit_s = 0;
 		exit(shell()->exit_s);
 	}
 	if (path)
 		execve(path, node->arguments, env_cpy);
 	free(path);
+	shell()->exit_s = 127;
 	if (node->pipe[1])
 		close(node->pipe[1]);
 	if (node->pipe[0])
@@ -189,7 +192,7 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	close(shell()->in);
 	if (shell()->hdoc)
 		unlink(".h_doc_tmp");
-	shell()->exit_s = 127;
+	printf("\n trocou o exit : %d \n", shell()->exit_s);
 	free_na_tree(shell()->root); // add aqui em caso de single arg errado ex : lls dava leak	 
 	exit(shell()->exit_s); // para only redir nodes
 }
@@ -235,7 +238,7 @@ void	wait_process(int pid, int num)
 void	exec_tree(void)
 {
 	t_node	*root = shell()->root;
-	int exit_status;
+	//int exit_status;
 	shell()->in = 0; // para limpar fd se nao da merda no proximo uso dos pipes
 	shell()->hdoc = 0;
 	t_try bora;
@@ -280,7 +283,8 @@ void	exec_tree(void)
 		if (bora.pid == 0)
 			cmd_simplao(root, 0, &bora);
 		signal_in(SIGINT, SIG_IGN);
-		waitpid(bora.pid, &exit_status, 0);
+		wait_process(bora.pid, 1);
+		printf("deu ruim no cdm exit como %d\n", shell()->exit_s);
 	}
 
 	free_na_tree(shell()->root); 
