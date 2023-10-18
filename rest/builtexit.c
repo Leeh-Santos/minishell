@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtexit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:53:20 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/17 19:12:09 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/18 19:02:16 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	exit_it(char **line, char **env)
 	{
 		shell()->exit_s = 1;
 		ft_putstr_fd("exit: too many arguments\n", 1);
-		while (env[++i])
+		/*while (env[++i])
 			free (env[i]);
-		free (env);
+		free (env);*/
 		return ;
 	}
 	else

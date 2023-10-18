@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/18 16:31:28 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/18 20:50:20 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	token_type(void)
 		}
 		tmp = tmp->next;
 	}
+	
 }
 
 void	send_to_tree(t_node *node)
@@ -106,7 +107,7 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 	
 	while (tmp) //quantas str pa nois maloca
 	{
-		if (tmp->token[0] == '|')
+		if (tmp->type == -1) // antes tava tmp == '|'
 			break;
 		if (tmp->type == 0) // 1 para redir 0 para cmd nao esquece poha
 			nb_str++;
@@ -136,10 +137,10 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 	}
 	
 	tmp = start;
-
+	
 	while (tmp)
 	{
-		if (tmp->token[0] == '|') 
+		if (tmp->type == -1)  //antes tava tmp == '|'
 		{
 			new->arguments[i] = NULL;
 			send_to_tree(new);
@@ -166,7 +167,6 @@ static int redir_tipo(t_token *redir)
 
 	tmp = redir;
 
-	
 	if (tmp->token[0] == '<' && tmp->token[1] == '<')
 		return (E_HDOC);
 	else if (tmp->token[0] == '>' && tmp->token[1] == '>')
@@ -210,7 +210,7 @@ void	for_redir(t_token *start) // ja manda o tipo do redir, o parsing que q ta o
 
 	while (tmp)
 	{
-		if (tmp->token[0] == '|')
+		if (tmp->type == -1) //antes tava tmp == '|'
 			return;
 		if (tmp->type == 1)
 		{

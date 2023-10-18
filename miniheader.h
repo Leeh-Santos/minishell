@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/18 16:26:52 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/18 20:28:40 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
-
-int exit_try;
 
 
 typedef enum e_type
@@ -127,6 +125,7 @@ int 	forbidenchar(char *input);
 int 	verify_c(char c, int i, char *in);
 int 	redicheck(char *input, int i);
 void	token_it(char *in);
+char	*del_quotes(char *str);
 
 //expand
 int	    expander_len(char *str);
