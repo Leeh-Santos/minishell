@@ -6,7 +6,11 @@
 /*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/10/18 21:06:37 by learodri         ###   ########.fr       */
+=======
+/*   Updated: 2023/10/18 20:28:40 by learodri         ###   ########.fr       */
+>>>>>>> teste
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +129,7 @@ int 	forbidenchar(char *input);
 int 	verify_c(char c, int i, char *in);
 int 	redicheck(char *input, int i);
 void	token_it(char *in);
+char	*del_quotes(char *str);
 
 //expand
 int	    expander_len(char *str);

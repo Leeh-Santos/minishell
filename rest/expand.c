@@ -106,7 +106,7 @@ static char *do_expand(char *str, char **env, int i)
     return (ret);
 }
 
-char *del_quotes(char *str)
+char	*del_quotes(char *str)
 {
     int i;
     int j;
@@ -160,7 +160,7 @@ char *expand_check(char *in, char **env)
             c = 0;
         }
     }
-    ret = del_quotes(ret);
+    //ret = del_quotes(ret);
     return (ret);
 }
 

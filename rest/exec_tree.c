@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/18 16:27:05 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/18 20:59:28 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	{
 		which_builtin(node, 1);
 		shell()->exit_s = 0;
+		free_linked();
+		free_no_env();
 		exit(shell()->exit_s);
 	}
 	if (path)

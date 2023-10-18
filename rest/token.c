@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/18 12:50:17 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/18 20:37:10 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,20 @@ void	insert(char *in)
 	
 }
 
+void	update_quote(void)
+{
+	t_token *tmp;
+
+	tmp = shell()->head;
+	if (!tmp)
+		return;
+	while (tmp)
+	{
+		tmp->token = del_quotes(tmp->token);
+		tmp = tmp->next;
+	}
+}
+
 void	token_it(char *in)
 {
 	int i;
@@ -231,6 +245,7 @@ void	token_it(char *in)
 		del_emptyQuotes();
 	}
 	token_type();
+	update_quote();
 	token_tree(shell()->head); 
 	print2D(shell()->root);
 }
