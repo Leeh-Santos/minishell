@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:12:21 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 21:56:53 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/17 20:11:15 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,13 @@ char *ft_itoa(int n)
 
 	i = 0;
 	j = n;
+	if (n == 0)
+	{
+		str = malloc(sizeof(char) * 2);
+		str[0] = '0';
+		str[1] = '\0';
+		return (str);
+	}
 	while (j > 0)
 	{
 		j /= 10;

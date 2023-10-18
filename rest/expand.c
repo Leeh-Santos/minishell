@@ -111,12 +111,15 @@ char *del_quotes(char *str)
     int i;
     int j;
     char *ret;
+    
 
     i = -1;
-    j = -1;
+    j = 0;
     while(str[++i])
         if(str[i] == '\'' || str[i] == '\"')
             j++;
+    if (j == 0)
+        return (str);
     ret = malloc(sizeof(char) * ((ft_strlen(str) - j) + 1));
     if(!ret)
         return 0;

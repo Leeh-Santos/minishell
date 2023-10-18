@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:53:20 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/02 16:05:37 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/17 19:12:09 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ void	exit_it(char **line, char **env)
 	while (env[++i])
 		free (env[i]);
 	free (env);
+	free_linked();
+	free_na_tree(shell()->root);
 	exit (status);
 }

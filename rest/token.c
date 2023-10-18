@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/11 21:59:52 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:50:17 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,7 +230,6 @@ void	token_it(char *in)
 		insert(take_w(in, &i));
 		del_emptyQuotes();
 	}
-	
 	token_type();
 	token_tree(shell()->head); 
 	print2D(shell()->root);
