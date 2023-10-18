@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/17 16:49:10 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/18 16:26:52 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ char	*expand_check(char *input, char **env);
 void	free_linked(void);
 void	free_na_tree(t_node *root);
 void	free_split(char **args);
+void	free_no_env(void);
 
 //tree stuff
 void	token_type(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:13:43 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/11 21:58:56 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:26:41 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	free_na_tree(t_node *root)
 	
 }
 
-void	free_linked()
+void	free_linked(void)
 {
 	t_token *tmp;
 	t_token	*current;
@@ -66,4 +66,17 @@ void	free_split(char **args)
 	while (i < size)
 		free(args[i++]);
 	free(args);
+}
+
+void	free_no_env(void)
+{
+	int i;
+
+	i = 0;
+	while (shell()->env[i])
+	{
+		free(shell()->env[i]);
+		i++;
+	}
+	free(shell()->env);
 }

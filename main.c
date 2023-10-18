@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/17 19:27:21 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/18 15:02:10 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	main(int argc, char **argv ,char **envp)
 		}
 		free_linked();
 		free(input);
+		
 	}
 	
 	return 0;

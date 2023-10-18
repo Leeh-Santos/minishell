@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/17 19:00:48 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/18 16:27:05 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,10 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	if (shell()->hdoc)
 		unlink(".h_doc_tmp");
 	printf("\n trocou o exit : %d \n", shell()->exit_s);
-	free_na_tree(shell()->root); // add aqui em caso de single arg errado ex : lls dava leak	 
+	free_na_tree(shell()->root);
+	printf("o pau vem agora\n");
+	free_linked();
+	free_no_env();
 	exit(shell()->exit_s); // para only redir nodes
 }
 
@@ -284,7 +287,6 @@ void	exec_tree(void)
 			cmd_simplao(root, 0, &bora);
 		signal_in(SIGINT, SIG_IGN);
 		wait_process(bora.pid, 1);
-		printf("deu ruim no cdm exit como %d\n", shell()->exit_s);
 	}
 
 	free_na_tree(shell()->root); 

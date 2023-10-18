@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/11 20:25:49 by learodri         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:31:28 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,8 @@ t_node*	redir_node(t_token *token_node, char *arg)
 	new->left = NULL;
 	new->right = NULL;
 	new->up = NULL;
+	new->pipe[0] = 0;
+	new->pipe[1] = 0;
 	return (new);
 }
 
