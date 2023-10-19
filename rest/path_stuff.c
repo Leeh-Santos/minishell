@@ -6,13 +6,13 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:06:47 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/19 16:39:41 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/19 16:56:22 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../miniheader.h"
 
-void	check_dir(char *str, char *path)
+void	check_dir(char *str, char *path, char **paths)
 {
 	struct stat	buf;
 
@@ -22,6 +22,11 @@ void	check_dir(char *str, char *path)
 	{
 		ft_putstr_fd(str, 2);
 		ft_putendl_fd(" is a directory", 2);
+		free_linked();
+		free_na_tree(shell()->root);
+		free_no_env();
+		free(path);
+		free_split(paths);
 		shell()->exit_s = 126;
 		exit(shell()->exit_s);
 	}
@@ -151,7 +156,7 @@ char	*find_path(char *cmd)
 		add_bar = ft_strjoin(paths[i], "/"); // add bar at the end of each possible path
 		final_path = ft_strjoin(add_bar, cmd); // add (ex. "ls") after the end of each path
 		free(add_bar);
-		check_dir(cmd, final_path);
+		check_dir(cmd, final_path, paths);
 		if (!access(final_path, F_OK))
 		{
 			free_split(paths);
