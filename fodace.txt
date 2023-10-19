@@ -13,3 +13,7 @@ heredoc -- OK
 builts / env -------------- ok
 
 
+lls | ls - merda no 1cmd com pipe
+
+. - merda aqquies
+
