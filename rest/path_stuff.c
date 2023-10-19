@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:06:47 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/17 16:04:10 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/19 15:44:39 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ int	is_path(char *str, char *path) //paara retornar com path ok
 		ft_putstr_fd(str, 2);
 		ft_putendl_fd(" is a directory", 2);
 		shell()->exit_s = 126;
+		free_linked();
+		free_na_tree(shell()->root);
+		free_no_env();
+		free(path);
 		exit(shell()->exit_s);
 	}
 	if (access(path, X_OK) >= 0)

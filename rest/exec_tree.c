@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/18 20:59:28 by learodri         ###   ########.fr       */
+/*   Updated: 2023/10/19 12:00:40 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,8 +179,10 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	{
 		which_builtin(node, 1);
 		shell()->exit_s = 0;
+		free(path);
 		free_linked();
 		free_no_env();
+		free_na_tree(shell()->root);
 		exit(shell()->exit_s);
 	}
 	if (path)
@@ -194,9 +196,7 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	close(shell()->in);
 	if (shell()->hdoc)
 		unlink(".h_doc_tmp");
-	printf("\n trocou o exit : %d \n", shell()->exit_s);
 	free_na_tree(shell()->root);
-	printf("o pau vem agora\n");
 	free_linked();
 	free_no_env();
 	exit(shell()->exit_s); // para only redir nodes
