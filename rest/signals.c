@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:57:54 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/30 16:40:39 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/30 19:47:50 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	sig_int2(int signal)
 			free_no_env();
 		if (shell()->path1)
 			free(shell()->path1);
-		/*if (shell()->tmp)
-			free(shell()->tmp);*/
+		if (shell()->tmp)
+			free(shell()->tmp);
 		shell()->exit_s = 130;
 		exit(shell()->exit_s);
 	}

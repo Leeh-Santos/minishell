@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/30 16:39:31 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/30 19:55:31 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ void	redir_error(t_node *node)
 	ft_putstr_fd(node->arguments[0] , 2);
 	ft_putstr_fd("\n", 2);
 	shell()->exit_s = 1;
+	if (shell()->root)
+		free_na_tree(shell()->root);
+	if (shell()->head)
+		free_linked();
+	if (shell()->env)
+		free_no_env();
+	if (shell()->path1)
+		free(shell()->path1);
 	exit(shell()->exit_s);
 }
 

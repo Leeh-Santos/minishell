@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hdoc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:15:04 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/30 17:59:08 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/30 19:47:20 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@ void	escreve_it(int fd, char *buffer)
 void	fill_it(t_node *node, int fd)
 {
 	char	*buffer;
-	char	*tmp;
+	//char	*tmp;
 
-	tmp = ft_strdup(node->arguments[0]);
+	shell()->tmp = ft_strdup(node->arguments[0]);
 	signal_in(SIGINT, sig_int2);
 	while (1)
 	{
 		buffer = readline("> ");
 		if (buffer)
 		{
-			if (ft_strlen(buffer) == ft_strlen(tmp)
-				&& !ft_strncmp(tmp, buffer, ft_strlen(node->arguments[0])))
+			if (ft_strlen(buffer) == ft_strlen(shell()->tmp)
+				&& !ft_strncmp(shell()->tmp, buffer, ft_strlen(node->arguments[0])))
 				break ;
 			escreve_it(fd, buffer);
 		}
 		else
 			break ;
 	}
-	free (tmp);
+	free (shell()->tmp);
 	free (buffer);
 }
 
