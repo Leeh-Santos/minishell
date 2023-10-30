@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/18 21:17:33 by learodri         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:36:13 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_shell
     int next_in;
 	int	nb_cmd;
 	int	expand;
+    char *path1;
+    char *tmp;
 	t_token *head;
 	t_node *root;
 }t_shell;
@@ -108,6 +110,7 @@ int		ft_atoi(const char *str);
 int		ft_isalnum(int c);
 //signal
 void	handle_sigint(int sig);
+void	sig_int2(int signal);
 
 //errors
 void	display_error(char *str, int x);

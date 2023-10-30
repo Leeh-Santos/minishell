@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:06:47 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/19 16:56:22 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/19 17:28:47 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_dir(char *str, char *path, char **paths)
 	if (S_ISDIR(buf.st_mode))
 	{
 		ft_putstr_fd(str, 2);
-		ft_putendl_fd(" is a directory", 2);
+		ft_putendl_fd(" is a directory or cmd not found", 2);
 		free_linked();
 		free_na_tree(shell()->root);
 		free_no_env();
@@ -48,7 +48,7 @@ char	*absolute_path(char *cmd)
 	{
 		closedir(dir);
 		ft_putstr_fd(cmd, 2);
-		ft_putendl_fd(" is a directory", 2);
+		ft_putendl_fd(" is a directory or cmd not found", 2);
 		free_linked();
 		free_na_tree(shell()->root);
 		free_no_env();

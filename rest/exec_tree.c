@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/19 16:36:03 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/30 16:39:31 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,12 +162,12 @@ void	pipe_it(t_node *sub, t_try *bora)
 void	cmd_simplao(t_node *node, int key, t_try *bora)
 {
 	char **env_cpy;
-	char *path;
+	//char *path;
 
-	signal_in(SIGINT, SIG_DFL);
-	signal_in(SIGQUIT, SIG_DFL);
+	if (shell()->path1)
+		free(shell()->path1);
 	env_cpy = shell()->env;
-	path = getpath(node->arguments[0]);
+	shell()->path1 = getpath(node->arguments[0]);
 	rl_clear_history();
 	if (node->pipe[0])
 		close(node->pipe[0]);
@@ -179,15 +179,15 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 	{
 		which_builtin(node, 1);
 		shell()->exit_s = 0;
-		free(path);
+		free(shell()->path1);
 		free_linked();
 		free_no_env();
 		free_na_tree(shell()->root);
 		exit(shell()->exit_s);
 	}
-	if (path)
-		execve(path, node->arguments, env_cpy);
-	free(path);
+	if (shell()->path1)
+		execve(shell()->path1, node->arguments, env_cpy);
+	free(shell()->path1);
 	shell()->exit_s = 127;
 	if (node->pipe[1])
 		close(node->pipe[1]);

@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:57:54 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/09 16:18:24 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/30 16:40:39 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,32 @@ int	exit_signal(int status, int flag)
 	}
 	if (flag == 3)
 		ret = 0;
+	
 	return (ret);
 }
 
+void	sig_int2(int signal)
+{
+	if (signal == SIGINT)
+	{
+		rl_replace_line("", 0);
+		ft_putstr_fd("chupa carai\n", 1);
+		rl_on_new_line();
+		rl_redisplay();
+		if (shell()->root)
+			free_na_tree(shell()->root);
+		if (shell()->head)
+			free_linked();
+		if (shell()->env)
+			free_no_env();
+		if (shell()->path1)
+			free(shell()->path1);
+		/*if (shell()->tmp)
+			free(shell()->tmp);*/
+		shell()->exit_s = 130;
+		exit(shell()->exit_s);
+	}
+}
 
 void	sig_int(int signal)
 {
@@ -45,6 +68,7 @@ void	sig_int(int signal)
 		exit_signal(130, 1);
 	}
 }
+
 
 void	signal_in(int sig, void (*func)())
 {

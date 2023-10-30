@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:15:04 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/29 16:14:43 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/10/30 17:59:08 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	fill_it(t_node *node, int fd)
 	char	*tmp;
 
 	tmp = ft_strdup(node->arguments[0]);
+	signal_in(SIGINT, sig_int2);
 	while (1)
 	{
 		buffer = readline("> ");
@@ -36,7 +37,7 @@ void	fill_it(t_node *node, int fd)
 			if (ft_strlen(buffer) == ft_strlen(tmp)
 				&& !ft_strncmp(tmp, buffer, ft_strlen(node->arguments[0])))
 				break ;
-			escreve_it(fd, buffer);//escreve no file
+			escreve_it(fd, buffer);
 		}
 		else
 			break ;
@@ -49,7 +50,8 @@ void    dale_hdoc(t_node *node)
 {
 
 	int	fd;
-	//signal
+	//signal_in(SIGINT, SIG_DFL);
+	//signal_in(SIGQUIT, SIG_DFL);
 	fd = open(".h_doc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 		redir_error(node);
