@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtexit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 15:53:20 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/18 19:02:16 by learodri         ###   ########.fr       */
+/*   Updated: 2023/11/07 21:27:28 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
+#include "../miniheader.h"
 
 int	num_exit(int num)
 {
@@ -61,9 +61,6 @@ void	exit_it(char **line, char **env)
 	{
 		shell()->exit_s = 1;
 		ft_putstr_fd("exit: too many arguments\n", 1);
-		/*while (env[++i])
-			free (env[i]);
-		free (env);*/
 		return ;
 	}
 	else

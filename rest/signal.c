@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:49:13 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/06/26 16:51:01 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/08 03:21:15 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
+#include "../miniheader.h"
 
 void	handle_sigint(int sig)
 {

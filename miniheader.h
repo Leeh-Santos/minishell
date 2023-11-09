@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/18 21:17:33 by learodri         ###   ########.fr       */
+/*   Updated: 2023/11/09 03:00:22 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int		ft_strlen(char *s);
 char    *ft_strcpy(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char    *ft_itoa(int n);
+char    *ft_itoa(int n, int i);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 char	**ft_split(const char *s, char c);
@@ -118,12 +118,12 @@ void	rlp_error_msg(char *cmd);
 
 int 	char_checker(char c);
 int 	skip_spaces(char c, int *i, char **in);
-void	del_emptyQuotes(void);
+void	del_emptyquotes(void);
 int 	inputcheck(char *input);
 int 	quotecheck(char *input, int i, int flag);
 int 	forbidenchar(char *input);
 int 	verify_c(char c, int i, char *in);
-int 	redicheck(char *input, int i);
+int 	redicheck(char *input, int i, int j);
 void	token_it(char *in);
 char	*del_quotes(char *str);
 
@@ -140,13 +140,16 @@ void	free_split(char **args);
 void	free_no_env(void);
 
 //tree stuff
+void	simple_built(t_node *root);
+void	wtf_hdoc(t_node *node);
+void	pipe_it(t_node *sub, t_try *bora);
 void	token_type(void);
-void token_tree(t_token *head);
-int	check_redir_node(t_node *node);
-int	check_pipe_node(t_node *node);
-int	check_cmd_node(t_node *node);
+void    token_tree(t_token *head);
+int	    check_redir_node(t_node *node);
+int	    check_pipe_node(t_node *node);
+int	    check_cmd_node(t_node *node);
 void	add_on_top(t_node *node);
-void		where_redir(t_node *node);
+void	where_redir(t_node *node);
 void	where_cmd(t_node *node);
 void	cmd_simplao(t_node *node, int key, t_try *bora);
 
@@ -180,7 +183,8 @@ void	export_it(char **line, char **env, int fd);
 void	unset_it(char **line, char **env);
 void	exit_it(char **line, char **env);
 void	delete_var(char *var, char **env);
-int	exist_var(char *var, char **env);
+int     exist_var(char *var, char **env);
+void	which_builtin(t_node *node, int fd);
 
 //signal
 

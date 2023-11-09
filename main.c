@@ -3,18 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/18 15:02:10 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/07 21:26:07 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "miniheader.h"
+#include "miniheader.h"
 
-void	print_token();
+void	print_token()
+{
+	t_token *tmp = shell()->head;
 
-void	bye_shell()
+	int i = 0;
+	
+	printf("\n");
+
+	while (tmp){
+		printf("linkedlistnode %d -- %s -- id:%d\n", i, tmp->token, tmp->type);
+		tmp = tmp->next;
+		i++;
+	}
+
+}
+void	bye_shell(void)
 {
 	int	i;
 
@@ -33,10 +46,10 @@ void	bye_shell()
 
 void	envparse(char **envp)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 		i++;
 	if (shell()->env)
 		free(shell()->env);
@@ -55,15 +68,12 @@ void	envparse(char **envp)
 	shell()->path = getenv("PATH");
 }
 
-int	main(int argc, char **argv ,char **envp)
+void	main_loop(void)
 {
-	char *input;
-	int validation;
+	char	*input;
+	int		validation;
 
-	(void)argc;
-	(void)argv;
-	envparse(envp);
-	shell()->head =	NULL;
+	shell()->head = NULL;
 	shell()->exit_s = 0;
 	while (1)
 	{
@@ -85,24 +95,14 @@ int	main(int argc, char **argv ,char **envp)
 		}
 		free_linked();
 		free(input);
-		
 	}
-	
-	return 0;
 }
 
-void	print_token(){
-	
-	t_token *tmp = shell()->head;
-
-	int i = 0;
-	
-	printf("\n");
-
-	while (tmp){
-		printf("linkedlistnode %d -- %s -- id:%d\n", i, tmp->token, tmp->type);
-		tmp = tmp->next;
-		i++;
-	}
-
+int	main(int argc, char **argv, char **envp)
+{
+	(void)argc;
+	(void)argv;
+	envparse(envp);
+	main_loop();
+	return (0);
 }

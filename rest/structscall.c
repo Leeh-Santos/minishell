@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   structscall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:19:32 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/06/26 16:00:46 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/08 03:38:12 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
+#include "../miniheader.h"
 
-t_shell *shell(void)
+t_shell	*shell(void)
 {
-    static t_shell shell;
+	static t_shell	shell;
 
-    return (&shell);
+	return (&shell);
 }
-

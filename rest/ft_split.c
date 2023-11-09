@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:40:48 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/20 11:41:29 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/08 02:36:48 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
+#include "../miniheader.h"
 
 static size_t	count_words(const char *s, char c)
 {

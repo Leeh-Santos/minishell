@@ -6,12 +6,11 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:04:36 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/11 04:36:35 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/08 03:34:30 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
-
+#include "../miniheader.h"
 
 void	add_on_left(t_node *current, t_node *new_node)
 {
@@ -27,11 +26,13 @@ void	add_on_left(t_node *current, t_node *new_node)
 	printf("nodetipo - %d , left \n", new_node->nodeType);
 }
 
+// line 34 : se ja tem node faz relacao pai e filho
+// jogando node anterior para a esquerda
 void	add_on_right(t_node *node, t_node *new_node)
 {
 	if (!node || !new_node)
 		return ;
-	if (node->right) // se ja tem node faz relacao pai e filho, jogando node anterior para a esquerda
+	if (node->right)
 	{
 		new_node->left = node->right;
 		node->right->up = new_node;
@@ -58,7 +59,14 @@ void	add_on_top(t_node *node)
 	printf("nodetipo - %d , on top \n", node->nodeType);
 }
 
-void		where_redir(t_node *node)
+//line 76 : se avore null redir vai pra cima
+//line 78 : se o tree for cmd ou outro redir, vai pra esquerda
+//line 80 : se tamo num pipe
+//line 82 : mira no right kid
+//line 83 : se nao tem kid a direita do pipe ou
+//for redir tambem, vai para direta
+//line 86 : redir na esquerda
+void	where_redir(t_node *node)
 {
 	t_node	*first;
 	t_node	*next;	
@@ -66,27 +74,29 @@ void		where_redir(t_node *node)
 	if (!node)
 		return ;
 	first = shell()->root;
-	if (!first) // se avore null redir vai pra cima
+	if (!first)
 		add_on_top(node);
-	else if (check_cmd_node(first) || check_redir_node(first)) // se o tree for cmd ou outro redir, vai pra esquerda
+	else if (check_cmd_node(first) || check_redir_node(first))
 		add_on_left(first, node);
-	else if (check_pipe_node(first)) // se tamo num pipe
+	else if (check_pipe_node(first))
 	{
-		next = first->right; // mira no right kid
-		if (!next || check_redir_node(next))// se nao tem kid a direita do pipe ou for redir tambem, vai para direta
+		next = first->right;
+		if (!next || check_redir_node(next))
 			add_on_right(first, node);
 		else
-			add_on_left(next, node); // redir na esquerda
+			add_on_left(next, node);
 	}
 }
 
+//line 98 : vai pra cima se ligando com a esquerda do parent
+//line 99 : se for pipe vai pa direita
 void	where_cmd(t_node *node)
 {
 	t_node	*first;
 
 	first = shell()->root;
 	if (!first || check_redir_node(first))
-		add_on_top(node); // vai pra cima se ligando com a esquerda do parent
-	else if (check_pipe_node(first)) // se for pipe vai pa direita
+		add_on_top(node);
+	else if (check_pipe_node(first))
 		add_on_right(first, node);
 }

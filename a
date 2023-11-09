@@ -1,0 +1,34 @@
+a
+alo
+a.out
+aqui
+as
+asd
+b
+c
+d
+docpica
+executor - help
+fodace.txt
+haha
+la
+libft.txt
+ls
+main.c
+main.o
+Makefile
+miniheader.h
+minishell
+oi
+output
+rest
+s
+sera
+shlvl.log
+TESTE DE INPUTS
+to-do.txt
+txt
+vaila
+valgrind-out.txt
+vs
+z

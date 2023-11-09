@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtexport.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 16:24:49 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/03 16:41:20 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/07 21:31:50 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
+#include "../miniheader.h"
+
+//line 26: traz env de volta porque se var for igual da free antes
 
 void	insert_var(char **env, char *var)
 {
@@ -21,7 +23,7 @@ void	insert_var(char **env, char *var)
 	if (exist_var(var, env))
 	{
 		delete_var(var, env);
-		env = shell()->env; //traz env de volta porque se var for igual da free antes
+		env = shell()->env;
 	}
 	while (env[i])
 		i++;
@@ -80,6 +82,7 @@ void	print_export_line(char *env_line, int fd)
 	ft_putchar_fd('\n', fd);
 }
 
+//line 102: antes tava env no primeiro arg aqui
 void	export_it(char **line, char **env, int fd)
 {
 	int	i;
@@ -96,7 +99,7 @@ void	export_it(char **line, char **env, int fd)
 	else
 	{
 		if (valid_var(line[1]))
-			insert_var(env, line[1]); // antes tava env no primeiro arg aqui
+			insert_var(env, line[1]);
 		else
 		{
 			ft_putstr_fd("export: \'", fd);

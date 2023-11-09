@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:06:47 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/19 16:56:22 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/09 03:04:12 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
+#include "../miniheader.h"
 
 void	check_dir(char *str, char *path, char **paths)
 {
@@ -36,7 +36,6 @@ void	rlp_error_msg(char *cmd)
 {
 	ft_putstr_fd(cmd, 2);
 	ft_putendl_fd(": Command not found", 2);
-
 }
 
 char	*absolute_path(char *cmd)
@@ -68,7 +67,8 @@ char	*absolute_path(char *cmd)
 	return (cmd);
 }
 
-int	is_path(char *str, char *path) //paara retornar com path ok
+//para retornar com path ok
+int	is_path(char *str, char *path)
 {
 	struct stat	buf;
 
@@ -96,7 +96,7 @@ char	*search_rpath(char *cmd)
 {
 	char	*path;
 	char	*tmp;
-	
+
 	path = NULL;
 	tmp = NULL;
 	path = getcwd(NULL, 0);
@@ -116,15 +116,15 @@ char	**grab_paths(char **envp)
 	char	**paths;
 	int		i;
 	int		flag;
-	
+
 	i = 0;
 	flag = 0;
 	while (envp[i])
-	{ 
+	{
 		if (ft_strnstr(envp[i], "PATH", 4))
 		{
 			flag++;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -143,7 +143,7 @@ char	*find_path(char *cmd)
 	char	*final_path;
 	char	*add_bar;
 	int		i;
-	
+
 	paths = grab_paths(shell()->env);
 	if (!paths)
 	{
@@ -153,8 +153,8 @@ char	*find_path(char *cmd)
 	i = -1;
 	while (paths[++i])
 	{
-		add_bar = ft_strjoin(paths[i], "/"); // add bar at the end of each possible path
-		final_path = ft_strjoin(add_bar, cmd); // add (ex. "ls") after the end of each path
+		add_bar = ft_strjoin(paths[i], "/");
+		final_path = ft_strjoin(add_bar, cmd);
 		free(add_bar);
 		check_dir(cmd, final_path, paths);
 		if (!access(final_path, F_OK))
@@ -169,10 +169,8 @@ char	*find_path(char *cmd)
 	return (0);
 }
 
-
 char	*getpath(char *cmd)
 {
-
 	if (cmd[0] == '/')
 		return (absolute_path(cmd));
 	if (cmd[0] && cmd[0] == '.')

@@ -3,23 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/10/18 20:50:20 by learodri         ###   ########.fr       */
+/*   Updated: 2023/11/08 03:28:28 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
-
-
+#include "../miniheader.h"
+/*
 void	print_node_recebido(t_node *node)
 {
-	t_node *tmp = node;
+	t_node	*tmp = node;
 
-	int i = 0;
-	
+	int i;
 
+	i = 0;
 	if (node->nodeType >= E_IN && node->nodeType <= E_HDOC)
 		printf("nodetype %d - #0 %s - #1 %s\n", tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
 	else if (node->nodeType == E_PIPE)
@@ -37,7 +36,7 @@ void	print_node_recebido(t_node *node)
 	}
 		
 }
-
+*/
 static int	built_ou_cmd(t_token *node)
 {
 	if (!ft_strncmp(node->token, "echo", 5))
@@ -64,8 +63,7 @@ void	token_type(void)
 	tmp = shell()->head;
 	if (!tmp)
 		return ;
-
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->token[0] == '|')
 			tmp->type = -1;
@@ -77,50 +75,46 @@ void	token_type(void)
 		}
 		tmp = tmp->next;
 	}
-	
 }
 
+//print_node_recebido(node);
 void	send_to_tree(t_node *node)
 {
-
-	//print_node_recebido(node);
-
-	if (check_redir_node(node)) 
+	if (check_redir_node(node))
 		where_redir(node);
-	else if (check_cmd_node(node)) 
+	else if (check_cmd_node(node))
 		where_cmd(node);
 	else if (check_pipe_node(node))
 		add_on_top(node);
-	
 }
 
-
-t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
+//contar quantas strs para matriz
+t_token *for_cmd(t_token *start)
 {
-	t_token *tmp;
-	t_node *new;
-	int	nb_str = 0;
-	int i = 0;
+	t_token	*tmp;
+	t_node	*new;
+	int		nb_str;
+	int		i;
 	
 	tmp = start;
-
-	
-	while (tmp) //quantas str pa nois maloca
+	nb_str = 0;
+	i = 0;
+	while (tmp)
 	{
-		if (tmp->type == -1) // antes tava tmp == '|'
+		if (tmp->type == -1)
 			break;
-		if (tmp->type == 0) // 1 para redir 0 para cmd nao esquece poha
+		if (tmp->type == 0)
 			nb_str++;
 		tmp = tmp->next;
 	}
 
-	if (!nb_str)   //com NULL nao manda node, atencao que com >a | ls >a na segunda pipe line nao executa, pode ter bug no futuro
+	if (!nb_str)
 		return (NULL);
 	
 	tmp = start;
 	
 	new = malloc(sizeof(t_node));
-	if (!new || !tmp) //tava tranvando aqui antes tava if (!tmp)
+	if (!new || !tmp)
 		return NULL;
 	new->nodeType = built_ou_cmd(tmp);
 	new->left = NULL;
@@ -140,11 +134,11 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 	
 	while (tmp)
 	{
-		if (tmp->type == -1)  //antes tava tmp == '|'
+		if (tmp->type == -1)
 		{
 			new->arguments[i] = NULL;
 			send_to_tree(new);
-			return(tmp); // pa nois rodar a recursividade dps
+			return(tmp);
 		}
 		if (tmp->type == 0)
 		{
@@ -157,7 +151,7 @@ t_token *for_cmd(t_token *start) // contar quantas strs para matriz,
 	new->arguments[i] = NULL;
 	send_to_tree(new);
 
-	return NULL; // em caso de nao ter mais pipes ou nao ter
+	return NULL;
 	
 }
 

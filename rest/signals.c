@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:57:54 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/09 16:18:24 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/08 03:21:55 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
+#include "../miniheader.h"
 
 void	sig_error(char *str)
 {
@@ -32,7 +32,6 @@ int	exit_signal(int status, int flag)
 		ret = 0;
 	return (ret);
 }
-
 
 void	sig_int(int signal)
 {

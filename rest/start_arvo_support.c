@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo_support.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:18:54 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/09/04 16:50:19 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/08 03:22:36 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
+#include "../miniheader.h"
 
 int	check_redir_node(t_node *node)
 {
