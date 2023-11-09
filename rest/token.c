@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/10/19 11:59:18 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/03 16:51:10 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ char	*take_w(char *in, int *i) // sempre cai aqui no 1 index da subs
 void	killspc(char *in, int *i)
 {
 
-	while ((in[*i]) && (in[*i] == ' '))
+	while ((in[*i]) && (in[*i] == ' ' || in[*i] == '\t'))
 	{
 		(*i)++;
 	}
