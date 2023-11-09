@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/09 03:00:22 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/09 20:28:03 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,10 @@ char	*getpath(char *cmd);
 
 //redir
 
+void	for_outs(t_node *node, int flag);
+void	for_ins(t_node *node, int flag);
+int	    check_outs(t_node *node);
+int	    check_ins(t_node *node);
 void	open_outs(t_node *node);
 void	redir_error(t_node *node);
 void	open_ins(t_node *node);

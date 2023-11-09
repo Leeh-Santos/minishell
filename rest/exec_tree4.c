@@ -49,36 +49,36 @@ void	wait_process(int pid, int num)
 		cmds--;
 	}
 }
-/*
-void	exec_pipe(t_node *root, t_try bora)
+
+void	exec_pipe(t_node *root, t_try *bora)
 {
 	shell()->nb_cmd = 2;
 	nb_cmds(root);
-	pipe_it(root->left, &bora);
+	pipe_it(root->left, bora);
 	shell()->nb_cmd--;
-	pipe_it(root->right, &bora);
+	pipe_it(root->right, bora);
 	shell()->nb_cmd--;
 	while (root->up)
 	{
 		root = root->up;
-		pipe_it(root->right, &bora);
+		pipe_it(root->right, bora);
 		shell()->nb_cmd--;
 	}
 	signal_in(SIGINT, SIG_IGN);
-	wait_process(bora.pid, shell()->nb_cmd_wait);
+	wait_process(bora->pid, shell()->nb_cmd_wait);
 	free_na_tree(shell()->root);
 	return ;
 }
 
-void	exec_other(t_node *root, t_try bora)
+void	exec_other(t_node *root, t_try *bora)
 {
-	bora.pid = fork();
-	if (bora.pid < 0)
+	bora->pid = fork();
+	if (bora->pid < 0)
 		ft_putendl_fd("Error: Fork failed", 2);
-	if (bora.pid == 0)
-		cmd_simplao(root, 0, &bora);
+	if (bora->pid == 0)
+		cmd_simplao(root, 0, bora);
 	signal_in(SIGINT, SIG_IGN);
-	wait_process(bora.pid, 1);
+	wait_process(bora->pid, 1);
 }
 
 void	exec_tree(void)
@@ -102,13 +102,13 @@ void	exec_tree(void)
 		return (free_na_tree(shell()->root));
 	}
 	if (root->nodeType == E_PIPE)
-		exec_pipe(root, bora);
+		exec_pipe(root, &bora);
 	else
-		exec_other(root, bora);
+		exec_other(root, &bora);
 	free_na_tree(shell()->root);
 }
-*/
 
+/*
 void	exec_tree(void)
 {
 	t_node	*root;
@@ -160,3 +160,4 @@ void	exec_tree(void)
 	}
 	free_na_tree(shell()->root);
 }
+*/
