@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/09 20:28:03 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/09 21:18:41 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_shell
     int next_in;
 	int	nb_cmd;
 	int	expand;
+    char *path1;
+    char *tmp;
 	t_token *head;
 	t_node *root;
 }t_shell;

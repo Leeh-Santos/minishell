@@ -12,30 +12,22 @@
 
 #include "../miniheader.h"
 
-void	handle_redirection(t_node *node, int key, t_try *bora)
-{
-	if (key)
-		dale_redir2(node, bora);
-	else
-		dale_redir(node);
-}
-
-void	handle_builtin(t_node *node, char *path)
+void	handle_builtin(t_node *node)
 {
 	which_builtin(node, 1);
 	shell()->exit_s = 0;
-	free(path);
+	free(shell()->path1);
 	free_linked();
 	free_no_env();
 	free_na_tree(shell()->root);
 	exit(shell()->exit_s);
 }
 
-void	handle_execution(t_node *node, char **env_cpy, char *path)
+void	handle_execution(t_node *node, char **env_cpy)
 {
-	if (path)
-		execve(path, node->arguments, env_cpy);
-	free(path);
+	if (shell()->path1)
+		execve(shell()->path1, node->arguments, env_cpy);
+	free(shell()->path1);
 	shell()->exit_s = 127;
 	if (node->pipe[1])
 		close(node->pipe[1]);
@@ -53,17 +45,19 @@ void	handle_execution(t_node *node, char **env_cpy, char *path)
 void	cmd_simplao(t_node *node, int key, t_try *bora)
 {
 	char	**env_cpy;
-	char	*path;
 
-	signal_in(SIGINT, SIG_DFL);
-	signal_in(SIGQUIT, SIG_DFL);
+	if (shell()->path1)
+		free(shell()->path1);
 	env_cpy = shell()->env;
-	path = getpath(node->arguments[0]);
+	shell()->path1 = getpath(node->arguments[0]);
 	rl_clear_history();
 	if (node->pipe[0])
 		close(node->pipe[0]);
-	handle_redirection(node, key, bora);
+	if (key)
+		dale_redir2(node, bora);
+	else
+		dale_redir(node);
 	if (node->nodeType == E_BUILT)
-		handle_builtin(node, path);
-	handle_execution(node, env_cpy, path);
+		handle_builtin(node);
+	handle_execution(node, env_cpy);
 }

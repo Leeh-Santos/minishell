@@ -49,7 +49,7 @@ void	wait_process(int pid, int num)
 		cmds--;
 	}
 }
-
+/*
 void	exec_pipe(t_node *root, t_try *bora)
 {
 	shell()->nb_cmd = 2;
@@ -107,8 +107,8 @@ void	exec_tree(void)
 		exec_other(root, &bora);
 	free_na_tree(shell()->root);
 }
+*/
 
-/*
 void	exec_tree(void)
 {
 	t_node	*root;
@@ -160,4 +160,3 @@ void	exec_tree(void)
 	}
 	free_na_tree(shell()->root);
 }
-*/
