@@ -6,12 +6,13 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/07 21:26:07 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/10 21:05:38 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniheader.h"
 
+/*
 void	print_token()
 {
 	t_token *tmp = shell()->head;
@@ -27,6 +28,7 @@ void	print_token()
 	}
 
 }
+*/
 void	bye_shell(void)
 {
 	int	i;
@@ -68,6 +70,7 @@ void	envparse(char **envp)
 	shell()->path = getenv("PATH");
 }
 
+//print_token();
 void	main_loop(void)
 {
 	char	*input;
@@ -89,7 +92,6 @@ void	main_loop(void)
 			if (!validation)
 			{
 				token_it(input);
-				print_token();
 				exec_tree();
 			}
 		}

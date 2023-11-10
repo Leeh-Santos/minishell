@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hdoc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:15:04 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/10 14:33:47 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/10 21:08:07 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	escreve_it(int fd, char *buffer)
 }
 
 //line 41: escreve no file
-
 void	sig_int2(int signal)
 {
 	if (signal == SIGINT)
@@ -47,10 +46,11 @@ void	sig_int2(int signal)
 		exit(shell()->exit_s);
 	}
 }
+
 void	fill_it(t_node *node, int fd)
 {
 	char	*buffer;
-	
+
 	shell()->tmp = ft_strdup(node->arguments[0]);
 	signal_in(SIGINT, sig_int2);
 	while (1)
@@ -59,7 +59,8 @@ void	fill_it(t_node *node, int fd)
 		if (buffer)
 		{
 			if (ft_strlen(buffer) == ft_strlen(shell()->tmp)
-				&& !ft_strncmp(shell()->tmp, buffer, ft_strlen(node->arguments[0])))
+				&& !ft_strncmp(shell()->tmp, buffer, \
+				ft_strlen(node->arguments[0])))
 				break ;
 			escreve_it(fd, buffer);
 		}
