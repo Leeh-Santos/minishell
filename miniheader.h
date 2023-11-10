@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/10 21:06:57 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/10 21:30:26 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void	exec_tree(void);
 
 //path shit
 
+void	check_dir(char *str, char *path, char **paths);
 char	*absolute_path(char *cmd);
 int     is_path(char *str, char *path);
 char	*search_rpath(char *cmd);
