@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/09 00:12:36 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:24:26 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ char	*take_w(char *in, int *i) // sempre cai aqui no 1 index da subs
 void	killspc(char *in, int *i)
 {
 
-	while ((in[*i]) && (in[*i] == ' '))
+	while ((in[*i]) && (in[*i] == ' ' || in[*i] == '\t'))
 	{
 		(*i)++;
 	}

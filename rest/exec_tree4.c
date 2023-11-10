@@ -49,7 +49,7 @@ void	wait_process(int pid, int num)
 		cmds--;
 	}
 }
-/*
+
 void	exec_pipe(t_node *root, t_try *bora)
 {
 	shell()->nb_cmd = 2;
@@ -66,8 +66,6 @@ void	exec_pipe(t_node *root, t_try *bora)
 	}
 	signal_in(SIGINT, SIG_IGN);
 	wait_process(bora->pid, shell()->nb_cmd_wait);
-	free_na_tree(shell()->root);
-	return ;
 }
 
 void	exec_other(t_node *root, t_try *bora)
@@ -107,9 +105,9 @@ void	exec_tree(void)
 		exec_other(root, &bora);
 	free_na_tree(shell()->root);
 }
-*/
 
-void	exec_tree(void)
+
+/*void	exec_tree(void)
 {
 	t_node	*root;
 	t_try	bora;
@@ -160,3 +158,4 @@ void	exec_tree(void)
 	}
 	free_na_tree(shell()->root);
 }
+*/

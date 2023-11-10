@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hdoc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:15:04 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/08 02:39:01 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/10 14:33:47 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,49 @@ void	escreve_it(int fd, char *buffer)
 }
 
 //line 41: escreve no file
+
+void	sig_int2(int signal)
+{
+	if (signal == SIGINT)
+	{
+		rl_replace_line("", 0);
+		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_redisplay();
+		if (shell()->root)
+			free_na_tree(shell()->root);
+		if (shell()->head)
+			free_linked();
+		if (shell()->env)
+			free_no_env();
+		if (shell()->path1)
+			free(shell()->path1);
+		if (shell()->tmp)
+			free(shell()->tmp);
+		shell()->exit_s = 130;
+		exit(shell()->exit_s);
+	}
+}
 void	fill_it(t_node *node, int fd)
 {
 	char	*buffer;
-	char	*tmp;
-
-	tmp = ft_strdup(node->arguments[0]);
+	
+	shell()->tmp = ft_strdup(node->arguments[0]);
+	signal_in(SIGINT, sig_int2);
 	while (1)
 	{
 		buffer = readline("> ");
 		if (buffer)
 		{
-			if (ft_strlen(buffer) == ft_strlen(tmp)
-				&& !ft_strncmp(tmp, buffer, ft_strlen(node->arguments[0])))
+			if (ft_strlen(buffer) == ft_strlen(shell()->tmp)
+				&& !ft_strncmp(shell()->tmp, buffer, ft_strlen(node->arguments[0])))
 				break ;
 			escreve_it(fd, buffer);
 		}
 		else
 			break ;
 	}
-	free (tmp);
+	free (shell()->tmp);
 	free (buffer);
 }
 
