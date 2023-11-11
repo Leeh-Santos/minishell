@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/10 21:30:26 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/11 07:42:21 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ typedef enum e_type
     E_BUILT
 } t_type;
 
+typedef struct s_params
+{
+    int	k;
+	int	flag;
+	int quote;
+	char c;
+}t_params;
 
 typedef struct s_token
 {
@@ -126,8 +133,11 @@ int 	quotecheck(char *input, int i, int flag);
 int 	forbidenchar(char *input);
 int 	verify_c(char c, int i, char *in);
 int 	redicheck(char *input, int i, int j);
+void	aspasword(char *in, char *tmp, int *i);
+void	update_quote(void);
 void	token_it(char *in);
 char	*del_quotes(char *str);
+
 
 //expand
 int	    expander_len(char *str);
@@ -142,18 +152,21 @@ void	free_split(char **args);
 void	free_no_env(void);
 
 //tree stuff
-void	simple_built(t_node *root);
-void	wtf_hdoc(t_node *node);
-void	pipe_it(t_node *sub, t_try *bora);
-void	token_type(void);
-void    token_tree(t_token *head);
-int	    check_redir_node(t_node *node);
-int	    check_pipe_node(t_node *node);
-int	    check_cmd_node(t_node *node);
-void	add_on_top(t_node *node);
-void	where_redir(t_node *node);
-void	where_cmd(t_node *node);
-void	cmd_simplao(t_node *node, int key, t_try *bora);
+int	        built_ou_cmd(t_token *node);
+void	    send_to_tree(t_node *node);
+t_token     *for_cmd(t_token *start);
+void	    simple_built(t_node *root);
+void	    wtf_hdoc(t_node *node);
+void	    pipe_it(t_node *sub, t_try *bora);
+void	    token_type(void);
+void      token_tree(t_token *head);
+int	      check_redir_node(t_node *node);
+int	       check_pipe_node(t_node *node);
+int	       check_cmd_node(t_node *node);
+void    	add_on_top(t_node *node);
+void    	where_redir(t_node *node);
+void    	where_cmd(t_node *node);
+void	    cmd_simplao(t_node *node, int key, t_try *bora);
 
 //exec tree
 

@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
+/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/10 12:24:26 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/11 07:47:08 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../miniheader.h"
-
-static int is_redir_pipe(char c)
-{
-	if (c == '|' || c == '<' || c == '>')
-		return 1;
-	return 0;
-}
-
+#include "../miniheader.h"
+/*
 void print2DUtil(t_node* root, int space)
 {
     int COUNT = 10;
@@ -41,155 +34,60 @@ void print2DUtil(t_node* root, int space)
     
     print2DUtil(root->left, space);
 }
- 
 
 void print2D(t_node* root)
 {
     print2DUtil(root, 0);
 }
-
-void	aspasword(char *in, char *tmp, int *i, char c)
-{
-	int	k;
-	int	flag;
-	int quote;
-
-	k = 0;
-	flag = 0;
-	quote = 0;
-	while(in[*i])
-	{
-		if(in[*i] == c && flag)
-		{
-			flag = 0;
-			tmp[k++] = c;
-			if (in[*i + 1] == ' ' || in[*i + 1] == '\t' || in[*i + 1] == '\0' || is_redir_pipe(in[*i + 1]))
-			{
-				tmp[k] = '\0';
-				(*i)++;
-				return;
-			}
-			else
-			{
-				(*i)++;
-				while (in[*i] && (in[*i] >= 32 && in[*i] <= 126))
-				{
-					if(in[*i] == 39 || in[*i] == '"')
-						quote++;
-					if(quote % 2 == 0 && (in[*i] == ' ' || in[*i] == '\t' || is_redir_pipe(in[*i])))
-						break;
-					tmp[k] = in[*i];
-					(*i)++;
-					k++;
-				}
-				tmp[k] = '\0';
-				return;
-			}
-		}
-		flag = 1;
-		tmp[k] = in[*i];
-		(*i)++;
-		k++;
-	}
-}
-
-void	delword(char c, char *in, char *tmp, int *i)
-{
-	int	k;
-
-	k = 0;
-	if (c == '|')
-	{
-		tmp[k] = c;
-		tmp[k + 1] ='\0';
-		(*i)++;
-		return;
-	}
-	else if (c == '>')
-	{
-		if (in[*i + 1] == '>')
-		{
-			tmp[k] = c;
-			tmp[k + 1] = c;
-			tmp[k + 2] = '\0';
-			(*i) += 2;
-			return;
-		}
-		tmp[k] = c;
-		tmp[k + 1] = '\0';
-		(*i)++;
-		return;
-	}
-	else if (c == '<')
-	{
-		if (in[*i + 1] == '<')
-		{
-			tmp[k] = c;
-			tmp[k + 1] = c;
-			tmp[k + 2] = '\0';
-			(*i) += 2; //proteger nesses casos
-			return;
-		}
-		tmp[k] = c;
-		tmp[k + 1] = '\0';
-		(*i)++;
-		return;
-	}
-}
+*/
 
 void	facin(char *in, char *tmp, int *i)
 {
 	int	k;
-	int quote;
+	int	quote;
 
 	quote = 0;
 	k = 0;
-	while((in[*i]))
+	while ((in[*i]))
 	{
-		if(is_redir_pipe(in[*i]))
-			break;
-		if(in[*i] == 39 || in[*i] == '"')
+		if (is_redir_pipe(in[*i]))
+			break ;
+		if (in[*i] == 39 || in[*i] == '"')
 			quote++;
-		if(quote % 2 == 0)
+		if (quote % 2 == 0)
 			if ((in[*i] == ' ') || ((in[*i] == '\t')))
-				break;
+				break ;
 		tmp[k] = in[*i];
 		(*i)++;
 		k++;
 	}
 	tmp[k] = '\0';
-	
-
 }
 
-char	*take_w(char *in, int *i) // sempre cai aqui no 1 index da subs
+char	*take_w(char *in, int *i)
 {
-	char	*tmp = malloc(999 * sizeof(char));
-	
-	if(!tmp)
-		return NULL;
-		
-	while(in[*i])
+	char	*tmp;
+
+	tmp = malloc(999 * sizeof(char));
+	if (!tmp)
+		return (NULL);
+	while (in[*i])
 	{
-		if(in[*i] == 39 || in[*i] == '"')
-			aspasword(in, tmp, i, in[*i]);
-		else if(in[*i] == '|' || in[*i] == '<'  || in[*i] == '>')
-			delword(in[*i],in, tmp, i);
-		else if(in[*i])
+		if (in[*i] == 39 || in[*i] == '"')
+			aspasword(in, tmp, i);
+		else if (in[*i] == '|' || in[*i] == '<' || in[*i] == '>')
+			delword(in[*i], in, tmp, i);
+		else if (in[*i])
 			facin(in, tmp, i);
-		break; // tava travado aqui antes no oioioi
+		break ;
 	}
 	return (tmp);
-	
 }
 
 void	killspc(char *in, int *i)
 {
-
 	while ((in[*i]) && (in[*i] == ' ' || in[*i] == '\t'))
-	{
 		(*i)++;
-	}
 }
 
 void	insert(char *in)
@@ -201,38 +99,23 @@ void	insert(char *in)
 	if (!new)
 		display_error("deu pau no malloc", 0);
 	in = expand_check(in, shell()->env);
-	new->token = in; //tratar do expand
+	new->token = in;
 	new->type = 0;
 	new->next = NULL;
 	tmp = shell()->head;
 	if (!tmp)
 	{
-		shell()->head = new;	
-		return;
+		shell()->head = new;
+		return ;
 	}
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
-	
-}
-
-void	update_quote(void)
-{
-	t_token *tmp;
-
-	tmp = shell()->head;
-	if (!tmp)
-		return;
-	while (tmp)
-	{
-		tmp->token = del_quotes(tmp->token);
-		tmp = tmp->next;
-	}
 }
 
 void	token_it(char *in)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	shell()->root = NULL;
@@ -240,12 +123,12 @@ void	token_it(char *in)
 	{
 		killspc(in, &i);
 		if (in[i] == '\0')
-			break;
+			break ;
 		insert(take_w(in, &i));
 		del_emptyquotes();
 	}
 	token_type();
 	update_quote();
-	token_tree(shell()->head); 
+	token_tree(shell()->head);
 	print2D(shell()->root);
 }
