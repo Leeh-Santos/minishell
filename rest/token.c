@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/11 07:47:08 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/11 07:51:51 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	insert(char *in)
 	tmp->next = new;
 }
 
+//print2D(shell()->root);
 void	token_it(char *in)
 {
 	int	i;
@@ -130,5 +131,4 @@ void	token_it(char *in)
 	token_type();
 	update_quote();
 	token_tree(shell()->head);
-	print2D(shell()->root);
 }

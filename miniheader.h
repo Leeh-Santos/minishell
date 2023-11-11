@@ -6,7 +6,7 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/11 07:42:21 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/11 07:52:54 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	rlp_error_msg(char *cmd);
 
 //input & parse
 
+int	    is_redir_pipe(char c);
 int 	char_checker(char c);
 int 	skip_spaces(char c, int *i, char **in);
 void	del_emptyquotes(void);
@@ -134,6 +135,7 @@ int 	forbidenchar(char *input);
 int 	verify_c(char c, int i, char *in);
 int 	redicheck(char *input, int i, int j);
 void	aspasword(char *in, char *tmp, int *i);
+void	delword(char c, char *in, char *tmp, int *i);
 void	update_quote(void);
 void	token_it(char *in);
 char	*del_quotes(char *str);

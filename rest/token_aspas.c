@@ -12,7 +12,7 @@
 
 #include "../miniheader.h"
 
-static int	is_redir_pipe(char c)
+int	is_redir_pipe(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
 		return (1);
