@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:13:43 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/08 02:36:18 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:34:52 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../miniheader.h"
 
-//printf("node deletado %d\n", root->nodeType);
+//printf("node deletado %d\n", root->nodetype);
 void	free_na_tree(t_node *root)
 {
 	int	i;

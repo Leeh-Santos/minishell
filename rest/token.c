@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 17:25:12 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/11 07:51:51 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:35:08 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void print2DUtil(t_node* root, int space)
     printf("\n");
     for (int i = COUNT; i < space; i++)
         printf(" ");
-    //print_node_recebido(root);//printf("%d\n", root->nodeType);
+    //print_node_recebido(root);//printf("%d\n", root->nodetype);
  
     
     print2DUtil(root->left, space);

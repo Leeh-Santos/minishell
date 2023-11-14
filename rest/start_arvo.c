@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_arvo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:50:55 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/10 21:57:30 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:34:01 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	print_node_recebido(t_node *node)
 	int i;
 
 	i = 0;
-	if (node->nodeType >= E_IN && node->nodeType <= E_HDOC)
+	if (node->nodetype >= E_IN && node->nodetype <= E_HDOC)
 		printf("nodetype %d - #0 %s - #1 %s\n", \
-		tmp->nodeType, tmp->arguments[0], tmp->arguments[1]);
-	else if (node->nodeType == E_PIPE)
+		tmp->nodetype, tmp->arguments[0], tmp->arguments[1]);
+	else if (node->nodetype == E_PIPE)
 		printf("PIPE CARAI \n");
-	else if (node->nodeType == E_CMD || node->nodeType == E_BUILT)
+	else if (node->nodetype == E_CMD || node->nodetype == E_BUILT)
 	{
-		printf("nodetype %d", tmp->nodeType);
+		printf("nodetype %d", tmp->nodetype);
 		while (node->arguments[i])
 		{
 			printf(" - #%d %s",i , tmp->arguments[i]);
@@ -63,7 +63,7 @@ t_node	*redir_node(t_token *token_node, char *arg)
 
 	tmp = token_node;
 	new = malloc(sizeof(t_node));
-	new->nodeType = redir_tipo(tmp);
+	new->nodetype = redir_tipo(tmp);
 	new->arguments = malloc(sizeof(char *) * 2);
 	if (!new->arguments || !new)
 		display_error("falha no malloc tree node", 0);
@@ -106,7 +106,7 @@ t_node	*pipe_node(void)
 	new = malloc(sizeof(t_node));
 	if (!new)
 		display_error("deu ruim pipemalloc", 0);
-	new->nodeType = E_PIPE;
+	new->nodetype = E_PIPE;
 	new->arguments = NULL;
 	new->left = NULL;
 	new->right = NULL;

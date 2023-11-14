@@ -57,7 +57,7 @@ void	cmd_simplao(t_node *node, int key, t_try *bora)
 		dale_redir2(node, bora);
 	else
 		dale_redir(node);
-	if (node->nodeType == E_BUILT)
+	if (node->nodetype == E_BUILT)
 		handle_builtin(node);
 	handle_execution(node, env_cpy);
 }

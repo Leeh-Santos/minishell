@@ -89,17 +89,17 @@ void	exec_tree(void)
 	shell()->hdoc = 0;
 	if (!root)
 		return ;
-	while (root->left != NULL && root->left->nodeType == E_PIPE)
+	while (root->left != NULL && root->left->nodetype == E_PIPE)
 		root = root->left;
-	printf(" chaaama no root poha, resultados abaixo : %d\n", root->nodeType);
-	if (!root->up && root->nodeType == E_HDOC)
+	printf(" chaaama no root poha, resultados abaixo : %d\n", root->nodetype);
+	if (!root->up && root->nodetype == E_HDOC)
 		return (wtf_hdoc(root));
-	if (!root->up && root->nodeType == E_BUILT)
+	if (!root->up && root->nodetype == E_BUILT)
 	{
 		simple_built(root);
 		return (free_na_tree(shell()->root));
 	}
-	if (root->nodeType == E_PIPE)
+	if (root->nodetype == E_PIPE)
 		exec_pipe(root, &bora);
 	else
 		exec_other(root, &bora);

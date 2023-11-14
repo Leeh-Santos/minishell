@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   miniheader.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/11 08:02:57 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:41:13 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#ifndef MINIHEADER_H
+# define MINIHEADER_H
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <signal.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <dirent.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
 
 typedef enum e_type
 {
@@ -36,7 +36,7 @@ typedef enum e_type
 	E_APPEND,
 	E_HDOC,
 	E_BUILT
-} t_type;
+}	t_type;
 
 typedef struct s_params
 {
@@ -44,24 +44,23 @@ typedef struct s_params
 	int		flag;
 	int		quote;
 	char	c;
-} t_params;
+}	t_params;
 
 typedef struct s_token
 {
 	char			*token;
 	int				type;
 	struct s_token	*next;
-} t_token;
+}	t_token;
 
 typedef struct s_node {
-	int				nodeType;
+	int				nodetype;
 	char			**arguments;
 	int				pipe[2];
-	struct s_node	*up;    
+	struct s_node	*up;
 	struct s_node	*left;
 	struct s_node	*right;
-} t_node;
-
+}	t_node;
 
 typedef struct s_shell
 {
@@ -80,29 +79,27 @@ typedef struct s_shell
 	char	*tmp;
 	t_token	*head;
 	t_node	*root;
-} t_shell;
+}	t_shell;
 
 typedef struct s_try
 {
 	int	pid;
 	int	ffd;
-} t_try;
-
-
+}	t_try;
 
 void	print_node_recebido(t_node *node);
 
 //struct
 
-t_shell *shell(void);
+t_shell	*shell(void);
 
 //libft
 
 int		ft_strlen(char *s);
-char    *ft_strcpy(char *s1, char *s2);
+char	*ft_strcpy(char *s1, char *s2);
 char	*ft_strdup(char *s1);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char    *ft_itoa(int n, int i);
+char	*ft_itoa(int n, int i);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 char	**ft_split(const char *s, char c);
@@ -121,24 +118,22 @@ void	handle_sigint(int sig);
 void	display_error(char *str, int x);
 void	rlp_error_msg(char *cmd);
 
-
 //input & parse
 
-int	    is_redir_pipe(char c);
-int 	char_checker(char c);
-int 	skip_spaces(char c, int *i, char **in);
+int		is_redir_pipe(char c);
+int		char_checker(char c);
+int		skip_spaces(char c, int *i, char **in);
 void	del_emptyquotes(void);
-int 	inputcheck(char *input);
-int 	quotecheck(char *input, int i, int flag);
-int 	forbidenchar(char *input);
-int 	verify_c(char c, int i, char *in);
-int 	redicheck(char *input, int i, int j);
+int		inputcheck(char *input);
+int		quotecheck(char *input, int i, int flag);
+int		forbidenchar(char *input);
+int		verify_c(char c, int i, char *in);
+int		redicheck(char *input, int i, int j);
 void	aspasword(char *in, char *tmp, int *i);
 void	delword(char c, char *in, char *tmp, int *i);
 void	update_quote(void);
 void	token_it(char *in);
 char	*del_quotes(char *str);
-
 
 //expand
 int		expander_len(char *str);
@@ -153,21 +148,21 @@ void	free_split(char **args);
 void	free_no_env(void);
 
 //tree stuff
-int	        built_ou_cmd(t_token *node);
-void	    send_to_tree(t_node *node);
-t_token     *for_cmd(t_token *start);
-void	    simple_built(t_node *root);
-void	    wtf_hdoc(t_node *node);
-void	    pipe_it(t_node *sub, t_try *bora);
-void	    token_type(void);
-void      token_tree(t_token *head);
-int	      check_redir_node(t_node *node);
-int	       check_pipe_node(t_node *node);
-int	       check_cmd_node(t_node *node);
-void    	add_on_top(t_node *node);
-void    	where_redir(t_node *node);
-void    	where_cmd(t_node *node);
-void	    cmd_simplao(t_node *node, int key, t_try *bora);
+int		built_ou_cmd(t_token *node);
+void	send_to_tree(t_node *node);
+t_token	*for_cmd(t_token *start);
+void	simple_built(t_node *root);
+void	wtf_hdoc(t_node *node);
+void	pipe_it(t_node *sub, t_try *bora);
+void	token_type(void);
+void	token_tree(t_token *head);
+int		check_redir_node(t_node *node);
+int		check_pipe_node(t_node *node);
+int		check_cmd_node(t_node *node);
+void	add_on_top(t_node *node);
+void	where_redir(t_node *node);
+void	where_cmd(t_node *node);
+void	cmd_simplao(t_node *node, int key, t_try *bora);
 
 //exec tree
 
@@ -177,7 +172,7 @@ void	exec_tree(void);
 
 void	check_dir(char *str, char *path, char **paths);
 char	*absolute_path(char *cmd);
-int     is_path(char *str, char *path);
+int		is_path(char *str, char *path);
 char	*search_rpath(char *cmd);
 char	*getpath(char *cmd);
 
@@ -185,14 +180,14 @@ char	*getpath(char *cmd);
 
 void	for_outs(t_node *node, int flag);
 void	for_ins(t_node *node, int flag);
-int	    check_outs(t_node *node);
-int	    check_ins(t_node *node);
+int		check_outs(t_node *node);
+int		check_ins(t_node *node);
 void	open_outs(t_node *node);
 void	redir_error(t_node *node);
 void	open_ins(t_node *node);
 void	dale_redir(t_node *node);
 void	dale_redir2(t_node *node, t_try *bora);
-void    dale_hdoc(t_node *node);
+void	dale_hdoc(t_node *node);
 
 //builts
 
@@ -204,7 +199,7 @@ void	export_it(char **line, char **env, int fd);
 void	unset_it(char **line, char **env);
 void	exit_it(char **line, char **env);
 void	delete_var(char *var, char **env);
-int     exist_var(char *var, char **env);
+int		exist_var(char *var, char **env);
 void	which_builtin(t_node *node, int fd);
 
 //signal

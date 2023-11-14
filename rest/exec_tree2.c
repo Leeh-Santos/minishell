@@ -14,13 +14,13 @@
 
 void	process_node(t_node *node, int *fd, int *flag)
 {
-	if (node->nodeType == E_IN || node->nodeType == E_HDOC)
+	if (node->nodetype == E_IN || node->nodetype == E_HDOC)
 		open_ins(node);
-	if (node->nodeType == E_OUT || node->nodeType == E_APPEND)
+	if (node->nodetype == E_OUT || node->nodetype == E_APPEND)
 	{
 		if (!(*flag))
 		{
-			if (node->nodeType == E_OUT)
+			if (node->nodetype == E_OUT)
 				*fd = open(node->arguments[0], O_CREAT | \
 				O_WRONLY | O_TRUNC, 0644);
 			else

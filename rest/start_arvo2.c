@@ -20,7 +20,7 @@ t_token	*finish_initialization(t_token *start, t_node **new, int *nb_str)
 	*new = malloc(sizeof(t_node));
 	if (!(*new) || !tmp)
 		return (NULL);
-	(*new)->nodeType = built_ou_cmd(tmp);
+	(*new)->nodetype = built_ou_cmd(tmp);
 	(*new)->left = NULL;
 	(*new)->right = NULL;
 	(*new)->up = NULL;

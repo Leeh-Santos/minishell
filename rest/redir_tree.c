@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_tree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 19:59:22 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/09 20:26:08 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:33:24 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	for_ins(t_node *node, int flag)
 	while (node->left)
 	{
 		node = node->left;
-		if (node->nodeType == E_IN || node->nodeType == E_HDOC)
+		if (node->nodetype == E_IN || node->nodetype == E_HDOC)
 		{
 			if (!flag)
 			{
-				if (node->nodeType == E_IN)
+				if (node->nodetype == E_IN)
 				{
 					fdin = open(node->arguments[0], O_RDONLY, 0644);
 					if (fdin == -1)
@@ -63,12 +63,12 @@ void	for_outs(t_node *node, int flag)
 	while (node->left)
 	{
 		node = node->left;
-		if (node->nodeType == E_OUT || node->nodeType == E_APPEND)
+		if (node->nodetype == E_OUT || node->nodetype == E_APPEND)
 		{
 			if (!flag)
 			{
 				open_out_file(node->arguments[0], \
-				node->nodeType == E_APPEND, node);
+				node->nodetype == E_APPEND, node);
 				flag++;
 			}
 			else
@@ -82,7 +82,7 @@ int	check_outs(t_node *node)
 	while (node->left)
 	{
 		node = node->left;
-		if (node->nodeType == E_OUT || node->nodeType == E_APPEND)
+		if (node->nodetype == E_OUT || node->nodetype == E_APPEND)
 			return (1);
 	}
 	return (0);
@@ -93,7 +93,7 @@ int	check_ins(t_node *node)
 	while (node->left)
 	{
 		node = node->left;
-		if (node->nodeType == E_IN || node->nodeType == E_HDOC)
+		if (node->nodetype == E_IN || node->nodetype == E_HDOC)
 			return (1);
 	}
 	return (0);

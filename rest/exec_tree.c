@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 19:30:51 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/10 12:20:08 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/14 14:31:32 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	redir_error(t_node *node)
 
 void	open_ins(t_node *node)
 {
-	if (node->nodeType == E_IN)
+	if (node->nodetype == E_IN)
 	{
 		if (open(node->arguments[0], O_RDONLY, 0644) == -1)
 			redir_error(node);
