@@ -56,21 +56,12 @@ t_token	*initialize_for_cmd(t_token *start, t_node **new, int *nb_str)
 
 void	populate_arguments(t_node *new, t_token *tmp, int *i)
 {
-	while (tmp)
+	if (tmp->type == 0)
 	{
-		if (tmp->type == -1)
-		{
-			new->arguments[*i] = NULL;
-			send_to_tree(new);
-			return ;
-		}
-		if (tmp->type == 0)
-		{
-			new->arguments[*i] = ft_strdup(tmp->token);
-			(*i)++;
-		}
-		tmp = tmp->next;
+		new->arguments[*i] = ft_strdup(tmp->token);
+		(*i)++;
 	}
+	tmp = tmp->next;
 }
 
 t_token	*for_cmd(t_token *start)
@@ -80,12 +71,23 @@ t_token	*for_cmd(t_token *start)
 	int		nb_str;
 	int		i;
 
+	i = 0;
 	tmp = initialize_for_cmd(start, &new, &nb_str);
 	if (!tmp)
 		return (NULL);
 	tmp = start;
-	i = 0;
-	populate_arguments(new, tmp, &i);
+	while (tmp)
+	{
+		if (tmp->type == -1)
+		{
+			new->arguments[i] = NULL;
+			send_to_tree(new);
+			return (tmp);
+		}
+		if (tmp->type == 0)
+			populate_arguments(new, tmp, &i);
+		tmp = tmp->next;
+	}
 	new->arguments[i] = NULL;
 	send_to_tree(new);
 	return (NULL);
