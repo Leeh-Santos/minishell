@@ -6,94 +6,93 @@
 /*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:52:42 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/11 07:52:54 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/11 08:02:57 by msimoes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MINISHELL_H
+#define MINISHELL_H
 
-# include <stdio.h>
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include <errno.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <dirent.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <signal.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
 
 typedef enum e_type
 {
-    E_CMD,
-    E_PIPE,
-    E_IN,
-    E_OUT,
-    E_APPEND,
-    E_HDOC,
-    E_BUILT
+	E_CMD,
+	E_PIPE,
+	E_IN,
+	E_OUT,
+	E_APPEND,
+	E_HDOC,
+	E_BUILT
 } t_type;
 
 typedef struct s_params
 {
-    int	k;
-	int	flag;
-	int quote;
-	char c;
-}t_params;
+	int		k;
+	int		flag;
+	int		quote;
+	char	c;
+} t_params;
 
 typedef struct s_token
 {
-	char *token;
-    int type;
-    struct s_token *next;
-}t_token;
+	char			*token;
+	int				type;
+	struct s_token	*next;
+} t_token;
 
 typedef struct s_node {
-    int nodeType;
-    char** arguments;
-    int pipe[2];
-    struct s_node *up;    
-    struct s_node *left;
-    struct s_node *right;
-}t_node;
+	int				nodeType;
+	char			**arguments;
+	int				pipe[2];
+	struct s_node	*up;    
+	struct s_node	*left;
+	struct s_node	*right;
+} t_node;
 
 
 typedef struct s_shell
 {
-	char **env;
-	char *input;
-	char *path;
-	int exit_s;
-    int	kid_stats;
-    int	nb_cmd_wait;
-    int in;
-    int hdoc;
-    int next_in;
-	int	nb_cmd;
-	int	expand;
-    char *path1;
-    char *tmp;
-	t_token *head;
-	t_node *root;
-}t_shell;
+	char	**env;
+	char	*input;
+	char	*path;
+	int		exit_s;
+	int		kid_stats;
+	int		nb_cmd_wait;
+	int		in;
+	int		hdoc;
+	int		next_in;
+	int		nb_cmd;
+	int		expand;
+	char	*path1;
+	char	*tmp;
+	t_token	*head;
+	t_node	*root;
+} t_shell;
 
 typedef struct s_try
 {
-	int pid;
-	int ffd;
-}t_try;
+	int	pid;
+	int	ffd;
+} t_try;
 
 
 
 void	print_node_recebido(t_node *node);
 
-//struct -- 
+//struct
 
 t_shell *shell(void);
 
@@ -142,9 +141,9 @@ char	*del_quotes(char *str);
 
 
 //expand
-int	    expander_len(char *str);
-int	    verify_var(char *str, char *env);
-int	    env_char(char c);
+int		expander_len(char *str);
+int		verify_var(char *str, char *env);
+int		env_char(char c);
 char	*expand_check(char *input, char **env);
 
 //free
