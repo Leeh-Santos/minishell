@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:04:36 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/14 14:34:41 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/14 15:01:59 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	add_on_top(t_node *node)
 		first = node;
 	}
 	shell()->root = first;
-	printf("nodetipo - %d , on top \n", node->nodetype);
 }
 
+//printf("nodetipo - %d , on top \n", node->nodetype);
 //line 76 : se avore null redir vai pra cima
 //line 78 : se o tree for cmd ou outro redir, vai pra esquerda
 //line 80 : se tamo num pipe

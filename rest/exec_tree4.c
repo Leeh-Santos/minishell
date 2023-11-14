@@ -23,7 +23,6 @@ void	nb_cmds(t_node *root)
 		tmp = tmp->up;
 	}
 	shell()->nb_cmd_wait = shell()->nb_cmd;
-	printf(" numero de comandos -- %d\n", shell()->nb_cmd);
 }
 
 void	wait_process(int pid, int num)
@@ -91,7 +90,6 @@ void	exec_tree(void)
 		return ;
 	while (root->left != NULL && root->left->nodetype == E_PIPE)
 		root = root->left;
-	printf(" chaaama no root poha, resultados abaixo : %d\n", root->nodetype);
 	if (!root->up && root->nodetype == E_HDOC)
 		return (wtf_hdoc(root));
 	if (!root->up && root->nodetype == E_BUILT)
