@@ -63,7 +63,10 @@ void	aspasword(char *in, char *tmp, int *i)
 	while (in[*i])
 	{
 		if (in[*i] == p.c && p.flag)
+		{
 			p.flag = end_aspas(in, tmp, i, &p);
+			return ;
+		}
 		p.flag = 1;
 		tmp[p.k] = in[*i];
 		(*i)++;
