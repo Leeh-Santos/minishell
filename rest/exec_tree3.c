@@ -45,7 +45,7 @@ void	handle_execution(t_node *node, char **env_cpy)
 void	cmd_simplao(t_node *node, int key, t_try *bora)
 {
 	char	**env_cpy;
-	
+
 	signal_in(SIGQUIT, SIG_DFL);
 	if (shell()->path1)
 		free(shell()->path1);

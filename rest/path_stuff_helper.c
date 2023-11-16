@@ -59,6 +59,8 @@ char	*find_path(char *cmd)
 	int		i;
 
 	paths = initialize_paths(cmd);
+	if (!paths)
+		return (NULL);
 	i = -1;
 	while (paths[++i])
 	{

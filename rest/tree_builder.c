@@ -6,7 +6,7 @@
 /*   By: learodri@student.42.fr <learodri>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:04:36 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/14 15:01:59 by learodri@st      ###   ########.fr       */
+/*   Updated: 2023/11/16 16:34:12 by learodri@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	add_on_left(t_node *current, t_node *new_node)
 	}
 	current->left = new_node;
 	new_node->up = current;
-	printf("nodetipo - %d , left \n", new_node->nodetype);
 }
 
 // line 34 : se ja tem node faz relacao pai e filho
@@ -39,7 +38,6 @@ void	add_on_right(t_node *node, t_node *new_node)
 	}
 	node->right = new_node;
 	new_node->up = node;
-	printf("nodetipo - %d , right \n", new_node->nodetype);
 }
 
 void	add_on_top(t_node *node)
