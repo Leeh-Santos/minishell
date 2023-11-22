@@ -45,5 +45,5 @@ void	dale_redir2(t_node *node, t_try *bora)
 		}
 		else
 			close(node->pipe[1]);
-	}	
+	}
 }

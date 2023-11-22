@@ -1,2 +1,0 @@
-nao fica infinito
-dasd

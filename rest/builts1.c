@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builts1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 19:36:54 by learodri@st       #+#    #+#             */
-/*   Updated: 2023/11/09 00:07:01 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:34:54 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	print_args(char **token, int fd, int i)
 			if (token[i + 1])
 				ft_putchar_fd(' ', fd);
 		}
-	i++;
+		i++;
 	}
 }
 

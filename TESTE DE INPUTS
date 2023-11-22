@@ -1,7 +1,0 @@
-cat | cat | cat <Makefile - talvez na var pid  -- cat | ls trocar para bora.ffd nao deu
-ls | wc x2 ------------ ------ shell()->nb_cmd = 3; nao da pau, resolvido com shell->in = 0;    
-export - export na mesma var duas vezes
-
-
-
-../ da merda no wrong dir

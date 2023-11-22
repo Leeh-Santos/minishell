@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 17:51:11 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/10 22:50:44 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:40:14 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	main_loop(void)
 	{
 		signal_in(SIGQUIT, SIG_IGN);
 		signal_in(SIGINT, sig_int);
-		input = readline("picashell$ ");
+		input = readline("bigshell$ ");
 		if (!input)
 			bye_shell();
 		if (input && *input)

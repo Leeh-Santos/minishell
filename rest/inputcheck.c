@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputcheck.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msimoes- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: learodri <learodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 17:56:02 by learodri          #+#    #+#             */
-/*   Updated: 2023/11/09 02:57:07 by msimoes-         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:35:47 by learodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	verify_c(char c, int i, char *in)
 			i++;
 		i++;
 		while ((in[i]) && (in[i] == '\t' || in[i] == ' '))
-				i++;
+			i++;
 		if (char_checker(in[i]))
 			return (1);
 	}
@@ -92,7 +92,7 @@ int	redicheck(char *input, int i, int j)
 			i++;
 	}
 	return (0);
-}	
+}
 
 int	inputcheck(char *input)
 {
